@@ -10,42 +10,30 @@
 
 <!-- <Package name="Secure Shell" repo-name="ssh" pp-version="1.0"  -->
 
-<Package name="Secure Shell"
+<Package name="IPsec"
   xmlns="https://niap-ccevs.org/cc/v1"
   xmlns:sec="https://niap-ccevs.org/cc/v1/section"
   xmlns:h="http://www.w3.org/1999/xhtml">
 
   <project-notes>
-   This update turns the SSH Extended Package into a Functional Package. 
-   This branch incorporates the CCUF version of the SSH FP into the NIAP version.
-
-   Significant changes:
-
-	- Removed FCS_COP and required that the PP or PP-Module that includes the package support the required algorithms. This effectively 
-		eliminated the need for TD0240.
-	- Incorporated TD0331
-	- Incorporated TD0332
-	- Incorporated TD0420
-	- Incorporated TD0446
-	- Added audit events covering those specified in NDcPP and a couple of the ESM PPs. These are presented as optional, and can be
-		incoporated by selection in a PP or PP-module that includes this package. (TLS should do this too).   
+	This is the initial draft of a functional package for IPsec. 
  </project-notes>
 
   <PPReference>
    <ReferenceTable>
-      <PPTitle>Functional Package for Secure Shell (SSH)</PPTitle>
+      <PPTitle>Functional Package for IPsec</PPTitle>
       <PPVersion>1.0</PPVersion>
       <PPAuthor>National Information Assurance Partnership</PPAuthor>
-      <PPPubDate>2021-05-13</PPPubDate>
-      <Keywords>SSH; secure shell</Keywords>
+      <PPPubDate>2022-01-06</PPPubDate>
+      <Keywords>IPsec; Internet Protocol</Keywords>
     </ReferenceTable>
   </PPReference>
   
   <RevisionHistory>
     <entry>
       <version>1.0</version>
-      <date>2021-05-13</date>
-      <subject>Converted SSH EP to a Functional Package and incorporated CCUF CWG input.</subject>
+      <date>2022-01-06</date>
+      <subject>Start of first draft.</subject>
     </entry>
   </RevisionHistory>
 	
@@ -66,11 +54,10 @@
 <!--			-->
   <sec:Overview>
         <h:p>
-	    Secure Shell (SSH) is a protocol for secure remote login and other secure network services over
-	    an untrusted network. SSH software can act as a client, server, or both.
+		Internet Protocol Security (IPsec) is a secure network protocol suite that authenticates and encrypts packets of data to provide secure 
+		encrypted communication between two computers over an Internet Protocol (IP) network. It is used in virtual private networks (VPNs).
       	</h:p><h:p>
-		This <h:i>Functional Package for Secure Shell</h:i> provides a collection of Secure Shell (SSH) protocol related SFRs and 
-		Evaluation Activities (EAs) covering audit, authentication, cryptographic algorithms, and protocol negotiation. The intent 
+		This <h:i>Functional Package for IPsec</h:i> provides a collection of requirements and evaluation activities for IPSec. The intent 
 		of this package is to provide PP, cPP, and PP-Module authors with a readily consumable collection of SFRs and EAs to be integrated into
 		their documents.  
         </h:p>
