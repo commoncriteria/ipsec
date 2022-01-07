@@ -1,11 +1,12 @@
-
 Functional Package for IPsec
 ===============
-
-![Build](https://github.com/commoncriteria/ipsec/workflows/Build/badge.svg)
+[![Build](https://github.com/commoncriteria/ipsec/workflows/Build/badge.svg)
 ![Validate](https://github.com/commoncriteria/ipsec/workflows/Validate/badge.svg)
+[![Validation](https://raw.githubusercontent.com/commoncriteria/ipsec/gh-pages/master/validation.svg)](https://github.com/commoncriteria/ipsec/blob/gh-pages/ValidationReport.txt)
+[![SanityChecks](https://raw.githubusercontent.com/commoncriteria/ipsec/gh-pages/master/warnings-badge.svg)](https://github.com/commoncriteria/ipsec/blob/gh-pages/SanityChecksOutput.md)
+[![SpellCheck](https://raw.githubusercontent.com/commoncriteria/ipsec/gh-pages/master/spell-badge.svg)](https://github.com/commoncriteria/ipsec/blob/gh-pages/SpellCheckReport.txt)
+[![QuickBuild](https://github.com/commoncriteria/ipsec/actions/workflows/quick_build.yml/badge.svg)](https://commoncriteria.github.io/ipsec)
 [![GitHub issues Open](https://img.shields.io/github/issues/commoncriteria/ipsec.svg?maxAge=2592000)](https://github.com/commoncriteria/ipsec/issues) 
-![license](https://img.shields.io/badge/license-Unlicensed-blue.svg)
 
 ## Draft Version
 
@@ -13,7 +14,7 @@ Functional Package for IPsec
 * [Functional Package for IPsec](https://commoncriteria.github.io/pp/ipsec/ipsec-release.pdf) (pdf)
 
 ## Release Version
-## * [Functional Package for IPsec](QQQQ)
+Currently, there is no release version.
 
 ## Contributing
 
