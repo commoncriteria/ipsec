@@ -90,8 +90,9 @@
 		to satisfy dependencies of this Package. It is the responsibility of the PP, cPP, or PP-Module author who 
 		incorporates this FP to ensure that dependence on these components is satisfied, either by the TOE or by 
 		assumptions about its Operational Environment.
-		<h:p/>An ST must identify the applicable version of the PP, cPP, or PP-Module and this
+		<h:p>An ST must identify the applicable version of the PP, cPP, or PP-Module and this
 		Functional Package in its conformance claims.</h:p>
+		
 		<componentsneeded>
 			<componentneeded>
 				<componentid>FCS_CKM.1</componentid>
