@@ -53,13 +53,20 @@
 <!-- 1.1 Overview	-->
 <!--			-->
   <sec:Overview>
-		Internet Protocol Security (IPsec) is a secure network protocol suite that authenticates and encrypts packets
-		of data to provide secure encrypted communication between two computers over an Internet Protocol (IP) network. 
-		It is used in virtual private networks (VPNs).
-      	<h:p/>
-		This <h:i>Functional Package for IPsec</h:i> provides a collection of requirements and evaluation activities for
-		IPSec implementations. The intent of this package is to provide PP, cPP, and PP-Module authors with a readily
-		consumable collection of SFRs and EAs to be integrated into their documents.  
+	Internet Protocol Security (IPsec) is a suite of open standards for ensuring private
+	communications over public networks. It is typically used to encrypt Internet Protocol (IP) traffic 
+	between hosts in a network and to create a virtual private network (VPN). 
+	A VPN is a virtual network built on top of existing physical networks that provides a secure 
+	communications mechanism for data and control information transmitted between computers or networks. 
+	IPsec can also be used as a component that provides the security for other
+	internet protocols, such as the User Datagram Protocol (UDP). <h:p/> 
+	The main components of IPsec are Encapsulating Security Protocol (ESP) and Internet Key Exchange (IKE).
+	ESP is the protocol used to to transport encrypted and integrity-protected 
+	communications across the network.  IKE is the protocol used to set up and manage IPsec connections.
+	<h:p/>
+	This <h:i>Functional Package for IPsec</h:i> provides a collection of requirements and evaluation activities for
+	IPSec implementations. The intent of this package is to provide PP, cPP, and PP-Module authors with a readily
+	consumable collection of SFRs and EAs to be integrated into their documents.
    </sec:Overview>
 
 <!-- 			-->
@@ -68,6 +75,25 @@
 <!-- 1.2.2 Technology Terms -->
 <!--			-->
    <tech-terms>
+      <term abbr="ESP" full="Encapsulating Security Payload">
+        The protocol used by IPsec to transport encrypted and integrity-protected 
+		communications across the network.
+      </term>
+      <term abbr="IKE" full="Internet Key Exchange">
+        The protocol used by IPsec to set up and manage IPsec connections. This includes negotiating
+		IPsec connection settings, authenticating endpoints to each other, defining 
+		the security parameters of IPsec-protected connections, and negotiating session keys.
+      </term>
+      <term abbr="IPsec" full="Internet Protocol Security">
+        A suite of open standards for ensuring private communications over public networks.
+      </term>
+      <term abbr="TODO" full="To Do">
+        This section needs to be filled out when the rest is done. 
+      </term>
+      <term abbr="UDP" full="User Datagram Protocol">
+        A communications protocol that is primarily used to establish low-latency and loss-tolerating
+		connections between applications on the internet. 
+      </term>
       <term abbr="VPN" full="Virtual Private Network">
         An extension of a private network across a public or shared network that allows users to 
 		exchange data as though they were connected directly to the private network.
@@ -110,8 +136,8 @@
 					To support the cryptography needed for IPsec communications, the incoporating document must include 
 					FCS_COP.1 (iterating as needed) to specify AES with corresponding key sizes and modes, digital
 					signature generation and verification function (at least one of RSA or ECDSA), a cryptographic hash
-					function, and a keyed-hash message authentication function.<h:p/>
-					AES-GCM-128, AES-GCM-256 are required.
+					function, and a keyed-hash message authentication function. In particular, IPsec requires that the
+					TOE support AES-GCM-128 and AES-GCM-256.
 				</notes>
 			</componentneeded>
 			<!-- The components in the PP or PP-Module that need this SFR should require it;
