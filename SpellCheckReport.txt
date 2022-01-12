@@ -22,9 +22,10 @@ output/ipsec-release-linkable.html: SAs
 output/ipsec-release-linkable.html: SPD
 output/ipsec-release-linkable.html: SPDs
 output/ipsec-release-linkable.html: STM
-output/ipsec-release-linkable.html: TODO
 output/ipsec-release-linkable.html: TTLS
 output/ipsec-release-linkable.html: XAUTH
+output/ipsec-release-linkable.html: ancilliary
+output/ipsec-release-linkable.html: implementaiton
 output/ipsec-release-linkable.html: incoporated
 output/ipsec-release-linkable.html: incoporating
 output/ipsec-release-linkable.html: jittered
@@ -57,9 +58,10 @@ output/ipsec-release.html: SAs
 output/ipsec-release.html: SPD
 output/ipsec-release.html: SPDs
 output/ipsec-release.html: STM
-output/ipsec-release.html: TODO
 output/ipsec-release.html: TTLS
 output/ipsec-release.html: XAUTH
+output/ipsec-release.html: ancilliary
+output/ipsec-release.html: implementaiton
 output/ipsec-release.html: incoporated
 output/ipsec-release.html: incoporating
 output/ipsec-release.html: jittered
@@ -92,9 +94,10 @@ output/ipsec.html: SAs
 output/ipsec.html: SPD
 output/ipsec.html: SPDs
 output/ipsec.html: STM
-output/ipsec.html: TODO
 output/ipsec.html: TTLS
 output/ipsec.html: XAUTH
+output/ipsec.html: ancilliary
+output/ipsec.html: implementaiton
 output/ipsec.html: incoporated
 output/ipsec.html: incoporating
 output/ipsec.html: jittered
