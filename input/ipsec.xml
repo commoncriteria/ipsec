@@ -66,7 +66,15 @@
 	<h:p/>
 	This <h:i>Functional Package for IPsec</h:i> provides a collection of requirements and evaluation activities for
 	IPSec implementations. The intent of this package is to provide PP, cPP, and PP-Module authors with a readily
-	consumable collection of SFRs and EAs to be integrated into their documents.
+	consumable collection of SFRs and EAs to be integrated into their documents. This Package can be used to 
+	to evaluate the IPsec functionality of TOEs that are not themselves VPN clients. For example,
+	it could be used to evaluate the trusted channel functionality of an operating system that chooses to 
+	use IPsec rather than SSH or TLS to implement secure remote management. And of course, this Package 
+	could be used to encapsulate the IPsec-specific requirements in a VPN technology evaluation as well.<h:p/>
+	As such, this Package attempts to specify only requirements for IPsec implementations
+	as distinct from those for VPN implementations, such as VPN gateways and clients. 
+	
+	
    </sec:Overview>
 
 <!-- 			-->
@@ -75,6 +83,10 @@
 <!-- 1.2.2 Technology Terms -->
 <!--			-->
    <tech-terms>
+      <term abbr="EAP" full="Extensible Authentication Protocol">
+        A framework for adding arbitrary authentication methods in a standardized way to any
+		protocol. The most common EAP method used with IKEv2 is EAP-TLS.
+      </term>
       <term abbr="ESP" full="Encapsulating Security Payload">
         The protocol used by IPsec to transport encrypted and integrity-protected 
 		communications across the network.
@@ -82,13 +94,11 @@
       <term abbr="IKE" full="Internet Key Exchange">
         The protocol used by IPsec to set up and manage IPsec connections. This includes negotiating
 		IPsec connection settings, authenticating endpoints to each other, defining 
-		the security parameters of IPsec-protected connections, and negotiating session keys.
+		the security parameters of IPsec-protected connections, and negotiating session keys.  
+		IKEv2 is the current version.
       </term>
       <term abbr="IPsec" full="Internet Protocol Security">
         A suite of open standards for ensuring private communications over public networks.
-      </term>
-      <term abbr="TODO" full="To Do">
-        This section needs to be filled out when the rest is done. 
       </term>
       <term abbr="UDP" full="User Datagram Protocol">
         A communications protocol that is primarily used to establish low-latency and loss-tolerating
@@ -105,8 +115,11 @@
 <!-- 1.3 Compliant Targets of Evaluation	-->
 <!--			-->
     <sec:toes title="Compliant Targets of Evaluation">
-		TODO: The Target of Evaluation (TOE) in this Functional Package (FP) is an implementation of IPsec in 
-		an IT product.  This FP describes the security functionality of IPsec in terms of <xref g="CC"/>. 
+		The Target of Evaluation (TOE) in this Functional Package (FP) is an IT product that includes 
+		an implementaiton of IPsec.  Typically this is a VPN client or VPN gateway - for which IPsec 
+		functionality is fundamental. But the TOE could also be an operating system or other
+		IT product for which IPsec functionality is merely ancilliary. This FP describes the security 
+		functionality of IPsec in terms of <xref g="CC"/>. 
 		<h:p/>
 		The contents of this FP must be appropriately incoporated into a PP, cPP, or PP-Module. When this Package 
 		is so incorporated, the ST must include selection-based requirements in accordance with the selections or 
@@ -212,7 +225,7 @@
 		<h:p>
 			The auditable events specified in this Package are included in a Security Target 
 			if the incorporating PP, cPP, or PP-Module supports audit event reporting through FAU_GEN.1
-			and all other criteria in the incorporating PP or PP-Module are met.
+			and all other criteria in the incorporating document are met.
 		</h:p>
 		<audit-table table="mandatory">
 			<h:div class="table-caption"><ctr ctr-type="Table" id="atref-mandatory">: Auditable Events for Mandatory SFRs</ctr></h:div>
@@ -231,19 +244,22 @@
 			<f-element id="fcs-ipsec-ext-1e1">
 				<title>The TSF shall implement the IPsec architecture as specified in RFC 4301.</title>
 				<note role="application">
-					When the TOE is a standalone software application, the IPsec functionality must be implemented by the
+<!--				## Below commented out text would better belong in a PP or Module that invokes the IPsec Package. 
+					The Package requirements apply only to an IPsec implementation, so there is no notion of relying on 
+					another entity for some or all IPsec services. ## -->
+<!--					When the TOE is a standalone software application, the IPsec functionality must be implemented by the
 					TSF, though it is permissible for the TSF to invoke cryptographic algorithm services from the TOE
 					platform to support the TOE’s implementation of IPsec. The TOE may also rely on the TOE platform for
 					X.509 certificate validation services, though it is the responsibility of the TSF to take the proper action
-					based on the validation response that is returned.<h:p/>
-					It is also permissible for the TSF to rely on low-level capabilities of the platform to perform enforcement
+					based on the validation response that is returned.<h:p/> -->
+<!--					It is also permissible for the TSF to rely on low-level capabilities of the platform to perform enforcement
 					and routing functions as a result of the policies the TSF maintains. For example, while the TSF must
 					provide the capability to implement the Security Policy Database abstraction, it is allowed for the TSF to
 					depend on the platform-provided network stack/driver to perform the low-level packet filtering and
-					routing actions once the TSF has set up those rules as defined by the SPD.<h:p/>
-					While enforcement of the IPsec requirements must be implemented by the TSF, it is permissible for the
+					routing actions once the TSF has set up those rules as defined by the SPD.<h:p/>  -->
+<!--					While enforcement of the IPsec requirements must be implemented by the TSF, it is permissible for the
 					TSF to receive configuration of the IPsec behavior from an environmental source, most notably a VPN
-					gateway. <h:p/>
+					gateway. <h:p/>  -->
 					RFC 4301 calls for an IPsec implementation to protect IP traffic through the use
 					of a Security Policy Database (SPD). The SPD is used to define how IP packets are
 					to be handled: PROTECT the packet (e.g., encrypt the packet), BYPASS the IPsec
@@ -254,9 +270,12 @@
 					resulting action that takes place.<h:p/>
 					While there must be a means to order the rules, a general approach to ordering
 					is not mandated, as long as the TOE can distinguish the IP packets and apply the
-					rules accordingly. There may be multiple SPDs (one for each network interface),
+					rules accordingly. There may be multiple SPDs (one for each network interface)
 					but this is not required.<h:p/>
-					A VPN gateway fully implements the IPsec capability and provides an
+<!-- Added -->		The SPD is established and populated by an administrative interface or application
+					implemented by the entity that establishes the IPsec connection, such as a VPN gateway 
+					or client application. This interface or application is outside the scope of this FP.<h:p/>
+<!-- To replace					A VPN gateway fully implements the IPsec capability and provides an
 					administrative interface to establish and populate an SPD. A VPN client is not
 					required to provide an administrative interface to create or maintain an SPD.<h:p/>
 					As an alternative, a client may provide an interface that can be used by another
@@ -265,11 +284,11 @@
 					administrative interface, or an API), while the client is expected to maintain the
 					SPD abstraction, it is permitted for the low-level enforcement and routing
 					activities to be implemented by platform capabilities (e.g., a network driver) as
-					configured by the client.
+					configured by the client.   -->
 				</note>
 				<aactivity level="component">
 					<TSS>
-						[VPN] In addition to the TSS EAs for the individual FCS_IPSEC_EXT.1 elements below, the evaluator shall
+						[VPN. the TOE is always an IPsec implementation. This is a VPN requirement.] In addition to the TSS EAs for the individual FCS_IPSEC_EXT.1 elements below, the evaluator shall
 						perform the following:<h:p/>
 						If the TOE boundary includes a general-purpose operating system or mobile device, the evaluator
 						shall examine the TSS to ensure that it describes whether the VPN client capability is 
@@ -277,7 +296,7 @@
 						is bundled with the platform.<h:p/>
 					</TSS>
 					<Guidance>
-						[VPN] In addition to the Operational Guidance EAs for the individual FCS_IPSEC_EXT.1 elements below, the
+						[VPN. The thing that configures the IPsec is outside the scope. This is a VPN thing] In addition to the Operational Guidance EAs for the individual FCS_IPSEC_EXT.1 elements below, the
 						evaluator shall perform the following:<h:p/>
 						If the configuration of the IPsec behavior is from an environmental source, most notably a VPN gateway
 						(e.g through receipt of required connection parameters from a VPN gateway), the evaluator shall ensure
@@ -299,7 +318,7 @@
 						evaluator with the ability manipulate fields in the ICMP, IPv4, IPv6, UDP, and TCP packet headers. The
 						evaluator shall provide justification for any differences in the test environment.<h:p/>
 						<figure entity="images/network.png" title="Test Environment" id="fig-testenv"/>
-						Note that the evaluator shall perform all tests using the VPN client and a representative sample of
+						Note that the evaluator shall perform all tests using the TOE and a representative sample of
 						platforms listed in the ST (for TOEs that claim to support multiple platforms).
 					</Tests>
 				</aactivity>
@@ -307,20 +326,20 @@
 					<TSS>
 						The evaluator shall examine the TSS and determine that it describes how the IPsec capabilities are
 						implemented.<h:p/>
-						If the TOE is a standalone software application, the evaluator shall ensure that the TSS asserts that all
-						IPsec functionality is implemented by the TSF. The evaluator shall also ensure that the TSS identifies what
+						<!-- If the TOE is a standalone software application, the evaluator shall ensure that the TSS asserts that all
+						IPsec functionality is implemented by the TSF. --> The evaluator shall ensure that the TSS identifies any
 						platform functionality the TSF relies upon to support its IPsec implementation, if any (e.g. does it invoke
 						cryptographic primitive functions from the platform’s cryptographic library, enforcement of packet
 						routing decisions by low-level network drivers).<h:p/>
-						If the TOE is part of a general-purpose desktop or mobile operating system, the evaluator shall ensure
+<!--						If the TOE is part of a general-purpose desktop or mobile operating system, the evaluator shall ensure
 						that the TSS describes at a high level the architectural relationship between the VPN client portion of the
 						TOE and the rest of the TOE (e.g. is the VPN client an integrated part of the OS or is it a standalone
 						executable that is bundled into the OS package). If the SPD is implemented by the underlying platform in
 						this case, then the TSS describes how the client interacts with the platform to establish and populate the
-						SPD, including the identification of the platform's interfaces that are used by the client.<h:p/>		    
-						In all cases, the evaluator shall also ensure that the TSS describes how the client interacts with the network
+						SPD, including the identification of the platform's interfaces that are used by the client.<h:p/>  -->		    
+<!--						In all cases, the evaluator shall also ensure that the TSS describes how the client interacts with the network
 						stack of the platform(s) on which it can run (e.g., does the client insert itself within the stack via kernel
-						mods, does the client simply invoke APIs to gain access to network services).<h:p/>		      
+						mods, does the client simply invoke APIs to gain access to network services).<h:p/>		    -->  
 						The evaluator shall ensure that the TSS describes how the SPD is implemented and the rules for processing
 						both inbound and outbound packets in terms of the IPsec policy. The TSS describes the rules that are
 						available and the resulting actions available after matching a rule. The TSS describes how the available
@@ -385,7 +404,7 @@
 			
 			<!-- FCS_IPSEC_EXT.1.2 -->
 			<f-element id="fcs-ipsec-ext-1e2">
-				<title>The TSF shall implement 
+				<title>The TSF shall implement IPsec in
 					<selectables>
 						<selectable>tunnel mode</selectable>
 						<selectable>transport mode</selectable>
@@ -478,7 +497,8 @@
 			<!-- FCS_IPSEC_EXT.1.4 -->
 			<f-element id="fcs-ipsec-ext-1e4">
 				<title>The TSF shall implement the IPsec protocol ESP as defined by RFC 4303 using the cryptographic 
-					algorithms [<h:i>AES-GCM-128, AES-GCM-256 as specified in RFC 4106,</h:i>
+					algorithms [<h:i>AES-GCM-128 as specified in RFC 4106,
+									AES-GCM-256 as specified in RFC 4106,</h:i>
 					<selectables>
 						<selectable>AES-CBC-128 with 
 							<selectables>
@@ -826,8 +846,8 @@
 					that use X.509v3 certificates that conform to RFC 4945 and 
 					<selectables>
 						<selectable id="sel-ipsec-e11-psk">Pre-shared keys</selectable>
-						<selectable id="sel-ipsec-e11-pskeap">Pre-shared Keys transmitted via EAP-TLS</selectable>
-						<selectable id="sel-ipsec-e11-pskeapma">Pre-shared Keys transmitted via EAP-TTLS with mutual authentication</selectable>
+						<selectable id="sel-ipsec-e11-pskeap">Pre-shared Keys transmitted via EAP-TLS</selectable>
+						<selectable id="sel-ipsec-e11-pskeapma">Pre-shared Keys transmitted via EAP-TLS with mutual authentication</selectable>
 						<selectable exclusive="yes">no other method</selectable>
 					</selectables>.
 				</title>
@@ -838,7 +858,7 @@
 					appropriate FCS requirements reflecting the algorithms used (and key
 					generation capabilities, if provided) are listed to support those methods. Note
 					that the TSS will elaborate on the way in which these algorithms are to be used 
-					(for example, 2409 specifies three authentication methods using public keys;
+					(for example, RFC 2409 specifies three authentication methods using public keys;
 					each one supported will be described in the TSS).<h:p/>
 					If any selection with “pre-shared keys” is selected, the selection-based requirement FIA_PSK_EXT.1
 					must be claimed. FIA_PSK_EXT.1 includes the options for MFA solutions, it may be brought in via this selection or via the 
