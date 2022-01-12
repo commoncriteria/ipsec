@@ -116,12 +116,12 @@
 <!--			-->
     <sec:toes title="Compliant Targets of Evaluation">
 		The Target of Evaluation (TOE) in this Functional Package (FP) is an IT product that includes 
-		an implementaiton of IPsec.  Typically this is a VPN client or VPN gateway - for which IPsec 
+		an implementation of IPsec.  Typically this is a VPN client or VPN gateway - for which IPsec 
 		functionality is fundamental. But the TOE could also be an operating system or other
-		IT product for which IPsec functionality is merely ancilliary. This FP describes the security 
+		IT product for which IPsec functionality is merely ancillary. This FP describes the security 
 		functionality of IPsec in terms of <xref g="CC"/>. 
 		<h:p/>
-		The contents of this FP must be appropriately incoporated into a PP, cPP, or PP-Module. When this Package 
+		The contents of this FP must be appropriately incorporated into a PP, cPP, or PP-Module. When this Package 
 		is so incorporated, the ST must include selection-based requirements in accordance with the selections or 
 		assignments indicated in the incorporating document.
 		<h:p/>
@@ -135,18 +135,18 @@
 		<componentsneeded>
 			<componentneeded>
 				<componentid>FCS_CKM.1</componentid>
-				<notes>To support key generation for IPsec, the incoporating document must
+				<notes>To support key generation for IPsec, the incorporating document must
 					include FCS_CKM.1 and specify the corresponding algorithm(s).</notes>
 			</componentneeded>
 			<componentneeded>
 				<componentid>FCS_CKM.2</componentid>
-					<notes>To support key establishment for IPsec, the incoporating document must
+					<notes>To support key establishment for IPsec, the incorporating document must
 						include FCS_CKM.2 and specify the corresponding algorithm(s).</notes>
 			</componentneeded>
 			<componentneeded>
 				<componentid>FCS_COP.1</componentid>
 				<notes>
-					To support the cryptography needed for IPsec communications, the incoporating document must include 
+					To support the cryptography needed for IPsec communications, the incorporating document must include 
 					FCS_COP.1 (iterating as needed) to specify AES with corresponding key sizes and modes, digital
 					signature generation and verification function (at least one of RSA or ECDSA), a cryptographic hash
 					function, and a keyed-hash message authentication function. In particular, IPsec requires that the
@@ -170,7 +170,7 @@
 			<componentneeded>
 			<componentid>FIA_X509_EXT.2</componentid>
 				<notes>To support establishment of IPsec communications using a public key algorithm that includes X.509, 
-					the incoporating document must include FIA_X509_EXT.2. Note however that support for X.509 is selectable 
+					the incorporating document must include FIA_X509_EXT.2. Note however that support for X.509 is selectable 
 					and not mandatory. </notes>
 			</componentneeded>
 			<componentneeded>
