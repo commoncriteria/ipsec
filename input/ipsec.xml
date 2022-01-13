@@ -917,7 +917,8 @@
 					generator specified in FCS_RBG_EXT.1, and having a length of at least
 					<assignable>(one or more) number(s) of bits that is at least twice the “bits of
 					security” value associated with the negotiated Diffie-Hellman group as listed in
-					Table 2 of <xref to="bibNIST80057"/>, Recommendation for Key Management: Part 1 - General</assignable> bits.
+					Table 2 of NIST SP 800-57, Recommendation for Key Management: Part 1 - General</assignable> bits.
+<!--					Table 2 of <xref to="bibNIST80057"/>, Recommendation for Key Management: Part 1 - General</assignable> bits. -->
 				</title>
 				<aactivity level="element">
 					<TSS>
@@ -937,7 +938,8 @@
 					probability that a specific nonce value will be repeated during the life a specific
 					IPsec SA is less than 1 in 2^<assignable>(one or more) “bits of security” value(s)
 					associated with the negotiated Diffie-Hellman group as listed in Table 2 of 
-					<xref to="bibNIST80057"/>, Recommendation for Key Management: Part 1 - General</assignable>.
+					NIST SP 800-57, Recommendation for Key Management: Part 1 - General</assignable>.
+<!--					<xref to="bibNIST80057"/>, Recommendation for Key Management: Part 1 - General</assignable>. -->
 				</title>
 				<aactivity level="element">
 					EAs for this element are tested through EAs for FCS_IPSEC_EXT.1.9.
@@ -1729,7 +1731,7 @@ And the X509-specific tests need to be removed. -->
 			<f-element id="fia-totp-ext-1e1">
 				<title>
 					The TSF shall support Time-Based One-Time Password (TOTP) authentication in accordance 
-					with <xfref to="bibRFC6238"/> to authenticate the user before establishing an IPsec connection. 
+					with <xref to="bibRFC6238"/> to authenticate the user before establishing an IPsec connection. 
 				</title>
 			</f-element>
 			<f-element id="fia-totp-ext-1e2">
@@ -1834,7 +1836,7 @@ And the X509-specific tests need to be removed. -->
 				</note>
 				<aactivity>
 					<TSS>
-						The evaluator shall confirm the TSS describes how the TOE complies with <xfref to="bibRFC6238"/><h:p/>.
+						The evaluator shall confirm the TSS describes how the TOE complies with <xref to="bibRFC6238"/><h:p/>.
 						The evaluator shall confirm the TSS describes how the TOTP seed is generated and ensure it
 							aligns with FCS_RBG_EXT.1.<h:p/>
 						The evaluator shall confirm the TSS describes how the TOTP seed is protected and ensure it
