@@ -1,0 +1,10 @@
+/home/runner/work/ipsec/ipsec/input/ipsec.xml:254:48: error: element "depends" not allowed here; expected the element end-tag or element "audit-event", "audit-table", "f-element" or "note"
+/home/runner/work/ipsec/ipsec/input/ipsec.xml:255:35: error: element "consistency-rationale" not allowed anywhere; expected the element end-tag or element "audit-event", "audit-table", "f-element" or "note"
+/home/runner/work/ipsec/ipsec/input/ipsec.xml:256:21: error: element "comp-lev" not allowed anywhere; expected the element end-tag or element "audit-event", "audit-table", "f-element" or "note"
+/home/runner/work/ipsec/ipsec/input/ipsec.xml:257:23: error: element "management" not allowed anywhere; expected the element end-tag or element "audit-event", "audit-table", "f-element" or "note"
+/home/runner/work/ipsec/ipsec/input/ipsec.xml:258:18: error: element "audit" not allowed anywhere; expected the element end-tag or element "audit-event", "audit-table", "f-element" or "note"
+/home/runner/work/ipsec/ipsec/input/ipsec.xml:260:25: error: element "dependencies" not allowed anywhere; expected the element end-tag or element "audit-event", "audit-table", "f-element" or "note"
+/home/runner/work/ipsec/ipsec/input/ipsec.xml:920:42: error: element "xref" not allowed here; expected the element end-tag, text or element "int"
+/home/runner/work/ipsec/ipsec/input/ipsec.xml:940:31: error: element "xref" not allowed here; expected the element end-tag, text or element "int"
+/home/runner/work/ipsec/ipsec/input/ipsec.xml:1732:35: error: element "xfref" not allowed anywhere; expected the element end-tag, text, element "_", "assignable", "choice", "componentsneeded", "ctr", "depends", "equation", "figure", "management-function-set", "no-link", "refinement", "selectables", "snip", "testlist" or "xref" or an element from another namespace
+/home/runner/work/ipsec/ipsec/input/ipsec.xml:1837:103: error: element "xfref" not allowed anywhere; expected the element end-tag, text, element "_", "assignable", "choice", "componentsneeded", "ctr", "depends", "equation", "figure", "no-link", "refinement", "selectables", "snip", "testlist" or "xref" or an element from another namespace
