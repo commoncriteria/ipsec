@@ -58,7 +58,7 @@
 	between hosts in a network and to create a virtual private network (VPN). 
 	A VPN is a virtual network built on top of existing physical networks that provides a secure 
 	communications mechanism for data and control information transmitted between computers or networks. 
-	IPsec can also be used as a component that provides the security for other
+	IPsec can also be used as a component that provides security for other
 	internet protocols, such as the User Datagram Protocol (UDP). <h:p/> 
 	The main components of IPsec are Encapsulating Security Protocol (ESP) and Internet Key Exchange (IKE).
 	ESP is the protocol used to to transport encrypted and integrity-protected 
@@ -71,10 +71,8 @@
 	it could be used to evaluate the trusted channel functionality of an operating system that chooses to 
 	use IPsec rather than SSH or TLS to implement secure remote management. And of course, this Package 
 	could be used to encapsulate the IPsec-specific requirements in a VPN technology evaluation as well.<h:p/>
-	As such, this Package attempts to specify only requirements for IPsec implementations
+	As such, this Package attempts to specify only requirements and evaluation activities for IPsec implementations
 	as distinct from those for VPN implementations, such as VPN gateways and clients. 
-	
-	
    </sec:Overview>
 
 <!-- 			-->
@@ -118,7 +116,7 @@
 		The Target of Evaluation (TOE) in this Functional Package (FP) is an IT product that includes 
 		an implementation of IPsec.  Typically this is a VPN client or VPN gateway - for which IPsec 
 		functionality is fundamental. But the TOE could also be an operating system or other
-		IT product for which IPsec functionality is merely ancillary. This FP describes the security 
+		IT product for which IPsec functionality is ancillary. This FP describes the security 
 		functionality of IPsec in terms of <xref g="CC"/>. 
 		<h:p/>
 		The contents of this FP must be appropriately incorporated into a PP, cPP, or PP-Module. When this Package 
@@ -136,12 +134,17 @@
 			<componentneeded>
 				<componentid>FCS_CKM.1</componentid>
 				<notes>To support key generation for IPsec, the incorporating document must
-					include FCS_CKM.1 and specify the corresponding algorithm(s). Package requires RSA or ECDSA for IKE.</notes>
+					include FCS_CKM.1 and specify the corresponding algorithms. </notes>
 			</componentneeded>
 			<componentneeded>
 				<componentid>FCS_CKM.2</componentid>
 					<notes>To support key establishment for IPsec, the incorporating document must
-						include FCS_CKM.2 and specify the corresponding algorithm(s).</notes>
+						include FCS_CKM.2 and specify the corresponding algorithms.</notes>
+			</componentneeded>
+			<componentneeded>
+				<componentid>FCS_CKM_EXT.5</componentid>
+					<notes>To support key derivation for IPsec, the incorporating document may need to include
+						FCS_CKM_EXT.5 and specify the corresponding key derivation algorithms.</notes>
 			</componentneeded>
 			<componentneeded>
 				<componentid>FCS_COP.1</componentid>
@@ -150,9 +153,7 @@
 					FCS_COP.1 (iterating as needed) to specify AES with corresponding key sizes and modes, digital
 					signature generation and verification function (at least one of RSA or ECDSA), a cryptographic hash
 					function, and a keyed-hash message authentication function. In particular, this Package requires that the
-					TOE support AES-GCM-128 and AES-GCM-256 for ESP, and AES-CBC-128 and AES-CBC-256 for IKE. This FP also
-					requires that IKE be implemented using either RSA or ECDSA.
-					
+					TOE support AES-GCM-128 and AES-GCM-256 for ESP, and AES-CBC-128 and AES-CBC-256 for IKE.					
 				</notes>
 			</componentneeded>
 			<!-- The components in the PP or PP-Module that need this SFR should require it;
@@ -166,14 +167,13 @@
 			<componentneeded>
 				<componentid>FIA_X509_EXT.1</componentid>
 				<notes>To support establishment of IPSec communications using a public key algorithm that includes X.509, 
-					the incorporating document must include FIA_X509_EXT.1. Note however that support for X.509 is selectable 
-					and not mandatory. ???? I think this is not true. I think it is mandatory. See element 11.  </notes>
+					the incorporating document must include FIA_X509_EXT.1. This documents requires that X.509v3 certificates
+					be used in IKE peer authentication.</notes>
 			</componentneeded>
 			<componentneeded>
 			<componentid>FIA_X509_EXT.2</componentid>
 				<notes>To support establishment of IPsec communications using a public key algorithm that includes X.509, 
-					the incorporating document must include FIA_X509_EXT.2. Note however that support for X.509 is selectable 
-					and not mandatory. </notes>
+					the incorporating document must include FIA_X509_EXT.2. </notes>
 			</componentneeded>
 			<componentneeded>
 			<componentid>FPT_STM.1</componentid>
@@ -244,7 +244,7 @@
 
 			<!-- FCS_IPSEC_EXT.1.1 -->
 			<f-element id="fcs-ipsec-ext-1e1">
-				<title>The TSF shall implement the IPsec architecture as specified in RFC 4301.</title>
+				<title>The TSF shall implement the IPsec architecture as specified in <xref t="bibliorfc4301"/><!--RFC 4301-->.</title>
 				<note role="application">
 <!--				## Below commented out text would better belong in a PP or Module that invokes the IPsec Package. 
 					The Package requirements apply only to an IPsec implementation, so there is no notion of relying on 
