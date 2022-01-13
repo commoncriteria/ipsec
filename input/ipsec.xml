@@ -250,103 +250,103 @@
 	<sec:cryptsup title="Cryptographic Support (FCS)">
 	
 	    <!-- FIA_EAP_EXT.1 EAP-TLS -->
-        <f-component cc-id="fcs_eap_ext.1" id="fcs-eap-ext-1" name="EAP-TLS">
-          <depends on-sel="sel-ipsec-e11-psk"/>
-          <consistency-rationale/>
-          <comp-lev>defines the use of EAP-TLS.</comp-lev>
-          <management>No specific management functions are identified.</management>
-          <audit>No specific audit functions are identified.
-          </audit>
-          <dependencies>FCS_IPSEC_EXT.1 IPsec</dependencies>
-          <f-element id="fcs-eap-ext-1e1">
-            <title>
-              The TSF shall implement
-              <selectables>
-                <selectable>EAP-TLS protocol as specified in RFC 5216</selectable>
-                <selectable>EAP-TTLS as specified in RFC 5881</selectable>
-              </selectables>
-              as updated by RFC 8996 with TLS implemented using mutual authentication in accordance with the TLS functional package.
-            </title>
-          </f-element>
-          <f-element id="fcs-eap-ext-1e2">
-            <title>
-              The TSF shall generate random values used in the
-              <selectables>
-                <selectable>EAP-TLS</selectable>
-                <selectable>EAP-TTLS</selectable>
-              </selectables>
-              exchange using the RBG specified in FCS_RBG_EXT.1.
-            </title>
-          </f-element>
-          <f-element id="fcs-eap-ext-1e3">
-            <title>
-              The TSF shall support peer authentication using certificates and
-              <selectables>
-                <selectable>PSK</selectable>
-                <selectable>HOTP</selectable>
-                <selectable>TOTP</selectable>
-                <selectable><assignable>other Authentication-verification protocols</assignable></selectable>
-                <selectable exclusive="yes">no other authentication</selectable>
-              </selectables>
-              as updated by RFC 8996 with TLS implemented using mutual authentication in accordance with the TLS functional package.
-            </title>
-            
-          </f-element>
-
-          <f-element id="fcs-eap-ext-1e4">
-            <title>
-              The TSF shall not forward a EAP-success response if the client certificate is not valid according to FIA_X509_EXT.1.
-            </title>
-          </f-element>
-
-
-          <f-element id="fcs-eap-ext-1e5">
-            <title>
-              The TSF shall use the MSK from the 
-              <selectables>
-                <selectable>EAP-TLS</selectable>
-                <selectable>EAP-TTLS</selectable>
-              </selectables> response as the IKEv2 shared secret in the authentication payload.
-            </title>
-            <aactivity>
-              <TSS>The evaluator shall verify that the TS describes the use of EAP options for each of the selected peer authentication 
-                mechanisms, that TLS with mutual authentication is used, that the random values are from an appropriate source, 
-                and that the EAP MSK is derived from the TLS master key and is used as the IKEv2 shared key..</TSS>
-              <Guidance>The evaluator shall verify that the guidance documents describe any configurable features of the EAP or TLS 
-                functionality, including instructions for configuration of the authenticator(s) and registration processes for clients.</Guidance>
-              <Tests>Testing for TLS functionality is in accordance with the TLS package.
-                <h:b/>For each supported EAP method claimed in FCS_EAP_TLS_EXT.1.1 and for each authentication method  claimed in 
-                FCS_EAP_TLS_EXT.1.3, the evaluator shall perform the following tests:
-                <testlist>
-                  <test>The evaluator shall follow AGD guidance to configure the TSF to use the EAP method claimed. 
-                    The evaluator shall follow AGD guidance to configure the TSF to use the authentication method claimed and, 
-                    for EAP-TTLS, register a client with appropriate key material required for the authentication method. 
-                    The evaluator shall establish an VPN session using a test client with a valid certificate and, for EAP-TTLS, 
-                    configured to provide a correct value for the configured authenticator. The evaluator shall  observe the the 
-                    VPN session is successful.</test>
-                  <test>(conditional for EAP-TTLS support): The evaluator shall cause the test client with a valid certificate to send 
-                    an invalid authenticator for the claimed authentication method:
-                    <h:b/>For HOTP, replay the HOTP value sent previously, 
-                    <h:b/>For TOTP or PSK, modify a byte of the properly constructed value,and observe that the TSF aborts the session</test>
-                  <test>The evaluator shall establish a new, valid certificate for a test client using an identifier not 
-                    corresponding to a registered user. For EAP-TTLS, the evaluator shall cause the test client using this 
-                    certificate to send a correct authenticator value for the registered user. The evaluator shall initiate a 
-                    VPN session from the test client to the TSF and observe that the TSF aborts the session.</test>
-                  <test>The evaluator shall follow AGD guidance to configure the TSF to use a supported EAP method and register the 
-                    user with key material for required for a supported authentication method. The evaluator shall configure a test 
-                    client to respond to an IKE v2 exchange with EAP-request, providing valid phase 1 handshake and valid TLS 
-                    handshake, but computing the phase 2 shared key using standard (non-EAP) methods. The evaluator shall initiate 
-                    a VPN session between the test client and the TSF, and observe that the TSF aborts the session.
-                  </test>
-                </testlist>
-              </Tests>
-            </aactivity>
-          </f-element>
-          
-          <audit-event/>
+        <f-component cc-id="fcs_eap_ext.1" id="fcs-eap-ext-1" name="EAP-TLS" status="sel-based">
+			<depends on-sel="sel-ipsec-e11-psk"/>
+			<f-element id="fcs-eap-ext-1e1">
+				<title>The TSF shall implement
+					<selectables>
+						<selectable>EAP-TLS protocol as specified in <xref to="bibRFC5216"/></selectable>
+						<selectable>EAP-TTLS as specified in <xref to="bibRFC5281"/></selectable>
+					</selectables>
+					as updated by <xref to="bibRFC8996"/> with TLS implemented using mutual authentication in accordance
+					with the <xref to="bibNIAPFPTLS"/>.
+				</title>
+			</f-element>
+			<f-element id="fcs-eap-ext-1e2">
+				<title>The TSF shall generate random values used in the
+					<selectables>
+						<selectable>EAP-TLS</selectable>
+						<selectable>EAP-TTLS</selectable>
+					</selectables>
+					exchange using the RBG specified in FCS_RBG_EXT.1.
+				</title>
+			</f-element>
+			<f-element id="fcs-eap-ext-1e3">
+				<title>The TSF shall support peer authentication using certificates and
+					<selectables>
+						<selectable>PSK</selectable>
+						<selectable>HOTP</selectable>
+						<selectable>TOTP</selectable>
+						<selectable><assignable>other Authentication-verification protocols</assignable></selectable>
+						<selectable exclusive="yes">no other authentication</selectable>
+					</selectables>
+					as updated by <xref to="bibRFC8996"/> with TLS implemented using mutual authentication in
+					accordance with the <xref to="bibNIAPFPTLS"/>.
+				</title>    
+			</f-element>
+			<f-element id="fcs-eap-ext-1e4">
+				<title>
+					The TSF shall not forward a EAP-success response if the client certificate is not valid according 
+					to FIA_X509_EXT.1.
+				</title>
+			</f-element>
+			<f-element id="fcs-eap-ext-1e5">
+				<title>The TSF shall use the MSK from the 
+					<selectables>
+						<selectable>EAP-TLS</selectable>
+						<selectable>EAP-TTLS</selectable>
+					</selectables> response as the IKEv2 shared secret in the authentication payload.
+				</title>
+				<aactivity>
+					<TSS>
+						The evaluator shall verify that the TSS describes the use of EAP options for each of the 
+						selected peer authentication mechanisms, that TLS with mutual authentication is used, that the
+						random values are from an appropriate source, and that the EAP MSK is derived from the TLS
+						master key and is used as the IKEv2 shared key.
+					</TSS>
+					<Guidance>
+						The evaluator shall verify that the guidance documents describe any configurable features of 
+						the EAP or TLS functionality, including instructions for configuration of the authenticators
+						and registration processes for clients.
+					</Guidance>
+					<Tests>
+						Testing for TLS functionality is in accordance with the TLS package.<h:p/>
+						For each supported EAP method claimed in FCS_EAP_EXT.1.1 and for each authentication method 
+						claimed in FCS_EAP_EXT.1.3, the evaluator shall perform the following tests:
+						<testlist>
+							<test>The evaluator shall follow AGD guidance to configure the TSF to use the EAP method
+								claimed. The evaluator shall follow AGD guidance to configure the TSF to use the 
+								authentication method claimed and, for EAP-TTLS, register an endpoint with appropriate
+								key material required for the authentication method. The evaluator shall establish an 
+								IPsec connection using a test endpoint with a valid certificate and, for EAP-TTLS, 
+								configured to provide a correct value for the configured authenticator. The evaluator
+								shall observe that the IPsec connection is successful.</test>
+							<test>[conditional] If EAP-TTLS is supported, the evaluator shall cause the test endpoint with a
+								valid certificate to send an invalid authenticator for the claimed authentication method:<h:ul>
+								<h:li>For HOTP, replay the HOTP value sent previously.</h:li>
+								<h:li>For TOTP or PSK, modify a byte of the properly constructed value,and observe that
+									the TSF aborts the connection.</h:li></h:ul>
+							</test>
+							<test>The evaluator shall establish a new, valid certificate for a test endpoint using an 
+								identifier not corresponding to a registered user. For EAP-TTLS, the evaluator shall cause
+								the test endpoint using this certificate to send a correct authenticator value for the
+								registered user. The evaluator shall initiate an IPsec connection from the test endpoint
+								to the TSF and observe that the TSF aborts the connection.</test>
+							<test>The evaluator shall follow AGD guidance to configure the TSF to use a supported EAP method
+								and register the user with key material for required for a supported authentication method.
+								The evaluator shall configure a test endpoint to respond to an IKEv2 exchange with 
+								EAP-request, providing valid phase 1 handshake and valid TLS handshake, but computing 
+								the phase 2 shared key using standard (non-EAP) methods. The evaluator shall initiate 
+								an IPsec connection between the test endpoint and the TSF, and observe that the TSF aborts
+								the connection.
+							</test>
+						</testlist>
+					</Tests>
+				</aactivity>
+			</f-element>    
+			<audit-event/>
         </f-component>
-	
-	
+		
 	
 	    <!-- 3.1.1.1 FCS_IPSEC_EXT.1 IPsec  -->	
         <f-component name="IPsec" cc-id="fcs_ipsec_ext.1" id="fcs-ipsec-ext-1">
@@ -1915,6 +1915,13 @@ And the X509-specific tests need to be removed. -->
 	
    <bibliography>
 	
+		<entry id="bibNIAPFPTLS">
+			<tag>Functional Package for TLS</tag>
+			<description>
+				<h:a href="https://www.niap-ccevs.org/Profile/Info.cfm?PPID=439&id=439">
+					Functional Package for Transport Layer Security (TLS)</h:a>
+			</description>
+		</entry>   
 		<entry id="bibNIST80057">
 			<tag>NIST SP 800-57 Part 1 Rev. 5</tag>
 			<description>
@@ -2012,6 +2019,19 @@ And the X509-specific tests need to be removed. -->
 				<h:a href="https://tools.ietf.org/html/rfc4945">The Internet IP Security PKI Profile of IKEv1/ISAKMP, IKEv2, and PKIX</h:a>
 			</description>
 		</entry>   
+		<entry id="bibRFC5216">
+			<tag>RFC 5216</tag>
+			<description>
+				<h:a href="https://tools.ietf.org/html/rfc5216">The EAP-TLS Authentication Protocol</h:a>
+			</description>
+		</entry>   
+		<entry id="bibRFC5281">
+			<tag>RFC 5281</tag>
+			<description>
+				<h:a href="https://tools.ietf.org/html/rfc5281">Extensible Authentication Protocol Tunneled Transport
+					Layer Security Authenticated Protocol Version 0 (EAP-TTLSv0)</h:a>
+			</description>
+		</entry>   
 		<entry id="bibRFC5282">
 			<tag>RFC 5282</tag>
 			<description>
@@ -2049,6 +2069,12 @@ And the X509-specific tests need to be removed. -->
 			<description>
 				<h:a href="https://tools.ietf.org/html/rfc8784">Mixing Preshared Keys in the Internet Key Exchange Protocol Version 2
 					(IKEv2) for Post-quantum Security</h:a>
+			</description>
+		</entry>   
+		<entry id="bibRFC8996">
+			<tag>RFC 8996</tag>
+			<description>
+				<h:a href="https://tools.ietf.org/html/rfc8996">Deprecating TLS 1.0 and TLS 1.1</h:a>
 			</description>
 		</entry>   
 
