@@ -36,7 +36,6 @@ output/ipsec-release-linkable.html: TTLSv0
 output/ipsec-release-linkable.html: XAUTH
 output/ipsec-release-linkable.html: authenticators
 output/ipsec-release-linkable.html: configurating
-output/ipsec-release-linkable.html: functality
 output/ipsec-release-linkable.html: href
 output/ipsec-release-linkable.html: jittered
 output/ipsec-release-linkable.html: rekeying
@@ -83,7 +82,6 @@ output/ipsec-release.html: TTLSv0
 output/ipsec-release.html: XAUTH
 output/ipsec-release.html: authenticators
 output/ipsec-release.html: configurating
-output/ipsec-release.html: functality
 output/ipsec-release.html: jittered
 output/ipsec-release.html: rekeying
 output/ipsec-release.html: resynchronization
@@ -129,7 +127,6 @@ output/ipsec.html: TTLSv0
 output/ipsec.html: XAUTH
 output/ipsec.html: authenticators
 output/ipsec.html: configurating
-output/ipsec.html: functality
 output/ipsec.html: jittered
 output/ipsec.html: rekeying
 output/ipsec.html: resynchronization
