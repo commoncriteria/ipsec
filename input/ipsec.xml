@@ -1920,7 +1920,7 @@ And the X509-specific tests need to be removed. -->
 		<entry id="bibNIAPFPTLS">
 			<tag>Functional Package for TLS</tag>
 			<description>
-				<h:a href="https://www.niap-ccevs.org/Profile/Info.cfm?PPID=439&id=439">
+				<h:a href="https://www.niap-ccevs.org/Profile/Info.cfm?id=439">
 					Functional Package for Transport Layer Security (TLS)</h:a>
 			</description>
 		</entry>   
