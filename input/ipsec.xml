@@ -1592,13 +1592,13 @@ And the X509-specific tests need to be removed. -->
 					<Guidance>
 						The evaluator shall confirm the operational guidance contains instructions for entering 
 						bit-based pre-shared keys for each protocol identified in the requirement, or generating a 
-						bit-based pre-shared key (or both). The evaluator shall confirm that any 
+						bit-based pre-shared key (or both). The evaluator shall confirm that any configuration
 						management functions related to pre-shared keys that are performed by the TOE are specified 
 						in the operational guidance.  <h:p/>
 						The guidance must specify the allowable characters for pre-shared keys, and that list must
 						include, at minimum, the same items contained in FIA_PSK_EXT.3.2. <h:p/>
 						The evaluator shall confirm the operational guidance contains any necessary instructions for 
-						enabling and configurating password checking functality. <h:p/>
+						enabling and configurating password checking functionality. <h:p/>
 					</Guidance>
 					<Tests>
 						Support for Password/Passphrase characteristics: In addition to the analysis above, the 
