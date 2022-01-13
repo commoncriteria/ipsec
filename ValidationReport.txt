@@ -1,0 +1,2 @@
+/home/runner/work/ipsec/ipsec/input/ipsec.xml:247:100: error: attribute "t" not allowed here; expected attribute "g" or "to"
+/home/runner/work/ipsec/ipsec/input/ipsec.xml:247:100: error: element "xref" missing one or more required attributes; expected attribute "g" or "to"
