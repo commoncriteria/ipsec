@@ -32,7 +32,9 @@ output/ipsec-release-linkable.html: SPDs
 output/ipsec-release-linkable.html: STM
 output/ipsec-release-linkable.html: TOTP
 output/ipsec-release-linkable.html: TTLS
+output/ipsec-release-linkable.html: TTLSv0
 output/ipsec-release-linkable.html: XAUTH
+output/ipsec-release-linkable.html: authenticators
 output/ipsec-release-linkable.html: configurating
 output/ipsec-release-linkable.html: functality
 output/ipsec-release-linkable.html: href
@@ -77,7 +79,9 @@ output/ipsec-release.html: SPDs
 output/ipsec-release.html: STM
 output/ipsec-release.html: TOTP
 output/ipsec-release.html: TTLS
+output/ipsec-release.html: TTLSv0
 output/ipsec-release.html: XAUTH
+output/ipsec-release.html: authenticators
 output/ipsec-release.html: configurating
 output/ipsec-release.html: functality
 output/ipsec-release.html: jittered
@@ -121,7 +125,9 @@ output/ipsec.html: SPDs
 output/ipsec.html: STM
 output/ipsec.html: TOTP
 output/ipsec.html: TTLS
+output/ipsec.html: TTLSv0
 output/ipsec.html: XAUTH
+output/ipsec.html: authenticators
 output/ipsec.html: configurating
 output/ipsec.html: functality
 output/ipsec.html: jittered
