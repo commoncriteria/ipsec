@@ -244,7 +244,7 @@
 
 			<!-- FCS_IPSEC_EXT.1.1 -->
 			<f-element id="fcs-ipsec-ext-1e1">
-				<title>The TSF shall implement the IPsec architecture as specified in <xref to="bibliorfc4301"/><!--RFC 4301-->.</title>
+				<title>The TSF shall implement the IPsec architecture as specified in <xref to="bibRFC4301"/><!--RFC 4301-->.</title>
 				<note role="application">
 <!--				## Below commented out text would better belong in a PP or Module that invokes the IPsec Package. 
 					The Package requirements apply only to an IPsec implementation, so there is no notion of relying on 
