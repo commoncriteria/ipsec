@@ -1909,7 +1909,7 @@ And the X509-specific tests need to be removed. -->
 			<audit-event/>
         </f-component>
  -->       
-<!--    </section>   <!-- FIA -->
+<!--    </section> -->  <!-- FIA -->
       
 
 </sec:Security_Functional_Requirements>
