@@ -1,0 +1,1 @@
+/home/runner/work/ipsec/ipsec/input/ipsec.xml:98:20: error: element "term" missing required attribute "full"
