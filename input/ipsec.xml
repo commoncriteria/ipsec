@@ -179,7 +179,8 @@
 				<notes>If the TOE uses pre-shared keys transmitted using the Extensible Authentication Protocol (EAP)
 					to establish IPsec connections, then this SFP must be claimed.</notes>
 			</componentneeded>
-			<componentid>FIA_PSK_EXT.1</componentid>
+			<componentneeded>
+				<componentid>FIA_PSK_EXT.1</componentid>
 				<notes>If the TOE uses pre-shared keys to establish IPsec connections, then this SFR must be claimed
 					to specify requirements for the composition of pre-shared keys.</notes>
 			</componentneeded>
