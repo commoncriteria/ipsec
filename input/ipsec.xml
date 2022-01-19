@@ -210,26 +210,30 @@
 					include a requirement that specifies the TOE's ability to invoke or provide 
 					random bit generation services, commonly identified as FCS_RBG_EXT.1.</notes>
 			</componentneeded>
-			<componentneeded>
+<!--			<componentneeded>
 				<componentid>FIA_EAP_EXT.1</componentid>
 				<notes>If the TOE uses pre-shared keys transmitted using the Extensible Authentication Protocol (EAP)
 					to establish IPsec connections, then this SFR must be claimed.</notes>
 			</componentneeded>
-			<componentneeded>
+-->
+<!--			<componentneeded>
 				<componentid>FIA_PSK_EXT.1</componentid>
 				<notes>If the TOE uses pre-shared keys to establish IPsec connections, then this SFR must be claimed
 					to specify requirements for the composition of pre-shared keys.</notes>
 			</componentneeded>
+-->
 			<componentneeded>
 				<componentid>FIA_X509_EXT.1</componentid>
 				<notes>To support establishment of IPSec communications using a public key algorithm that includes X.509, 
 					the incorporating document must include FIA_X509_EXT.1. This documents requires that X.509v3 certificates
-					be used in IKE peer authentication.</notes>
+					be used in IKE peer authentication. If this is pretty much the same across all technologies, then
+					maybe it should be brought in to this package.</notes>
 			</componentneeded>
 			<componentneeded>
 			<componentid>FIA_X509_EXT.2</componentid>
 				<notes>To support establishment of IPsec communications using a public key algorithm that includes X.509, 
-					the incorporating document must include FIA_X509_EXT.2. </notes>
+					the incorporating document must include FIA_X509_EXT.2 to specify the reasons for using X.509 certificates. 
+					But is this really a dependency for this package? I don't think so.</notes>
 			</componentneeded>
 			<componentneeded>
 			<componentid>FPT_STM.1</componentid>
@@ -239,6 +243,49 @@
 			</componentneeded>
 		</componentsneeded>
 	</sec:toes>
+	
+	<!--   1.4 Use Cases  -->
+    <section title="Use Cases" id="usecases">
+		This Package supports several use cases. The cases
+		enumerated below change which SFRs in the below collection are mandatory. 
+		<usecases>
+			<usecase title="IPsec Endpoint" id="uc-ipsec-endpoint">
+				<description>
+					This is the default use case for this package. The mandatory requirement is FCS_IPSEC_EXT.1 and all
+					other SFRs are claimed depending on selections made within this requirement.
+				</description>
+				<config>
+					<ref-id>sfr-fcs-ipsec-ext-1</ref-id>
+				</config>
+			</usecase>
+			<usecase title="EAP" id="uc-EAP">
+				<description>
+					This use case adds physical protections to the base requirements for server-class hardware.
+					Additional physical protections are required because the platform us assumed to be minimally 
+					protected by the by the operational environment. This use case can also be invoked for servers in 
+					data centers where there are enhanced security requirements.<h:p/>
+					This use case adds requirements for audit, physical protections, and Administrator 
+					authentication to the base mandatory SFRs. 
+					It removes the assumption that the TOE is physically protected by the OE.
+				</description>
+				<config>
+					<ref-id>sfr-fia-eap-ext-1</ref-id>
+				</config>
+			</usecase>
+			<usecase title="Pre-Shared Keys" id="uc-pre-shared-keys">
+				<description>
+					This use case defines the base requirements for portable clients. <h:p/>
+					This use case adds no requirements to the base mandatory SFRs.
+				</description>
+				<config>
+					<ref-id>sfr-fia-psk-ext-1</ref-id>
+				</config>
+			</usecase>
+		</usecases>
+    </section>
+	
+	
+	
 </sec:Introduction>
   
 <!-- 			-->
@@ -296,8 +343,7 @@
 	<sec:cryptsup title="Cryptographic Support (FCS)">
 	
 	    <!-- FIA_EAP_EXT.1 EAP-TLS -->
-<!--
-        <f-component cc-id="fcs_eap_ext.1" id="fcs-eap-ext-1" name="EAP-TLS" status="sel-based">
+        <f-component cc-id="fcs_eap_ext.1" id="sfr-fcs-eap-ext-1" name="EAP-TLS" status="sel-based">
 			<depends on-sel="sel-ipsec-psk-eap-tls"/>
 			<depends on-sel="sel-ipsec-psk-eap-ttls"/>
 			<f-element id="fcs-eap-ext-1e1">
@@ -393,11 +439,10 @@
 				</aactivity>
 			</f-element>    
 			<audit-event/>
-        </f-component>
--->	
+        </f-component>	
 	
 	    <!-- 3.1.1.1 FCS_IPSEC_EXT.1 IPsec  -->	
-        <f-component name="IPsec" cc-id="fcs_ipsec_ext.1" id="fcs-ipsec-ext-1">
+        <f-component name="IPsec" cc-id="fcs_ipsec_ext.1" id="sfr-fcs-ipsec-ext-1">
 
 			<!-- FCS_IPSEC_EXT.1.1 -->
 			<f-element id="fcs-ipsec-ext-1e1">
@@ -655,14 +700,14 @@
 					algorithms [<h:i>AES-GCM-128 as specified in <xref to="bibRFC4106"/>,
 									AES-GCM-256 as specified in <xref to="bibRFC4106"/>,</h:i>
 					<selectables>
-						<selectable>AES-CBC-128 with 
+						<selectable id="sel-ipsec-esp-cbc-128">AES-CBC-128 with 
 							<selectables>
 								<selectable>HMAC-SHA-1</selectable>
 								<selectable>HMAC-SHA-256</selectable>
 								<selectable>HMAC-SHA-384</selectable>
 								<selectable>HMAC-SHA-512</selectable>
 							</selectables> as specified in <xref to="bibRFC3602"/></selectable>
-						<selectable>AES-CBC-256 with
+						<selectable id="sel-ipsec-esp-cbc-256">AES-CBC-256 with
 							<selectables>
 								<selectable>HMAC-SHA-1</selectable>
 								<selectable>HMAC-SHA-256</selectable>
@@ -708,7 +753,7 @@
 			<f-element id="fcs-ipsec-ext-1e5">
 				<title>The TSF shall implement the protocol:
 					<selectables linebreak="yes">
-						<selectable>IKEv1, using Main Mode for Phase I exchanges, as defined in <xref to="bibRFC2407"/>, 
+						<selectable id="sel-ipsec-5-ikev1">IKEv1, using Main Mode for Phase I exchanges, as defined in <xref to="bibRFC2407"/>, 
 							<xref to="bibRFC2408"/>, <xref to="bibRFC2409"/>, <xref to="bibRFC4109"/>, 
 							<selectables>
 								<selectable><xref to="bibRFC4304"/> for extended sequence numbers</selectable>
@@ -722,7 +767,7 @@
 								<selectable>support for XAUTH</selectable>
 								<selectable>no support for XAUTH</selectable>
 							</selectables></selectable>
-						<selectable>IKEv2 as defined in <xref to="bibRFC7296"/> (with mandatory support for NAT traversal 
+						<selectable id="sel-ipsec-5-ikev2">IKEv2 as defined in <xref to="bibRFC7296"/> (with mandatory support for NAT traversal 
 							as specified in section 2.23), <xref to="bibRFC8784"/>, <xref to="bibRFC8247"/>, and 
 							<selectables>
 								<selectable><xref to="bibRFC4868"/> for hash functions</selectable>
@@ -770,14 +815,14 @@
 			<f-element id="fcs-ipsec-ext-1e6">
 				<title>The TSF shall ensure the encrypted payload in the 
 					<selectables>
-						<selectable>IKEv1</selectable>
-						<selectable>IKEv2</selectable>
+						<selectable id="sel-ipsec-6-ikev1">IKEv1</selectable>
+						<selectable id="sel-ipsec-6-ikev2">IKEv2</selectable>
 					</selectables> 
 					protocol uses the cryptographic algorithms [<h:i>AES-CBC-128, AES-CBC-256 as specified in 
 					<xref to="bibRFC6379"/> and </h:i>
 					<selectables>
-						<selectable>AES-GCM-128 as specified in <xref to="bibRFC5282"/></selectable>
-						<selectable>AES-GCM-256 as specified in <xref to="bibRFC5282"/></selectable>
+						<selectable id="sel-ipsec-ike-gcm-128">AES-GCM-128 as specified in <xref to="bibRFC5282"/></selectable>
+						<selectable id="sel-ipsec-ike-gcm-256">AES-GCM-256 as specified in <xref to="bibRFC5282"/></selectable>
 						<selectable exclusive="yes">no other algorithm</selectable>
 					</selectables>.
 				</title>
@@ -815,7 +860,7 @@
 			<f-element id="fcs-ipsec-ext-1e7"> 
 				<title>The TSF shall ensure that 
 					<selectables>
-						<selectable>IKEv2 SA lifetimes can be configured by 
+						<selectable id="sel-ipsec-ikev2-sa-config">IKEv2 SA lifetimes can be configured by 
 							<selectables>
 								<selectable>an Administrator</selectable>
 								<selectable>a VPN gateway</selectable>
@@ -826,7 +871,7 @@
 								<selectable>length of time</selectable>
 							</selectables>
 						</selectable>
-						<selectable>IKEv1 SA lifetimes can be configured by 
+						<selectable id="sel-ipsec-ikev1-sa-config">IKEv1 SA lifetimes can be configured by 
 							<selectables>
 								<selectable>an Administrator</selectable>
 								<selectable>a VPN gateway</selectable>
@@ -837,7 +882,7 @@
 								<selectable>length of time</selectable>
 							</selectables>
 						</selectable>
-						<selectable>IKEv1 SA lifetimes are fixed based on 
+						<selectable id="sel-ipsec-ikev1-sa-fixed">IKEv1 SA lifetimes are fixed based on 
 							<selectables>
 								<selectable>number of packets/number of bytes</selectable>
 								<selectable>length of time</selectable>
@@ -1269,16 +1314,14 @@ And the X509-specific tests need to be removed. -->
     </sec:cryptsup>  <!-- FCS -->
 
 	<!-- B.2 Identification and Authentication (FIA) -->
-<!--
     <section title="Identification and Authentication (FIA)" id="s-fia">
         The TOE may support pre-shared keys for use in establishing an IPsec connection. PSK in the context of this document refer
 		to generated values, memorized values subject to conditioning, one time passwords, and combinations of the
 		above as described in FIA_PSK_EXT.1.2.  
--->
+
         
 		<!-- FIA_HOTP_EXT.1 -->
-<!--
-        <f-component cc-id="fia_hotp_ext.1" id="fia-hotp-ext-1" name="HMAC-Based One-Time Password Pre-Shared Keys"
+        <f-component cc-id="fia_hotp_ext.1" id="sfr-fia-hotp-ext-1" name="HMAC-Based One-Time Password Pre-Shared Keys"
 			status="sel-based">
 			<depends on-sel="sel-verify-hotp"/>
 			<f-element id="fia-hotp-ext-1e1">
@@ -1422,11 +1465,10 @@ And the X509-specific tests need to be removed. -->
 			</f-element>
 			<audit-event/>
         </f-component>
--->
+
 	  
 		<!-- FIA_PSK_EXT.1 Pre-Shared Key Composition -->
-<!--
-        <f-component cc-id="fia_psk_ext.1" id="fia-psk-ext-1" name="Pre-Shared Key Composition" status="sel-based">
+        <f-component cc-id="fia_psk_ext.1" id="sfr-fia-psk-ext-1" name="Pre-Shared Key Composition" status="sel-based">
 			<depends on-sel="sel-ipsec-psk"/> 
 			<depends on-sel="sel-ipsec-psk-eap-tls"/>
 			<depends on-sel="sel-ipsec-psk-eap-ttls"/>		
@@ -1482,11 +1524,10 @@ And the X509-specific tests need to be removed. -->
 			</f-element>
 			<audit-event/>
         </f-component>
--->
+
 		
 		<!-- FIA_PSK_EXT.2 Generated Pre-Shared Keys -->		
-<!--
-        <f-component cc-id="fia_psk_ext.2" id="fia-psk-ext-2" name="Generated Pre-Shared Keys" status="sel-based">
+        <f-component cc-id="fia_psk_ext.2" id="sfr-fia-psk-ext-2" name="Generated Pre-Shared Keys" status="sel-based">
 			<depends on-sel="pskgen"/>
 			<depends on-sel="pskgenhotp"/>
 			<depends on-sel="pskgentotp"/>
@@ -1527,11 +1568,10 @@ And the X509-specific tests need to be removed. -->
 			</f-element>
 			<audit-event/>
         </f-component>
--->
+
         
 		<!-- FIA_PSK_EXT.3 Password-based Pre-Shared Keys -->
-<!--
-        <f-component cc-id="fia_psk_ext.3" id="fia-psk-ext-3" name="Password-Based Pre-Shared Keys" status="sel-based">
+        <f-component cc-id="fia_psk_ext.3" id="sfr-fia-psk-ext-3" name="Password-Based Pre-Shared Keys" status="sel-based">
 			<depends on-sel="pskpw"/>
 			<depends on-sel="pskpwhotp"/>
 			<depends on-sel="pskpwtotp"/>
@@ -1680,11 +1720,10 @@ And the X509-specific tests need to be removed. -->
 			</f-element>
 			<audit-event/>
         </f-component>
--->
+
         
 		<!-- FIA_PSK_EXT.4 HMAC-based One-Time Password Pre-Shaed Keys Support -->
-<!--
-        <f-component cc-id="fia_psk_ext.4" id="fia-psk-ext-4" name="HMAC-Based One-Time Password Pre-shared Keys Support"
+        <f-component cc-id="fia_psk_ext.4" id="sfr-fia-psk-ext-4" name="HMAC-Based One-Time Password Pre-shared Keys Support"
 			status="sel-based">
 			<depends on-sel="pskhotp"/>
 			<depends on-sel="pskgenhotp"/>
@@ -1732,11 +1771,9 @@ And the X509-specific tests need to be removed. -->
 			</f-element>
 			<audit-event/>
         </f-component>
--->
 		
 		<!-- FIA_PSK_EXT.5 Time-Based One-Time Password Pre-shared Keys Support -->
-<!--
-        <f-component cc-id="fia_psk_ext.5" id="fia-psk-ext-5" name="Time Based One Time Password Pre-shared Keys Support"
+        <f-component cc-id="fia_psk_ext.5" id="sfr-fia-psk-ext-5" name="Time Based One Time Password Pre-shared Keys Support"
 			status="sel-based">
 			<depends on-sel="psktotp"/>
 			<depends on-sel="pskgentotp"/>
@@ -1782,11 +1819,9 @@ And the X509-specific tests need to be removed. -->
 			</f-element>
 			<audit-event/>
         </f-component>
--->
      
         <!-- FIA_TOTP_EXT Time-Based One-Time Password Pre-Shared Keys -->
-<!--
-        <f-component cc-id="fia_totp_ext.1" id="fia-totp-ext-1" name="Time-Based One-Time Password Pre-Shared Keys" status="sel-based">
+        <f-component cc-id="fia_totp_ext.1" id="sfr-fia-totp-ext-1" name="Time-Based One-Time Password Pre-Shared Keys" status="sel-based">
 			<depends on-sel="sel-psk5-ext-e2-verify"/>
 			<f-element id="fia-totp-ext-1e1">
 				<title>
@@ -1939,8 +1974,8 @@ And the X509-specific tests need to be removed. -->
 			</f-element>
 			<audit-event/>
         </f-component>
- -->       
-<!--    </section> -->  <!-- FIA -->
+        
+    </section>  <!-- FIA -->
       
 
 </sec:Security_Functional_Requirements>
@@ -1975,16 +2010,14 @@ And the X509-specific tests need to be removed. -->
 <!-- Appendix C: References 	-->
 <!--                    -->
 	
-   <bibliography>
-	
-<!--		<entry id="bibNIAPFPTLS">
+   <bibliography>	
+		<entry id="bibNIAPFPTLS">
 			<tag>Functional Package for TLS</tag>
 			<description>
 				<h:a href="https://www.niap-ccevs.org/Profile/Info.cfm?id=439">
 					Functional Package for Transport Layer Security (TLS)</h:a>
 			</description>
 		</entry>   
--->
 		<entry id="bibNIST80057">
 			<tag>NIST SP 800-57 Part 1 Rev. 5</tag>
 			<description>
@@ -1992,22 +2025,20 @@ And the X509-specific tests need to be removed. -->
 					Recommendation for Key Management: Part 1 - General</h:a>
 			</description>
 		</entry>   
-<!--		<entry id="bibNIST80063b">
+		<entry id="bibNIST80063b">
 			<tag>NIST SP 800-63B</tag>
 			<description>
 				<h:a href="https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-63b.pdf">
 					Digital Identity Guidelines: Authentication and Lifecycle Management</h:a>
 			</description>
 		</entry>   
--->
-<!--		<entry id="bibNIST800132">
+		<entry id="bibNIST800132">
 			<tag>NIST SP 800-132 Part 1</tag>
 			<description>
 				<h:a href="https://nvlpubs.nist.gov/nistpubs/Legacy/SP/nistspecialpublication800-132.pdf">
 				Recommendation for Password-Based Key Derivation Part 1: Storage Applications</h:a>
 			</description>
 		</entry>   
--->
 		<entry id="bibRFC2407">
 			<tag>RFC 2407</tag>
 			<description>
@@ -2045,13 +2076,12 @@ And the X509-specific tests need to be removed. -->
 				<h:a href="https://tools.ietf.org/html/rfc4109">Algorithms for Internet Key Exchange version 1 (IKEv1)</h:a>
 			</description>
 		</entry>   
-<!--		<entry id="bibRFC4226">
+		<entry id="bibRFC4226">
 			<tag>RFC 4226</tag>
 			<description>
 				<h:a href="https://tools.ietf.org/html/rfc4226">HOTP: An HMAC-Based One-Time Password Algorithm</h:a>
 			</description>
-		</entry>  
--->		
+		</entry>  		
 		<entry id="bibRFC4301">
 			<tag>RFC 4301</tag>
 			<description>
@@ -2084,21 +2114,19 @@ And the X509-specific tests need to be removed. -->
 				<h:a href="https://tools.ietf.org/html/rfc4945">The Internet IP Security PKI Profile of IKEv1/ISAKMP, IKEv2, and PKIX</h:a>
 			</description>
 		</entry>   
-<!--		<entry id="bibRFC5216">
+		<entry id="bibRFC5216">
 			<tag>RFC 5216</tag>
 			<description>
 				<h:a href="https://tools.ietf.org/html/rfc5216">The EAP-TLS Authentication Protocol</h:a>
 			</description>
 		</entry>   
--->
-<!--		<entry id="bibRFC5281">
+		<entry id="bibRFC5281">
 			<tag>RFC 5281</tag>
 			<description>
 				<h:a href="https://tools.ietf.org/html/rfc5281">Extensible Authentication Protocol Tunneled Transport
 					Layer Security Authenticated Protocol Version 0 (EAP-TTLSv0)</h:a>
 			</description>
 		</entry>   
--->
 		<entry id="bibRFC5282">
 			<tag>RFC 5282</tag>
 			<description>
@@ -2106,13 +2134,12 @@ And the X509-specific tests need to be removed. -->
 					Encrypted Payload of the Internet Key Exchange version 2 (IKEv2) Protocol</h:a>
 			</description>
 		</entry>   
-<!--		<entry id="bibRFC6238">
+		<entry id="bibRFC6238">
 			<tag>RFC 6238</tag>
 			<description>
 				<h:a href="https://tools.ietf.org/html/rfc6238">TOTP: Time-Based One-Time Password Algorithm</h:a>
 			</description>
 		</entry>   
--->
 		<entry id="bibRFC6379">
 			<tag>RFC 6379</tag>
 			<description>
@@ -2139,12 +2166,11 @@ And the X509-specific tests need to be removed. -->
 					(IKEv2) for Post-quantum Security</h:a>
 			</description>
 		</entry>   
-<!--		<entry id="bibRFC8996">
+		<entry id="bibRFC8996">
 			<tag>RFC 8996</tag>
 			<description>
 				<h:a href="https://tools.ietf.org/html/rfc8996">Deprecating TLS 1.0 and TLS 1.1</h:a>
 			</description>
 		</entry>   
--->
     </bibliography>
 </Package>
