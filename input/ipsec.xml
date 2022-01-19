@@ -8,7 +8,6 @@
 <!-- 
 -->  
 
-<!-- <Package name="Secure Shell" repo-name="ssh" pp-version="1.0"  -->
 
 <Package name="IPsec"
   xmlns="https://niap-ccevs.org/cc/v1"
@@ -16,12 +15,12 @@
   xmlns:h="http://www.w3.org/1999/xhtml">
 
   <project-notes>
-	This is the initial draft of a functional package for IPsec. 
+	This is the initial draft of a functional package for IPsec & Friends. 
  </project-notes>
 
   <PPReference>
    <ReferenceTable>
-      <PPTitle>Functional Package for IPsec</PPTitle>
+      <PPTitle>Functional Package for IPsec 'n Friends</PPTitle>
       <PPVersion>1.0</PPVersion>
       <PPAuthor>National Information Assurance Partnership</PPAuthor>
       <PPPubDate>2022-01-06</PPPubDate>
