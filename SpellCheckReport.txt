@@ -6,6 +6,7 @@ output/ipsec-release-linkable.html: DNs
 output/ipsec-release-linkable.html: DOI
 output/ipsec-release-linkable.html: EAP
 output/ipsec-release-linkable.html: ECP
+output/ipsec-release-linkable.html: EKU
 output/ipsec-release-linkable.html: ESN
 output/ipsec-release-linkable.html: Eliptic
 output/ipsec-release-linkable.html: FPF
@@ -35,6 +36,7 @@ output/ipsec-release-linkable.html: TTLS
 output/ipsec-release-linkable.html: TTLSv0
 output/ipsec-release-linkable.html: XAUTH
 output/ipsec-release-linkable.html: authenticators
+output/ipsec-release-linkable.html: caSigning
 output/ipsec-release-linkable.html: configurating
 output/ipsec-release-linkable.html: iteraton
 output/ipsec-release-linkable.html: jittered
@@ -52,6 +54,7 @@ output/ipsec-release.html: DNs
 output/ipsec-release.html: DOI
 output/ipsec-release.html: EAP
 output/ipsec-release.html: ECP
+output/ipsec-release.html: EKU
 output/ipsec-release.html: ESN
 output/ipsec-release.html: Eliptic
 output/ipsec-release.html: FPF
@@ -81,6 +84,7 @@ output/ipsec-release.html: TTLS
 output/ipsec-release.html: TTLSv0
 output/ipsec-release.html: XAUTH
 output/ipsec-release.html: authenticators
+output/ipsec-release.html: caSigning
 output/ipsec-release.html: configurating
 output/ipsec-release.html: iteraton
 output/ipsec-release.html: jittered
@@ -98,6 +102,7 @@ output/ipsec.html: DNs
 output/ipsec.html: DOI
 output/ipsec.html: EAP
 output/ipsec.html: ECP
+output/ipsec.html: EKU
 output/ipsec.html: ESN
 output/ipsec.html: Eliptic
 output/ipsec.html: FPF
@@ -127,6 +132,7 @@ output/ipsec.html: TTLS
 output/ipsec.html: TTLSv0
 output/ipsec.html: XAUTH
 output/ipsec.html: authenticators
+output/ipsec.html: caSigning
 output/ipsec.html: configurating
 output/ipsec.html: iteraton
 output/ipsec.html: jittered
