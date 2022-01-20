@@ -246,7 +246,8 @@
 	
 	<!--   1.4 Use Cases  -->
     <section title="Use Cases" id="s-usecases">
-	    Although focused on IPsec, this Package contains requirements for several protocols. If the TOE does not implement IPsec, but
+	    Although focused on IPsec, this Package contains requirements for several authentication protocols used by
+		IPsec IKE protocols. If the TOE does not implement IPsec, but
 	    it does implement one of the other protocols, then this Package can be used to integrate requirements for the other protocols
 	    into the ST.
 		<usecases> 
@@ -274,6 +275,15 @@
 				</config>
 			</usecase>
 			<usecase title="Pre-Shared Keys" id="uc-pre-shared-keys">
+				<description>
+					This use case defines the base requirements for portable clients. <h:p/>
+					This use case adds no requirements to the base mandatory SFRs.
+				</description>
+				<config>
+					<ref-id>sfr-fia-psk-ext-1</ref-id>
+				</config>
+			</usecase>
+			<usecase title="X.509 Certificates" id="uc-x509">
 				<description>
 					This use case defines the base requirements for portable clients. <h:p/>
 					This use case adds no requirements to the base mandatory SFRs.
