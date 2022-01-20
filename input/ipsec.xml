@@ -245,20 +245,11 @@
 	</sec:toes>
 	
 	<!--   1.4 Use Cases  -->
-    <section title="Entry Points" id="s-entrypoints">
+    <section title="Use Cases" id="s-usecases">
 	    Although focused on IPsec, this Package contains requirements for several protocols. If the TOE does not implement IPsec, but
 	    it does implement one of the other protocols, then this Package can be used to integrate requirements for the other protocols
 	    into the ST.
-	    <h:ul>
-		    <h:li><h:b>IPsec</h:b> <!-- sfr-fcs-ipsec-ext-1 -->: The main entry point. If your TOE implements IPsec - either for a VPN or just as a trusted channel protocol, this 
-			is the main entry point for the Package.</h:li>  
-		    <h:li><h:b>Pre-Shared Keys</h:b><!-- sfr-fia-psk-ext-1 --> The entry point if your TOE implements Pre-Shared Keys independent of IPsec.</h:li>
-		    <h:li><h:b>EAP</h:b> <!-- sfr-fia-eap-ext-1 --> The entry point if your TOE implements Extensible Authentication Protocol (EAP) independent of 
-			    IPsec or PSK.</h:li>
-		    <h:li><h:b>X.509</h:b> <!-- sfr-fia-x509-ext-1 --> The entry point if your TOE implements X.509 Certificates independent of IPsec.</h:li>
-	    </h:ul>
-	    
-<!--		<usecases> 
+		<usecases> 
 			<usecase title="IPsec Endpoint" id="uc-ipsec-endpoint">
 				<description>
 					This is the default use case for this package. The mandatory requirement is FCS_IPSEC_EXT.1 and all
@@ -292,7 +283,7 @@
 				</config>
 			</usecase>
 		</usecases>
--->
+
     </section>
 	
 	
