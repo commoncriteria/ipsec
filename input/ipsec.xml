@@ -80,13 +80,6 @@
 <!-- 1.2.2 Technology Terms -->
 <!--			-->
 	<tech-terms>
-		<term abbr="CA" full="Certificate Authority">
-			An entity that issues digital certificates.
-		</term>
-		<term abbr="CSR" full="Certificate Signing Request">
-			A message sent from an applicant to a registration authority of the public key infrastructure 
-			in order to apply for a digital identity certificate.
-		</term>
 		<term abbr="DN" full="Distinguished Name">
 			A field in an X.509 certificate that uniquely identifies a person, organization, or business.
 		</term>
@@ -107,11 +100,6 @@
 		<term abbr="FQDN" full="Fully Qualified Domain Name">
 			A domain name that specifies its exact location in the hierarchy of the Domain Name System (DNS).
 		</term>
-		<term abbr="ICMP" full="Internet Control Message Protocol">
-			A supporting protocol in the Internet Protocol suite. It is used by network devices 
-			to send error messages and operational information indicating success or failure when 
-			communicating with another IP address. 
-		</term>
 		<term abbr="IKE" full="Internet Key Exchange">
 			The protocol used by IPsec to set up and manage IPsec connections. This includes negotiating
 			IPsec connection settings, authenticating endpoints to each other, defining 
@@ -124,9 +112,6 @@
 		<term abbr="ISAKMP" full="Internet Security Association and Key Management Protocol">
 			A protocol defined by RFC 2408 for establishing Security association (SA) and cryptographic keys in an
 			Internet environment.	  
-		</term>
-		<term abbr="OCSP" full="Online Certificate Status Protocol">
-			An Internet protocol used for obtaining the revocation status of an X.509 digital certificate.
 		</term>
 		<term abbr="PSK" full="Pre-Shared Key">
 			A secret that was previously shared between two parties before it needs to be used.
@@ -896,11 +881,12 @@
 						<selectable>RSA</selectable>
 						<selectable>ECDSA</selectable>
 					</selectables> 
-					that use X.509v3 certificates that conform to <xref to="bibRFC4945"/> and 
+					that use X.509v3 certificates that conform to <xref to="bibRFC4945"/> as specified in <no-link>FIA_X509_EXT.1</no-link> and 
 					<selectables>
-						<selectable id="sel-ipsec-psk-eap-tls">Pre-shared Keys transmitted via EAP-TLS</selectable>
-						<selectable id="sel-ipsec-psk-eap-ttls">Pre-shared Keys transmitted via EAP-TTLS with mutual authentication</selectable>
-						<selectable id="sel-ipsec-psk">Pre-shared Keys not transmitted via EAP</selectable>
+						<selectable id="sel-ipsec-psk-eap-tls">Pre-shared Keys transmitted via EAP-TLS as specified in <no-link>FCS_EAP_EXT.1</no-link></selectable>
+						<selectable id="sel-ipsec-psk-eap-ttls">Pre-shared Keys transmitted via EAP-TTLS with mutual authentication
+							as specified in <no-link>FCS_EAP_EXT.1</no-link></selectable>
+						<selectable id="sel-ipsec-psk">Pre-shared Keys not transmitted via EAP as specified in <no-link>FIA_PSK_EXT.1</no-link></selectable>
 						<selectable exclusive="yes">no other method</selectable>
 					</selectables>.
 				</title>
@@ -1144,6 +1130,66 @@ And the X509-specific tests need to be removed. -->
 					</Tests>
 				</aactivity>
 			</f-element>
+		
+			<!-- FCS_IPSEC_EXT.15 -->
+			<!-- This was pulled from the EAP requirement to here since no EAP requirement should reference IPsec, 
+				but it makes sense for an IPsec requirement to reference EAP. -->
+			<!-- TODO: Check the words -->
+			<f-element id="fcs-ipsec-ext-1e15">
+				<title>The TSF shall use the MSK from the 
+					<selectables>
+						<selectable>EAP-TLS</selectable>
+						<selectable>EAP-TTLS</selectable>
+					</selectables> response as the IKEv2 shared secret in the authentication payload.
+					<!-- Clearly this happens only if IKEv2 is selected. Is there a way to word this so it doesn't matter  -->
+				</title>
+				<aactivity>
+					<TSS>
+						The evaluator shall verify that the TSS describes the use of EAP options for each of the 
+						selected peer authentication mechanisms, that TLS with mutual authentication is used, that the
+						random values are from an appropriate source, and that the EAP MSK is derived from the TLS
+						master key and is used as the IKEv2 shared key.
+					</TSS>
+					<Guidance>
+						The evaluator shall verify that the guidance documents describe any configurable features of 
+						the EAP or TLS functionality, including instructions for configuration of the authenticators
+						and registration processes for clients.
+					</Guidance>
+					<Tests>
+						Testing for TLS functionality is in accordance with the TLS package.<h:p/>
+						For each supported EAP method claimed in FCS_EAP_EXT.1.1 and for each authentication method 
+						claimed in FCS_EAP_EXT.1.3, the evaluator shall perform the following tests:
+						<testlist>
+							<test>The evaluator shall follow AGD guidance to configure the TSF to use the EAP method
+								claimed. The evaluator shall follow AGD guidance to configure the TSF to use the 
+								authentication method claimed and, for EAP-TTLS, register an endpoint with appropriate
+								key material required for the authentication method. The evaluator shall establish an 
+								IPsec connection using a test endpoint with a valid certificate and, for EAP-TTLS, 
+								configured to provide a correct value for the configured authenticator. The evaluator
+								shall observe that the IPsec connection is successful.</test>
+							<test>[conditional] If EAP-TTLS is supported, the evaluator shall cause the test endpoint with a
+								valid certificate to send an invalid authenticator for the claimed authentication method:<h:ul>
+								<h:li>For HOTP, replay the HOTP value sent previously.</h:li>
+								<h:li>For TOTP or PSK, modify a byte of the properly constructed value,and observe that
+									the TSF aborts the connection.</h:li></h:ul>
+							</test>
+							<test>The evaluator shall establish a new, valid certificate for a test endpoint using an 
+								identifier not corresponding to a registered user. For EAP-TTLS, the evaluator shall cause
+								the test endpoint using this certificate to send a correct authenticator value for the
+								registered user. The evaluator shall initiate an IPsec connection from the test endpoint
+								to the TSF and observe that the TSF aborts the connection.</test>
+							<test>The evaluator shall follow AGD guidance to configure the TSF to use a supported EAP method
+								and register the user with key material for required for a supported authentication method.
+								The evaluator shall configure a test endpoint to respond to an IKEv2 exchange with 
+								EAP-request, providing valid phase 1 handshake and valid TLS handshake, but computing 
+								the phase 2 shared key using standard (non-EAP) methods. The evaluator shall initiate 
+								an IPsec connection between the test endpoint and the TSF, and observe that the TSF aborts
+								the connection.
+							</test>
+						</testlist>
+					</Tests>
+				</aactivity>
+			</f-element>    
 			
 			<audit-event>
 				<audit-event-descr>Decisions to DISCARD or BYPASS network packets processed by the TOE.</audit-event-descr>
