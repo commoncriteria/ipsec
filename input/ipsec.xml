@@ -1131,9 +1131,10 @@ And the X509-specific tests need to be removed. -->
 				</aactivity>
 			</f-element>
 		
-			<!-- FCS_IPSEC_EXT.15 -->
+			<!-- FCS_IPSEC_EXT.1.15 -->
 			<!-- This was pulled from the EAP requirement to here since no EAP requirement should reference IPsec, 
 				but it makes sense for an IPsec requirement to reference EAP. -->
+			<!-- This should be pulled into a selection-based requirement for if EAP is being used since it is conditional. -->
 			<!-- TODO: Check the words -->
 			<f-element id="fcs-ipsec-ext-1e15">
 				<title>The TSF shall use the MSK from the 
@@ -1145,9 +1146,7 @@ And the X509-specific tests need to be removed. -->
 				</title>
 				<aactivity>
 					<TSS>
-						The evaluator shall verify that the TSS describes the use of EAP options for each of the 
-						selected peer authentication mechanisms, that TLS with mutual authentication is used, that the
-						random values are from an appropriate source, and that the EAP MSK is derived from the TLS
+						The evaluator shall verify that the TSS describes that the EAP MSK is derived from the TLS
 						master key and is used as the IKEv2 shared key.
 					</TSS>
 					<Guidance>
@@ -1156,28 +1155,9 @@ And the X509-specific tests need to be removed. -->
 						and registration processes for clients.
 					</Guidance>
 					<Tests>
-						Testing for TLS functionality is in accordance with the TLS package.<h:p/>
-						For each supported EAP method claimed in FCS_EAP_EXT.1.1 and for each authentication method 
-						claimed in FCS_EAP_EXT.1.3, the evaluator shall perform the following tests:
+						For each supported EAP method claimed in FCS_IPSEC_EXT.1.15 <h:b>and for each authentication method 
+						claimed in FCS_EAP_EXT.1.3, the evaluator shall perform the following tests:</h:b>
 						<testlist>
-							<test>The evaluator shall follow AGD guidance to configure the TSF to use the EAP method
-								claimed. The evaluator shall follow AGD guidance to configure the TSF to use the 
-								authentication method claimed and, for EAP-TTLS, register an endpoint with appropriate
-								key material required for the authentication method. The evaluator shall establish an 
-								IPsec connection using a test endpoint with a valid certificate and, for EAP-TTLS, 
-								configured to provide a correct value for the configured authenticator. The evaluator
-								shall observe that the IPsec connection is successful.</test>
-							<test>[conditional] If EAP-TTLS is supported, the evaluator shall cause the test endpoint with a
-								valid certificate to send an invalid authenticator for the claimed authentication method:<h:ul>
-								<h:li>For HOTP, replay the HOTP value sent previously.</h:li>
-								<h:li>For TOTP or PSK, modify a byte of the properly constructed value,and observe that
-									the TSF aborts the connection.</h:li></h:ul>
-							</test>
-							<test>The evaluator shall establish a new, valid certificate for a test endpoint using an 
-								identifier not corresponding to a registered user. For EAP-TTLS, the evaluator shall cause
-								the test endpoint using this certificate to send a correct authenticator value for the
-								registered user. The evaluator shall initiate an IPsec connection from the test endpoint
-								to the TSF and observe that the TSF aborts the connection.</test>
 							<test>The evaluator shall follow AGD guidance to configure the TSF to use a supported EAP method
 								and register the user with key material for required for a supported authentication method.
 								The evaluator shall configure a test endpoint to respond to an IKEv2 exchange with 
