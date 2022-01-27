@@ -1,4 +1,6 @@
 output/ipsec-esr.html: CESG
+output/ipsec-release-linkable.html: A1
+output/ipsec-release-linkable.html: A2
 output/ipsec-release-linkable.html: CEM
 output/ipsec-release-linkable.html: CSR
 output/ipsec-release-linkable.html: DNs
@@ -33,6 +35,8 @@ output/ipsec-release-linkable.html: subnets
 output/ipsec-release-linkable.html: v1
 output/ipsec-release-linkable.html: v2
 output/ipsec-release-linkable.html: webpage
+output/ipsec-release.html: A1
+output/ipsec-release.html: A2
 output/ipsec-release.html: CEM
 output/ipsec-release.html: CSR
 output/ipsec-release.html: DNs
@@ -67,6 +71,8 @@ output/ipsec-release.html: subnets
 output/ipsec-release.html: v1
 output/ipsec-release.html: v2
 output/ipsec-release.html: webpage
+output/ipsec.html: A1
+output/ipsec.html: A2
 output/ipsec.html: CEM
 output/ipsec.html: CSR
 output/ipsec.html: DNs
