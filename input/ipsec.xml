@@ -210,8 +210,8 @@
 					the incorporating document must include FIA_X509_EXT.1. This documents requires that X.509v3 certificates
 					be used in IKE peer authentication.</notes>
 			</componentneeded>
-			<componentneeded>
-<!--			<componentid>FIA_X509_EXT.2</componentid>
+<!--			<componentneeded>
+			<componentid>FIA_X509_EXT.2</componentid>
 				<notes>To support establishment of IPsec communications using a public key algorithm that includes X.509, 
 					the incorporating document must include FIA_X509_EXT.2 to specify the reasons for using X.509 certificates. 
 					But is this really a dependency for this package? I don't think so.</notes>
