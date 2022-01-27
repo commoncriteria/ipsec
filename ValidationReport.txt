@@ -1,1 +1,0 @@
-/home/runner/work/ipsec/ipsec/input/ipsec.xml:1193:29: error: element "note" not allowed here; expected the element end-tag or element "audit-event", "audit-table" or "f-element"
