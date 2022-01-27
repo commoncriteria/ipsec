@@ -1189,11 +1189,11 @@ And the X509-specific tests need to be removed. -->
 				<title>The TSF shall support IKE peer authentication using pre-shared keys composed as specified 
 					in <no-link>FIA_PSK_EXT.1</no-link>. 
 				</title>
+				<note role="application">
+					FIA_PSK_EXT.1 specifies the composition and requirements for pre-shared keys. It requires that the resulting	
+					PSKs are 128 or 256 bits. 
+				</note>
 			</f-element>
-			<note role="application">
-				FIA_PSK_EXT.1 specifies the composition and requirements for pre-shared keys. It requires that the resulting	
-				PSKs are 128 or 256 bits. 
-			</note>
 			
 			<f-element id="fcs-ipsec-2e2">
 			<!-- This element should be about actually doing the authentication using PSKs -->
