@@ -643,14 +643,14 @@
 					</Tests>
 				</aactivity>
 				<rule id="rule-ipsec-ikev1-version-matches">
-					<description>If "<h:i><xref to="sel-ipsec-ikev1"/></h:i>" is selected in FCS_IPSEC_EXT.1.5 
-						  then "<h:i><xref to="sel-ipsec-6-ikev1"/></h:i>" must be selected in FCS_IPSEC_EXT.1.6.</description>
+					<description>If "<h:i>IKEv1...</h:i>" is selected in FCS_IPSEC_EXT.1.5 
+						  then "<h:i>IKEv1</h:i>" selections must be made in FCS_IPSEC_EXT.1.6 and FCS_IPSEC_EXT.1.7.</description>
                         <if><ref-id>sel-ipsec-ikev1</ref-id></if>
 						<then><and><ref-id>sel-ipsec-6-ikev1</ref-id>
 							  <or><ref-id>sel-ipsec-ikev1-sa-config</ref-id><ref-id>sel-ipsec-ikev1-sa-fixed</ref-id></or></and></then></rule>
 				<rule id="rule-ipsec-ikev2-version-matches">
-					<description>If "<h:i><xref to="sel-ipsec-ikev2"/></h:i>" is selected in FCS_IPSEC_EXT.1.5 
-						  then "<h:i><xref to="sel-ipsec-6-ikev2"/></h:i>" must be selected in FCS_IPSEC_EXT.1.6.</description>
+					<description>If "<h:i>IKEv2...</h:i>" is selected in FCS_IPSEC_EXT.1.5 
+						  then "<h:i>IKEv2</h:i>" selections must be made in FCS_IPSEC_EXT.1.6 and FCS_IPSEC_EXT.1.7.</description>
                         <if><ref-id>sel-ipsec-ikev2</ref-id></if>
 						<then><and><ref-id>sel-ipsec-6-ikev2</ref-id><ref-id>sel-ipsec-ikev2-sa-config</ref-id></and></then></rule>
 			</f-element>
@@ -700,12 +700,12 @@
 				</aactivity>
 				<rule id="rule-ipsec6-ikev1-version-matches">
 					<description>If "<h:i><xref to="sel-ipsec-6-ikev1"/></h:i>" is selected in FCS_IPSEC_EXT.1.6 
-						  then "<h:i><xref to="sel-ipsec-ikev1"/></h:i>" must be selected in FCS_IPSEC_EXT.1.5.</description>
+						  then "<h:i>IKEv1...</h:i>" must be selected in FCS_IPSEC_EXT.1.5.</description>
                         <if><ref-id>sel-ipsec-6-ikev1</ref-id></if>
 						<then><ref-id>sel-ipsec-ikev1</ref-id></then></rule>
 				<rule id="rule-ipsec6-ikev2-version-matches">
 					<description>If "<h:i><xref to="sel-ipsec-6-ikev2"/></h:i>" is selected in FCS_IPSEC_EXT.1.6 
-						  then "<h:i><xref to="sel-ipsec-ikev2"/></h:i>" must be selected in FCS_IPSEC_EXT.1.5.</description>
+						  then "<h:i>IKEv2...</h:i>" must be selected in FCS_IPSEC_EXT.1.5.</description>
                         <if><ref-id>sel-ipsec-6-ikev2</ref-id></if>
 						<then><ref-id>sel-ipsec-ikev2</ref-id></then></rule>
 			</f-element>
