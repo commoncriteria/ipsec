@@ -710,7 +710,7 @@
 						<then><ref-id>sel-ipsec-ikev2</ref-id></then></rule>
 			</f-element>
 			
-			<!-- FCS_IPSEC_EX.1.7 OK -->
+			<!-- FCS_IPSEC_EX.1.7 IKE lifetimes configuration -->
 			<f-element id="fcs-ipsec-ext-1e7"> 
 				<title>The TSF shall ensure that 
 					<selectables>
@@ -805,6 +805,16 @@
 						</testlist>
 					</Tests>
 				</aactivity>
+				<rule id="rule-ipsec7-ikev1-version-matches">
+					<description>If either "<h:i>IKEv1 SA...</h:i>" selection is made in FCS_IPSEC_EXT.1.7 
+						  then "<h:i>IKEv1...</h:i>" must be selected in FCS_IPSEC_EXT.1.5.</description>
+                        <if><or><ref-id>sel-ipsec-ikev1-sa-config</ref-id><ref-id>sel-ipsec-ikev1-sa-fixed</ref-id></or></if>
+						<then><ref-id>sel-ipsec-ikev1</ref-id></then></rule>
+				<rule id="rule-ipsec7-ikev2-version-matches">
+					<description>If "<h:i>IKEv2 SA...</h:i>" is selected in FCS_IPSEC_EXT.1.7 
+						  then "<h:i>IKEv2...</h:i>" must be selected in FCS_IPSEC_EXT.1.5.</description>
+                        <if><ref-id>sel-ipsec-ikev2-sa-config</ref-id></if>
+						<then><ref-id>sel-ipsec-ikev2</ref-id></then></rule>
 			</f-element>
 			
 			<!-- FCS_IPSEC_EXT.1.8 OK -->
