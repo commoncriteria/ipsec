@@ -2,14 +2,11 @@ output/ipsec-release-linkable.html: A1
 output/ipsec-release-linkable.html: A2
 output/ipsec-release-linkable.html: B1
 output/ipsec-release-linkable.html: B2
-output/ipsec-release-linkable.html: Eliptic
 output/ipsec-release.html: A1
 output/ipsec-release.html: A2
 output/ipsec-release.html: B1
 output/ipsec-release.html: B2
-output/ipsec-release.html: Eliptic
 output/ipsec.html: A1
 output/ipsec.html: A2
 output/ipsec.html: B1
 output/ipsec.html: B2
-output/ipsec.html: Eliptic
