@@ -87,8 +87,8 @@
 			A framework for adding arbitrary authentication methods in a standardized way to any
 			protocol. The most common EAP method used with IKEv2 is EAP-TLS.
 		</term>
-		<term abbr="ECP" full="Eliptic Curve group modulo a Prime">
-			Eliptic Curve Group Modulo a Prime.
+		<term abbr="ECP" full="Elliptic Curve group modulo a Prime">
+			Elliptic Curve Group Modulo a Prime.
 		</term>
 		<term abbr="ESN" full="Extended Sequence Number">
 			An extension to the standard that allows IPsec to use 64-bit sequence numbers.
