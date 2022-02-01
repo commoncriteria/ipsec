@@ -1,0 +1,3 @@
+output/ipsec-release-linkable.html: HOTP
+output/ipsec-release.html: HOTP
+output/ipsec.html: HOTP
