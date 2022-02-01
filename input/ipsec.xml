@@ -192,13 +192,13 @@
 					include a requirement that specifies the TOE's ability to invoke or provide 
 					random bit generation services, commonly identified as FCS_RBG_EXT.1.</notes>
 			</componentneeded>
-			<componentneeded>
+<!--			<componentneeded>
 				<componentid>FIA_EAP_EXT.1</componentid>
 				<notes>The Extensible Authentication Protocol (EAP) is an authentication framework that supports multiple
 					authentication mechanisms. It can be used during IPsec connection setup for peer authentication using 
 					existing credential infrastructure. In this Package, if the TOE uses pre-shared keys transmitted using EAP, 
 					then this SFR must be claimed.</notes>
-			</componentneeded>
+			</componentneeded>  -->
 			<componentneeded>
 				<componentid>FIA_PSK_EXT.1</componentid>
 				<notes>If the TOE uses pre-shared keys to establish IPsec connections, then this SFR must be claimed
@@ -210,8 +210,8 @@
 					the incorporating document must include FIA_X509_EXT.1. This documents requires that X.509v3 certificates
 					be used in IKE peer authentication.</notes>
 			</componentneeded>
-<!--			<componentneeded>
-			<componentid>FIA_X509_EXT.2</componentid>
+			<componentneeded>
+<!--			<componentid>FIA_X509_EXT.2</componentid>
 				<notes>To support establishment of IPsec communications using a public key algorithm that includes X.509, 
 					the incorporating document must include FIA_X509_EXT.2 to specify the reasons for using X.509 certificates. 
 					But is this really a dependency for this package? I don't think so.</notes>
@@ -904,21 +904,14 @@
 						<selectable>RSA</selectable>
 						<selectable>ECDSA</selectable>
 					</selectables> 
-					that use X.509v3 certificates that conform to <xref to="bibRFC4945"/> as specified in 
-					<no-link>FIA_X509_EXT.1</no-link> and 
-					<selectables>
-						<selectable id="sel-ipsec-peer-psk">Pre-shared keys as specified in <no-link>FCS_IPSEC_EXT.2</no-link> 
-							<selectables linebreak="yes" onlyone="yes">
-								<selectable id="sel-ipsec-peer-psk-eap">transmitted via EAP as specified in <no-link>FCS_IPSEC_EXT.3</no-link></selectable>
-<!--								<selectable>transmitted via EAP-TTLS</selectable>   -->
-								<selectable>not transmitted via EAP</selectable>
-							</selectables></selectable>
-						<selectable exclusive="yes">no other method</selectable>
-<!--						<selectable id="sel-ipsec-psk-eap-tls">Pre-shared Keys transmitted via EAP-TLS as specified in <no-link>FCS_EAP_EXT.1</no-link></selectable>
-						<selectable id="sel-ipsec-psk-eap-ttls">Pre-shared Keys transmitted via EAP-TTLS with mutual authentication
-							as specified in <no-link>FCS_EAP_EXT.1</no-link></selectable>
-						<selectable id="sel-ipsec-psk">Pre-shared Keys not transmitted via EAP as specified in <no-link>FIA_PSK_EXT.1</no-link></selectable>
-						<selectable exclusive="yes">no other method</selectable>  -->
+					with X.509v3 certificates that conform to <xref to="bibRFC4945"/> as specified in <no-link>FIA_X509_EXT.1</no-link> and 
+					<selectables onlyone="yes">
+						<selectable id="sel-ipsec-peer-psk">Pre-shared keys as specified in <no-link>FIA_PSK_EXT.1</no-link></selectable>
+						<selectable>no other method</selectable>
+					</selectables> transmitted via
+					<selectables onlyone="yes">
+						<selectable id="sel-ipsec-peer-eap">EAP as specified in FCS_IPSEC_EXT.2</selectable>
+						<selectable>means other than EAP</selectable>
 					</selectables>.
 				</title>
 				<note role="application">
@@ -928,18 +921,16 @@
 					appropriate FCS requirements reflecting the algorithms used (and key
 					generation capabilities, if provided) are listed to support those methods. Note
 					that the TSS will elaborate on the way in which these algorithms are to be used 
-					(for example, RFC 2409 specifies three authentication methods using public keys;
+					(for example, <xref id="bibRFC2409"/> specifies three authentication methods using public keys;
 					each one supported will be described in the TSS).<h:p/>
 
-					If any selection with “pre-shared keys” is selected, the selection-based requirement FIA_PSK_EXT.1
-					must be claimed. FIA_PSK_EXT.1 includes the options for MFA solutions, it may be brought in via this selection or via the 
-					optional FPF_MFA_EXT.1 requirement.<h:p/> 
-					When pre-shared keys are supported for IKE v2, ‘Pre-shared Keys transmitted via EAP-TLS’ or 
-					‘Pre-shared Keys transmitted via EAP-TTLS’ is selected to indicate client verification using certificates 
-					in a mutually authenticated TLS handshake, and verification of provided PSK protected under the TLS channel. 
-					When Pre-shared Keys are supported for IKE v1, the first selection is claimed to indicate one of the mechanisms 
-					for using PSK described in the RFC. <h:p/>
-					It is acceptable for different use cases to leverage different selections, if this is the case it shall be identified.
+					If "<h:i>Pre-shared keys as specified in FIA_PSK_EXT.1</h:i>" is selected, then the 
+					external requirement <no-link>FIA_PSK_EXT.1</no-link> must be claimed. FIA_PSK_EXT.1 includes options
+					for MFA solutions.<h:p/>
+					
+					If "<h:i>EAP as specified in FCS_IPSEC_EXT.2</h:i>" is selected, then FCS_IPSEC_EXT.2 must be claimed. 
+					This selection should be made if the Extensible Authentication Protocol (EAP) is used for transmission of
+					authentication factors whether certificate-based or PSK-based.<h:p/>
 				</note>
 				<aactivity level="element">
 					<TSS>
@@ -1067,7 +1058,7 @@ And the X509-specific tests need to be removed. -->
 				</aactivity>
 			</f-element>
 			
-			<!-- FCS_IPSEC_EXT1.13 -->
+			<!-- FCS_IPSEC_EXT.1.13 -->
 			<f-element id="fcs-ipsec-ext-1e13">
 				<title>The TSF shall not establish an SA if the presented identifier does not match the
 					configured reference identifier of the peer.
@@ -1102,11 +1093,7 @@ And the X509-specific tests need to be removed. -->
 			<f-element id="fcs-ipsec-ext-1e14">
 <!-- Why does this SFR try to impose requirements on something that is not the TOE? -->
 <!-- Also, what does it mean to "ensure by default?" Should it just try for better? -->
-				<title>The
-					<selectables>
-						<selectable>TSF</selectable>
-						<selectable>VPN gateway</selectable>
-					</selectables> shall be able to ensure by default that the strength of the symmetric algorithm 
+				<title>The TSF shall be able to ensure by default that the strength of the symmetric algorithm 
 					(in terms of the number of bits in the key) negotiated to protect the 
 					<selectables>
 						<selectable>IKEv1 Phase 1</selectable>
@@ -1180,41 +1167,70 @@ And the X509-specific tests need to be removed. -->
 			</audit-event>
         </f-component>
 		
-		<!-- FCS_IPSEC_EXT.2 IPsec Peer Authentication Using Pre-Shared Keys -->
-		<!-- This is another new requirement to handle IPsec-specific aspects of using PSKs -->
+		<!-- FCS_IPSEC_EXT.2 IPsec Peer Authentication Over EAP -->
+		<!-- I decided that the EAP requriement is specific enough to IPsec that it is 
+			completely incorporated here. -->  
 		<f-component id="sfr-fcs-ipsec-ext-2" cc-id="fcs_ipsec_ext.2" 
-			name="IPsec Peer Authentication Using PSKs" status="sel-based">
-			<depends on="sel-ipsec-peer-psk"/>
+			name="IPsec Peer Authentication Over EAP" status="sel-based">
+			<depends on="sel-ipsec-peer-eap"/>
 			<f-element id="fcs-ipsec-ext-2e1">
-				<title>The TSF shall support IKE peer authentication using pre-shared keys composed as specified 
-					in <no-link>FIA_PSK_EXT.1</no-link>. 
+				<title>
+					The TSF shall perform IPsec peer authentication over EAP using
+					<selectables linebreak="yes">
+						<selectable>EAP-TLS as specified in <xref id="bibRFC5216"/></selectable>
+						<selectable>EAP-TTLS as specified in <xref id="bibRFC5281"/></selectable>
+					</selectables> as updated by <xref id="bibRFC8996"/> with TLS implemented using 
+					mutual authentication in accordance with the <xref id="bibNIAPFPTLS"/>.
 				</title>
 				<note role="application">
-					FIA_PSK_EXT.1 specifies the composition and requirements for pre-shared keys. It requires that the resulting	
-					PSKs are 128 or 256 bits. 
-				</note>
+					EAP-TLS and EAP-TTLS with mutual authentication are the only two EAP methods allowed 
+					by this Package for IPsec peer authentication.
+				</note>		
 			</f-element>
-			
-			<f-element id="fcs-ipsec-2e2">
-			<!-- This element should be about actually doing the authentication using PSKs -->
+			<f-element id="fcs-ipsec-ext-2e2">
 				<title>
-					
+					The TSF shall generate random values used in the EAP exchange using the RBG specified in 
+					<no-link>FCS_RBG_EXT.1</no-link>.
 				</title>
-				
+			</f-element>
+			<f-element id="fcs-ipsec-ext-2e3">
+				<title>
+					The TSF shall not forward a EAP-success response if the client certificate is not valid in accordance with 
+					<no-link>to FIA_X509_EXT.1</no-link>.
+				</title>
+			</f-element>
+			<f-element id="fcs-ipsec-ext-2e4">
+				<title>The TSF shall use the MSK from the EAP-TLS or EAP-TTLS response as the IKEv2 shared secret in the
+					authentication payload.
+				</title>
 				<aactivity>
 					<TSS>
-						The evaluator shall verify that the TSS describes that the EAP MSK is derived from the TLS
-						master key and is used as the IKEv2 shared key.
+						The evaluator shall verify that the TSS describes the use of EAP options for each of the selected peer 
+						authentication mechanisms, that TLS with mutual authentication is used, that the random values are from
+						an appropriate source, and that the TSS describes that the EAP MSK is derived from the TLS
+						master key and is used as the IKEv2 shared key.<h:p/>
 					</TSS>
 					<Guidance>
-						The evaluator shall verify that the guidance documents describe any configurable features of 
-						the EAP or TLS functionality, including instructions for configuration of the authenticators
-						and registration processes for clients.
+						The evaluator shall verify that the guidance documents describe any configurable features of the EAP or
+						TLS functionality, including instructions for configuration of the authenticators and registration 
+						processes for clients.<h:p/>
 					</Guidance>
 					<Tests>
-						For each supported EAP method claimed in FCS_IPSEC_EXT.2.1 <h:b>and for each authentication method 
-						claimed in FCS_EAP_EXT.1.3, <!-- Probably shouldn't refernces these --> the evaluator shall perform the following tests:</h:b>
+						For each supported EAP method claimed in FCS_IPSEC_EXT.2.1 the evaluator shall perform the following tests:
 						<testlist>
+							<test>The evaluator shall follow AGD guidance to configure the TSF to use the EAP method claimed. 
+								The evaluator shall follow AGD guidance to configure the TSF to use the authentication method claimed and,
+								for EAP-TTLS, register an endpoint with appropriate key material required for the authentication
+								method. The evaluator shall establish a connection using a test endpoint with a valid certificate and, 
+								for EAP-TTLS, configured to provide a correct value for the configured authenticator. The evaluator shall
+								observe that the connection is successful.
+							</test>
+							<test>[conditional] If EAP-TTLS is supported, the evaluator shall cause the test endpoint with a valid
+								certificate to send an invalid authenticator for the claimed authentication method:<h:ul>
+									<h:li>For HOTP, replay a HOTP value sent previously,</h:li>
+									<h:li>For TOTP or other PSK, modify a byte of the properly constructed value,</h:li></h:ul>
+								and observe that the TSF aborts the connection.
+							</test>
 							<test>The evaluator shall follow AGD guidance to configure the TSF to use a supported EAP method
 								and register the user with key material for required for a supported authentication method.
 								The evaluator shall configure a test endpoint to respond to an IKEv2 exchange with 
@@ -1228,56 +1244,6 @@ And the X509-specific tests need to be removed. -->
 				</aactivity>
 			</f-element>    
 		</f-component>
-
-		
-		<!-- FCS_IPSEC_EXT.3 IPsec Peer Authentication Using PSKs over EAP -->
-		<!-- This was pulled from the EAP requirement to here since no EAP requirement should reference IPsec, 
-			but it makes sense for an IPsec requirement to reference EAP. -->
-		<!-- TODO: Check the words -->
-		<f-component id="sfr-fcs-ipsec-ext-3" cc-id="fcs_ipsec_ext.3" 
-			name="IPsec Peer Authentication Using PSKs Over EAP" status="sel-based">
-			<depends on="sel-ipsec-peer-psk-eap"/>
-			<f-element id="fcs-ipsec-ext-3e1">
-				<title>The TSF shall use the MSK from the 
-					<selectables>
-						<selectable>EAP-TLS</selectable>
-						<selectable>EAP-TTLS</selectable>
-					</selectables> response as the IKEv2 shared secret in the authentication payload.
-					<!-- Clearly this happens only if IKEv2 is selected. Is there a way to word this so it doesn't matter  -->
-				</title>
-				<aactivity>
-					<TSS>
-						The evaluator shall verify that the TSS describes that the EAP MSK is derived from the TLS
-						master key and is used as the IKEv2 shared key.
-					</TSS>
-					<Guidance>
-						The evaluator shall verify that the guidance documents describe any configurable features of 
-						the EAP or TLS functionality, including instructions for configuration of the authenticators
-						and registration processes for clients.
-					</Guidance>
-					<Tests>
-						For each supported EAP method claimed in FCS_IPSEC_EXT.3.1 <h:b>and for each authentication method 
-						claimed in FCS_EAP_EXT.1.3, <!-- Probably shouldn't refernces these. Are they IPsec-specific? --> 
-						the evaluator shall perform the following tests:</h:b>
-						<testlist>
-							<test>The evaluator shall follow AGD guidance to configure the TSF to use a supported EAP method
-								and register the user with key material for required for a supported authentication method.
-								The evaluator shall configure a test endpoint to respond to an IKEv2 exchange with 
-								EAP-request, providing valid phase 1 handshake and valid TLS handshake, but computing 
-								the phase 2 shared key using standard (non-EAP) methods. The evaluator shall initiate 
-								an IPsec connection between the test endpoint and the TSF, and observe that the TSF aborts
-								the connection.
-							</test>
-						</testlist>
-					</Tests>
-				</aactivity>
-			</f-element>    
-		</f-component>
-		
-	<!-- PSKs are 128 or 256 bits -->
-	<!-- For HOTP and TOTP, must re-seed for each connection. Is this a VPN requirement? -->
-	<!-- For Password-based, must enter PWD for each connection. Seems like this should be a VPN requirement. -->
-	<!-- For generated PSKs shared through out of band mechanisms. -->
 		
     </sec:cryptsup>  <!-- FCS -->
 
@@ -1314,6 +1280,13 @@ And the X509-specific tests need to be removed. -->
 <!--                    -->
 	
    <bibliography>	
+		<entry id="bibNIAPFPTLS">
+			<tag>Functional Package for TLS</tag>
+			<description>
+				<h:a href="https://www.niap-ccevs.org/Profile/Info.cfm?id=439">
+					Functional Package for Transport Layer Security (TLS)</h:a>
+			</description>
+		</entry>   
 		<entry id="bibNIST80057">
 			<tag>NIST SP 800-57 Part 1 Rev. 5</tag>
 			<description>
@@ -1389,7 +1362,20 @@ And the X509-specific tests need to be removed. -->
 			<description>
 				<h:a href="https://tools.ietf.org/html/rfc4945">The Internet IP Security PKI Profile of IKEv1/ISAKMP, IKEv2, and PKIX</h:a>
 			</description>
-		</entry>   
+		</entry>
+		<entry id="bibRFC5216">
+			<tag>RFC 5216</tag>
+			<description>
+				<h:a href="https://tools.ietf.org/html/rfc5216">The EAP-TLS Authentication Protocol</h:a>
+			</description>
+		</entry> 
+		<entry id="bibRFC5281">
+			<tag>RFC 5281</tag>
+			<description>
+				<h:a href="https://tools.ietf.org/html/rfc5281">Extensible Authentication Protocol Tunneled Transport
+					Layer Security Authenticated Protocol Version 0 (EAP-TTLSv0)</h:a>
+			</description>
+		</entry>     		
 		<entry id="bibRFC5282">
 			<tag>RFC 5282</tag>
 			<description>
@@ -1422,6 +1408,12 @@ And the X509-specific tests need to be removed. -->
 				<h:a href="https://tools.ietf.org/html/rfc8784">Mixing Preshared Keys in the Internet Key Exchange Protocol Version 2
 					(IKEv2) for Post-quantum Security</h:a>
 			</description>
-		</entry>   
+		</entry>
+		<entry id="bibRFC8996">
+			<tag>RFC 8996</tag>
+			<description>
+				<h:a href="https://tools.ietf.org/html/rfc8996">Deprecating TLS 1.0 and TLS 1.1</h:a>
+			</description>
+		</entry>   		
     </bibliography>
 </Package>
