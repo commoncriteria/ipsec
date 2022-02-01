@@ -921,7 +921,7 @@
 					appropriate FCS requirements reflecting the algorithms used (and key
 					generation capabilities, if provided) are listed to support those methods. Note
 					that the TSS will elaborate on the way in which these algorithms are to be used 
-					(for example, <xref id="bibRFC2409"/> specifies three authentication methods using public keys;
+					(for example, <xref to="bibRFC2409"/> specifies three authentication methods using public keys;
 					each one supported will be described in the TSS).<h:p/>
 
 					If "<h:i>Pre-shared keys as specified in FIA_PSK_EXT.1</h:i>" is selected, then the 
@@ -1177,10 +1177,10 @@ And the X509-specific tests need to be removed. -->
 				<title>
 					The TSF shall perform IPsec peer authentication over EAP using
 					<selectables linebreak="yes">
-						<selectable>EAP-TLS as specified in <xref id="bibRFC5216"/></selectable>
-						<selectable>EAP-TTLS as specified in <xref id="bibRFC5281"/></selectable>
-					</selectables> as updated by <xref id="bibRFC8996"/> with TLS implemented using 
-					mutual authentication in accordance with the <xref id="bibNIAPFPTLS"/>.
+						<selectable>EAP-TLS as specified in <xref to="bibRFC5216"/></selectable>
+						<selectable>EAP-TTLS as specified in <xref to="bibRFC5281"/></selectable>
+					</selectables> as updated by <xref to="bibRFC8996"/> with TLS implemented using 
+					mutual authentication in accordance with the <xref to="bibNIAPFPTLS"/>.
 				</title>
 				<note role="application">
 					EAP-TLS and EAP-TTLS with mutual authentication are the only two EAP methods allowed 
