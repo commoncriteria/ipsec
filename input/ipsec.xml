@@ -970,7 +970,7 @@ And the X509-specific tests need to be removed. -->
 				</aactivity>
 			</f-element>
 			
-			<!-- FCS_IPSEC_EXT.1.12 Rules for establishing SAa in Peer Authetication	 -->
+			<!-- FCS_IPSEC_EXT.1.12 Rules for establishing SAs in Peer Authetication	 -->
 			<!-- What is the difference between this element and the next element? -->
 			<f-element id="fcs-ipsec-ext-1e12">
 				<title>The TSF shall not establish an SA if the [
