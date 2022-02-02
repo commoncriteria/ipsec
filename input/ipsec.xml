@@ -20,10 +20,10 @@
 
   <PPReference>
    <ReferenceTable>
-      <PPTitle>Functional Package for IPsec</PPTitle>
+      <PPTitle>Draft Functional Package for IPsec</PPTitle>
       <PPVersion>1.0</PPVersion>
       <PPAuthor>National Information Assurance Partnership</PPAuthor>
-      <PPPubDate>2022-02-01</PPPubDate>
+      <PPPubDate>2022-02-02</PPPubDate>
       <Keywords>IPsec; Internet Protocol</Keywords>
     </ReferenceTable>
   </PPReference>
@@ -31,7 +31,7 @@
   <RevisionHistory>
     <entry>
       <version>1.0</version>
-      <date>2022-02-01</date>
+      <date>2022-02-02</date>
       <subject>First draft.</subject>
     </entry>
   </RevisionHistory>
@@ -906,17 +906,7 @@
 						identifiers for the peer.<h:br/>
 					</Guidance>
 					<Tests>
-
-
-
-
-<!-- This needs to be reworded since the X509 SFRs are not in here.
-And the X509-specific tests need to be removed. -->
-<!-- How much of this is really IPsec? -->
-						For efficiency’s sake, the testing that is performed here has been combined with the testing for
-						<h:b>FIA_X509_EXT.2</h:b> and <h:b>FIA_X509_EXT.3</h:b> (for IPsec connections and depending on the Base-PP),
-						<h:b>FCS_IPSEC_EXT.1.12</h:b>, and <h:b>FCS_IPSEC_EXT.1.13</h:b>. The following tests shall be repeated for each peer
-						authentication protocol selected in the <h:b>FCS_IPSEC_EXT.1.11</h:b> selection above:
+						The following tests shall be repeated for each peer authentication method supported:
 						<testlist>
 							<test>The evaluator shall have the TOE generate a public-private key pair, and submit a CSR (Certificate
 								Signing Request) to a CA (trusted by both the TOE and the peer VPN used to establish a connection) for
@@ -979,37 +969,11 @@ And the X509-specific tests need to be removed. -->
 				</aactivity>
 			</f-element>
 	
-		
-
-<!--
-Application Note 88
-When using RSA or ECDSA certificates for peer authentication, the reference and presented
-identifiers take the form of either a DN, IP address, FQDN or user FQDN. The reference
-identifier is the identifier the TOE expects to receive from the peer during IKE authentication.
-The presented identifier is the identifier that is contained within the peer certificate body. The
-ST author shall select the presented and reference identifier types supported and may
-optionally assign additional supported identifier types in the second selection. Excluding the
-DN identifier type (which is necessarily the Subject DN in the peer certificate), the TOE may
-support the identifier in either the Common Name or Subject Alternative Name (SAN) or both.
-The critical requirement of X.509 identifiers is the ability to bind the public key uniquely to an
-identity. This can be achieved by using strongly-typed identifiers or controlling the CA and
-certificate issuance. One recommended method for identity verification is supporting the use
-of the Subject Alternative Name (SAN) extension using DNS names, URI names, or Service
-Names. However, the support for a SAN extension is optional as long as identifier uniqueness
-can be achieved by other means.
-In a future version of this cPP, SAN and/or DN support might be required for all TOEs, support
-for CN might be optional, and the “other supported referenced identifier types” selection might
-be removed. In a future version of this cPP, it might also be required that the SAN (when
-present) shall take precedence over CN.
-Supported peer certificate algorithms are the same as FCS_IPSEC_EXT.1.13		
-		-->
-
-		
 			<!-- FCS_IPSEC_EXT.1.12 Rules for establishing SAs in Peer Authetication	 -->
 			<f-element id="fcs-ipsec-ext-1e12">
 				<title>The TSF shall establish a SA only if the presented identifier in the received 
 					certificate matches the configured resource identifier, where the 
-					presented and reference identifiers are of the following fields and types: 
+					presented and reference identifiers are of the following fields and types: <h:p/>
 					[
 					<selectables>
 						<selectable>IP address</selectable>
@@ -1021,17 +985,20 @@ Supported peer certificate algorithms are the same as FCS_IPSEC_EXT.1.13
 					<selectables>
 						<selectable><assignable>other supported reference identifier types</assignable></selectable>
 						<selectable exclusive="yes">no other reference identifier type</selectable>
-					</selectables>] contained in a certificate does not match the expected values for the
+					</selectables>] 
+					contained in a certificate does not match the expected values for the
 					entity attempting to establish a connection.
 				</title>
 				<note role="application">
-					The TOE must support at least one of the following identifier types: IP address,
+					The reference identifier is the identifier the TOE expects to receive from the peer
+					during IKE authentication. The presented identifier is the identifier that is contained
+					within the peer certificate body. The TOE must support at least one of the following
+					identifier types: IP address,
 					Fully Qualified Domain Name (FQDN), user FQDN, or Distinguished Name (DN).
 					In the future, the TOE will be required to support all of these identifier types. The
 					TOE is expected to support as many IP address formats (IPv4 and IPv6) as IP
 					versions supported by the TOE in general. The ST author may assign additional
 					supported identifier types in the second selection.<h:p/>
-					
 					At this time, only the comparison between the presented identifier in the peer’s
 					certificate and the peer’s reference identifier is mandated by the testing below.
 					However, in the future, this requirement will address two aspects of the peer
@@ -1049,8 +1016,7 @@ Supported peer certificate algorithms are the same as FCS_IPSEC_EXT.1.13
 					peer’s certificate does not contain a SAN, to fall back to a comparison against
 					the Common Name. In the future, the TOE will be required to compare the
 					reference identifier to the presented identifier in the SAN only, ignoring the
-					Common Name.<h:p/>
-					
+					Common Name.					
 				</note>
 				<aactivity level="element">
 					EAs for this element are tested through EAs for FCS_IPSEC_EXT.1.11.
@@ -1058,11 +1024,8 @@ Supported peer certificate algorithms are the same as FCS_IPSEC_EXT.1.13
 				</aactivity>
 			</f-element>
 			
-			
 			<!-- FCS_IPSEC_EXT.1.13 -->
 			<f-element id="fcs-ipsec-ext-1e13">
-<!-- Why does this SFR try to impose requirements on something that is not the TOE? -->
-<!-- Also, what does it mean to "ensure by default?" Should it just try for better? -->
 				<title>The TSF shall be able to ensure by default that the strength of the symmetric algorithm 
 					(in terms of the number of bits in the key) negotiated to protect the 
 					<selectables>
