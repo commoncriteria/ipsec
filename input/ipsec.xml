@@ -552,8 +552,11 @@
 								<selectable>support for XAUTH</selectable>
 								<selectable>no support for XAUTH</selectable>
 							</selectables></selectable>
-						<selectable id="sel-ipsec-ikev2">IKEv2 as defined in <xref to="bibRFC7296"/> (with mandatory support for NAT traversal 
-							as specified in section 2.23), <xref to="bibRFC8784"/>, <xref to="bibRFC8247"/>, and 
+						<selectable id="sel-ipsec-ikev2">IKEv2 as defined in <xref to="bibRFC7296"/> 
+							<selectables onlyone="yes">
+								<selectable>with mandatory support for NAT traversal as specified in section 2.23</selectable>
+								<selectable>with no support for NAT traversal</selectable>
+							</selectables>, and <xref to="bibRFC8784"/>, <xref to="bibRFC8247"/>, and
 							<selectables>
 								<selectable><xref to="bibRFC4868"/> for hash functions</selectable>
 								<selectable exclusive="yes">no other RFCs for hash functions</selectable>
@@ -561,6 +564,10 @@
 						</selectable>
 					</selectables>.
 				</title>
+				<note role="application">
+					If the IPsec implementation is being used in a VPN application, then the ST author must claim 
+					"<h:i>with mandatory support for NAT traversal as specified in section 2.23</h:i>."
+				</note>
 				<aactivity level="element">
 					<TSS>
 						The evaluator shall examine the TSS to verify that IKEv1 or IKEv2 (or both) are implemented. If IKEv1 is
@@ -578,9 +585,9 @@
 					</Guidance>
 					<Tests>
 						<testlist>
-							<test>
-								The evaluator shall configure the TOE so that it will perform NAT traversal processing as described
-								in the TSS and <xref to="bibRFC7296"/>, section 2.23. The evaluator shall initiate an IPsec connection and determine that
+							<test>[conditional] If NAT traversal is supported, the evaluator shall configure the TOE so that it will
+								perform NAT traversal processing as described in the TSS and <xref to="bibRFC7296"/>, section 2.23.
+								The evaluator shall initiate an IPsec connection and determine that
 								the NAT is successfully traversed. If the TOE supports IKEv1 with or without XAUTH, the evaluator shall
 								verify that this test can be successfully repeated with XAUTH enabled and disabled in the manner specified
 								by the operational guidance. If the TOE supports only IKEv1 with XAUTH, the evaluator shall verify that
@@ -678,8 +685,7 @@
 								<selectable>length of time</selectable>
 							</selectables>
 						</selectable>
-					</selectables>, and that if length of time is used, it shall include at least one option that
-					is 24 hours or less for Phase 1 SAs and 8 hours or less for Phase 2 SAs.
+					</selectables>.
 				</title>
 				<note role="application">
 					The ST author is afforded a selection based on the version of IKE in their
@@ -702,7 +708,10 @@
 					operational guidance generated for AGD_OPE. It is appropriate to refine the
 					requirement in terms of number of MB/KB instead of number of packets, as long
 					as the TOE is capable of setting a limit on the amount of traffic that is protected
-					by the same key (the total volume of all IPsec traffic protected by that key).
+					by the same key (the total volume of all IPsec traffic protected by that key).<h:p/>
+					If the TOE is a VPN, then if a length of time is used for configuring SA lifetimes,
+					then the assigned values should include at least one option that is 24 hours or less 
+					for Phase 1 SAs and 8 hours or less for Phase 2 SAs.
 				</note>
 				<aactivity level="element">
 					<TSS>There are no TSS EAs for this requirement.<h:br/></TSS>
@@ -969,11 +978,39 @@ And the X509-specific tests need to be removed. -->
 					</Tests>
 				</aactivity>
 			</f-element>
-			
+	
+		
+
+<!--
+Application Note 88
+When using RSA or ECDSA certificates for peer authentication, the reference and presented
+identifiers take the form of either a DN, IP address, FQDN or user FQDN. The reference
+identifier is the identifier the TOE expects to receive from the peer during IKE authentication.
+The presented identifier is the identifier that is contained within the peer certificate body. The
+ST author shall select the presented and reference identifier types supported and may
+optionally assign additional supported identifier types in the second selection. Excluding the
+DN identifier type (which is necessarily the Subject DN in the peer certificate), the TOE may
+support the identifier in either the Common Name or Subject Alternative Name (SAN) or both.
+The critical requirement of X.509 identifiers is the ability to bind the public key uniquely to an
+identity. This can be achieved by using strongly-typed identifiers or controlling the CA and
+certificate issuance. One recommended method for identity verification is supporting the use
+of the Subject Alternative Name (SAN) extension using DNS names, URI names, or Service
+Names. However, the support for a SAN extension is optional as long as identifier uniqueness
+can be achieved by other means.
+In a future version of this cPP, SAN and/or DN support might be required for all TOEs, support
+for CN might be optional, and the “other supported referenced identifier types” selection might
+be removed. In a future version of this cPP, it might also be required that the SAN (when
+present) shall take precedence over CN.
+Supported peer certificate algorithms are the same as FCS_IPSEC_EXT.1.13		
+		-->
+
+		
 			<!-- FCS_IPSEC_EXT.1.12 Rules for establishing SAs in Peer Authetication	 -->
-			<!-- What is the difference between this element and the next element? -->
 			<f-element id="fcs-ipsec-ext-1e12">
-				<title>The TSF shall not establish an SA if the [
+				<title>The TSF shall establish a SA only if the presented identifier in the received 
+					certificate matches the configured resource identifier, where the 
+					presented and reference identifiers are of the following fields and types: 
+					[
 					<selectables>
 						<selectable>IP address</selectable>
 						<selectable>Fully Qualified Domain Name (FQDN)</selectable>
@@ -993,20 +1030,8 @@ And the X509-specific tests need to be removed. -->
 					In the future, the TOE will be required to support all of these identifier types. The
 					TOE is expected to support as many IP address formats (IPv4 and IPv6) as IP
 					versions supported by the TOE in general. The ST author may assign additional
-					supported identifier types in the second selection.
-				</note>
-				<aactivity level="element">
-					EAs for this element are tested through EAs for FCS_IPSEC_EXT.1.11.
-					<no-tests/>
-				</aactivity>
-			</f-element>
-			
-			<!-- FCS_IPSEC_EXT.1.13 -->
-			<f-element id="fcs-ipsec-ext-1e13">
-				<title>The TSF shall not establish an SA if the presented identifier does not match the
-					configured reference identifier of the peer.
-				</title>
-				<note role="application">
+					supported identifier types in the second selection.<h:p/>
+					
 					At this time, only the comparison between the presented identifier in the peer’s
 					certificate and the peer’s reference identifier is mandated by the testing below.
 					However, in the future, this requirement will address two aspects of the peer
@@ -1025,6 +1050,7 @@ And the X509-specific tests need to be removed. -->
 					the Common Name. In the future, the TOE will be required to compare the
 					reference identifier to the presented identifier in the SAN only, ignoring the
 					Common Name.<h:p/>
+					
 				</note>
 				<aactivity level="element">
 					EAs for this element are tested through EAs for FCS_IPSEC_EXT.1.11.
@@ -1032,8 +1058,9 @@ And the X509-specific tests need to be removed. -->
 				</aactivity>
 			</f-element>
 			
-			<!-- FCS_IPSEC_EXT.1.14 -->
-			<f-element id="fcs-ipsec-ext-1e14">
+			
+			<!-- FCS_IPSEC_EXT.1.13 -->
+			<f-element id="fcs-ipsec-ext-1e13">
 <!-- Why does this SFR try to impose requirements on something that is not the TOE? -->
 <!-- Also, what does it mean to "ensure by default?" Should it just try for better? -->
 				<title>The TSF shall be able to ensure by default that the strength of the symmetric algorithm 
