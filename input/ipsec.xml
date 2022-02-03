@@ -168,8 +168,9 @@
 			</componentneeded>
 			<componentneeded>
 				<componentid>FCS_CKM.2</componentid>
-					<notes>To support key establishment for IPsec, the incorporating document must
+					<notes>To support key distribution for IPsec, the incorporating document must
 						include FCS_CKM.2 and specify the corresponding algorithms.</notes>
+				<!-- VPN Module says key establishment, but that's not what CKM.2 is about -->
 			</componentneeded>
 			<componentneeded>
 				<componentid>FCS_CKM_EXT.5</componentid>
@@ -192,13 +193,11 @@
 					include a requirement that specifies the TOE's ability to invoke or provide 
 					random bit generation services, commonly identified as FCS_RBG_EXT.1.</notes>
 			</componentneeded>
-<!--			<componentneeded>
-				<componentid>FIA_EAP_EXT.1</componentid>
-				<notes>The Extensible Authentication Protocol (EAP) is an authentication framework that supports multiple
-					authentication mechanisms. It can be used during IPsec connection setup for peer authentication using 
-					existing credential infrastructure. In this Package, if the TOE uses pre-shared keys transmitted using EAP, 
-					then this SFR must be claimed.</notes>
-			</componentneeded>  -->
+			<componentneeded>
+				<componentid>FCS_TLS_EXT.1</componentid>
+				<notes>To support peer authentication over EAP, this Package requires support for the EAP-TLS or EAP-TTLS
+					protocols. For this reason, the ST may need to incorporate the <xref to="bibNIAPFPTLS"/>.</notes>
+			</componentneeded>
 			<componentneeded>
 				<componentid>FIA_PSK_EXT.1</componentid>
 				<notes>If the TOE uses pre-shared keys to establish IPsec connections, then this SFR must be claimed
@@ -210,12 +209,13 @@
 					the incorporating document must include FIA_X509_EXT.1. This documents requires that X.509v3 certificates
 					be used in IKE peer authentication.</notes>
 			</componentneeded>
-<!--			<componentneeded>
+			<componentneeded>
 			<componentid>FIA_X509_EXT.2</componentid>
+				<!-- Not sure that this one needs to be here. Does IPsec actually depend on it? -->
 				<notes>To support establishment of IPsec communications using a public key algorithm that includes X.509, 
-					the incorporating document must include FIA_X509_EXT.2 to specify the reasons for using X.509 certificates. 
-					But is this really a dependency for this package? I don't think so.</notes>
-			</componentneeded>  -->
+					the incorporating document must include FIA_X509_EXT.2 to specify the trusted channel protocols that 
+					use X.509 certificates.</notes>
+			</componentneeded>
 			<componentneeded>
 			<componentid>FPT_STM.1</componentid>
 				<notes>To support establishment of IPSec communications using a public key algorithm that includes X.509, 
@@ -883,19 +883,19 @@
 					<TSS>
 						The evaluator ensures that the TSS identifies RSA or ECDSA or both as being used to perform peer
 						authentication.<h:p/>
-						If any selection with pre-shared keys is chosen in the selection, the evaluator shall check to ensure that the TSS describes
-						how those selections work in conjunction with authentication of IPsec connections.<h:p/>
 						The evaluator shall ensure that the TSS describes how the TOE compares the peer’s presented identifier
 						to the reference identifier. This description shall include whether the certificate presented identifier is
 						compared to the ID payload presented identifier, which fields of the certificate are used as the presented
 						identifier (DN, Common Name, or SAN) and, if multiple fields are supported, the logical order comparison.
 						If the ST author assigned an additional identifier type, the TSS description shall also include a description
-						of that type and the method by which that type is compared to the peer’s presented certificate.<h:br/>
+						of that type and the method by which that type is compared to the peer’s presented certificate.<h:p/>
+						If any selection with pre-shared keys is chosen in the selection, the evaluator shall check to ensure that the TSS describes
+						how those selections work in conjunction with authentication of IPsec connections.<h:br/>
 					</TSS>
 					<Guidance>
 						If any selection with “<h:i>Pre-shared Keys</h:i>” is selected, the evaluator shall check that the operational guidance 
 						describes any configuration necessary to enable any selected authentication mechanisms. <h:p/>
-						If any method other than no other method is selected, the evaluator shall check that the operational guidance 
+						If any method other than "<h:i>no other method</h:i>" is selected, the evaluator shall check that the operational guidance 
 						describes any configuration necessary to enable any selected authentication mechanisms.<h:p/>
 						The evaluator ensures the operational guidance describes how to set up the TOE to use the cryptographic
 						algorithms RSA or ECDSA, as selected.<h:p/>
@@ -906,7 +906,7 @@
 						identifiers for the peer.<h:br/>
 					</Guidance>
 					<Tests>
-						The following tests shall be repeated for each peer authentication method supported:
+						The following tests shall be repeated for each certificate-based peer authentication method supported:
 						<testlist>
 							<test>The evaluator shall have the TOE generate a public-private key pair, and submit a CSR (Certificate
 								Signing Request) to a CA (trusted by both the TOE and the peer VPN used to establish a connection) for
@@ -918,9 +918,8 @@
 								trusted CA and shall establish an IPsec connection with the peer.                
 							</test>
 							<test>The evaluator shall test that the TOE can properly handle revoked certificates – conditional on
-								whether CRL or OCSP is selected; if both are selected, and then a test is performed for each method. For
-								this current version of the PP-Module, the evaluator has to only test one up in the trust chain (future
-								drafts may require to ensure the validation is done up the entire chain). The evaluator shall ensure that a
+								whether CRL or OCSP is selected in <no-link>FIA_X509_EXT.1</no-link>; if both are selected, and then a test 
+								is performed for each method. The evaluator shall ensure that a
 								valid certificate is used, and that the SA is established. The evaluator then attempts the test with a
 								certificate that will be revoked (for each method chosen in the selection) to ensure when the certificate
 								is no longer valid that the TOE will not establish an SA
@@ -1024,7 +1023,7 @@
 				</aactivity>
 			</f-element>
 			
-			<!-- FCS_IPSEC_EXT.1.13 -->
+			<!-- FCS_IPSEC_EXT.1.13 IKE algorithm strengths -->
 			<f-element id="fcs-ipsec-ext-1e13">
 				<title>The TSF shall be able to ensure by default that the strength of the symmetric algorithm 
 					(in terms of the number of bits in the key) negotiated to protect the 
@@ -1101,8 +1100,6 @@
         </f-component>
 		
 		<!-- FCS_IPSEC_EXT.2 IPsec Peer Authentication Over EAP -->
-		<!-- I decided that the EAP requriement is specific enough to IPsec that it is 
-			completely incorporated here. -->  
 		<f-component id="sfr-fcs-ipsec-ext-2" cc-id="fcs_ipsec_ext.2" 
 			name="IPsec Peer Authentication Over EAP" status="sel-based">
 			<depends on="sel-ipsec-peer-eap"/>
@@ -1129,7 +1126,7 @@
 			<f-element id="fcs-ipsec-ext-2e3">
 				<title>
 					The TSF shall not forward a EAP-success response if the client certificate is not valid in accordance with 
-					<no-link>to FIA_X509_EXT.1</no-link>.
+					<no-link>FIA_X509_EXT.1</no-link>.
 				</title>
 			</f-element>
 			<f-element id="fcs-ipsec-ext-2e4">
