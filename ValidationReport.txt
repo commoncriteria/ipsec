@@ -1,0 +1,2 @@
+/home/runner/work/ipsec/ipsec/input/ipsec.xml:201:38: error: found attribute "id", but no attributes allowed here
+/home/runner/work/ipsec/ipsec/input/ipsec.xml:203:67: error: element "depends" not allowed here; expected element "notes"
