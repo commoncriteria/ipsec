@@ -1,0 +1,6 @@
+output/ipsec-release-linkable.html: AGD
+output/ipsec-release-linkable.html: FIA
+output/ipsec-release.html: AGD
+output/ipsec-release.html: FIA
+output/ipsec.html: AGD
+output/ipsec.html: FIA
