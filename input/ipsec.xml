@@ -163,14 +163,15 @@
 		<componentsneeded>
 			<componentneeded>
 				<componentid>FCS_CKM.1</componentid>
+				<!-- IPsec potentially needs both AKs and SKs -->
 				<notes>To support key generation for IPsec, the incorporating document must
 					include FCS_CKM.1 and specify the corresponding algorithms. </notes>
 			</componentneeded>
 			<componentneeded>
 				<componentid>FCS_CKM.2</componentid>
+					<!-- VPN Module says key establishment, but that's not what CKM.2 is about -->
 					<notes>To support key distribution for IPsec, the incorporating document must
 						include FCS_CKM.2 and specify the corresponding algorithms.</notes>
-				<!-- VPN Module says key establishment, but that's not what CKM.2 is about -->
 			</componentneeded>
 			<componentneeded>
 				<componentid>FCS_CKM_EXT.5</componentid>
@@ -179,6 +180,7 @@
 			</componentneeded>
 			<componentneeded>
 				<componentid>FCS_COP.1</componentid>
+				<!-- Needs FCS_COP.1/SKC for sure. Possibly FCS_COP.1/Hash or KeyedHash. SigGen, SigVer -->
 				<notes>
 					To support the cryptography needed for IPsec communications, the incorporating document must include 
 					FCS_COP.1 (iterating as needed) to specify AES with corresponding key sizes and modes, digital
@@ -193,8 +195,10 @@
 					include a requirement that specifies the TOE's ability to invoke or provide 
 					random bit generation services, commonly identified as FCS_RBG_EXT.1.</notes>
 			</componentneeded>
-			<componentneeded>
+			<componentneeded id="cn-ipsec-tls">
+				<!-- Selection based inclusion of the TLS Package -->
 				<componentid>FCS_TLS_EXT.1</componentid>
+				<depends on-sel="sel-ipsec-peer-eap"/>
 				<notes>To support peer authentication over EAP, this Package requires support for the EAP-TLS or EAP-TTLS
 					protocols. For this reason, the ST may need to incorporate the <xref to="bibNIAPFPTLS"/>.</notes>
 			</componentneeded>
@@ -205,13 +209,15 @@
 					to specify requirements for the composition of pre-shared keys.</notes>
 			</componentneeded>
 			<componentneeded>
+				<!-- Always required -->
 				<componentid>FIA_X509_EXT.1</componentid>
 				<notes>To support establishment of IPSec communications using a public key algorithm that includes X.509, 
 					the incorporating document must include FIA_X509_EXT.1. This documents requires that X.509v3 certificates
 					be used in IKE peer authentication.</notes>
 			</componentneeded>
 			<componentneeded>
-			<componentid>FIA_X509_EXT.2</componentid>
+				<!-- Always required -->
+				<componentid>FIA_X509_EXT.2</componentid>
 				<!-- Not sure that this one needs to be here. Does IPsec actually depend on it? -->
 				<notes>To support establishment of IPsec communications using a public key algorithm that includes X.509, 
 					the incorporating document must include FIA_X509_EXT.2 to specify the trusted channel protocols that 
