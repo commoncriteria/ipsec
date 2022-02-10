@@ -162,25 +162,33 @@
 		
 		<componentsneeded>
 			<componentneeded>
-				<componentid>FCS_CKM.1</componentid>
-				<!-- IPsec potentially needs both AKs and SKs -->
+				<!-- <componentid>FCS_CKM.1</componentid>  -->
+				<componentid>FCS_CKM.1/AKG</componentid>
+				<componentid>FCS_CKM.1/SKG</componentid>
 				<notes>To support key generation for IPsec, the incorporating document must
 					include FCS_CKM.1 and specify the corresponding algorithms. </notes>
 			</componentneeded>
 			<componentneeded>
 				<componentid>FCS_CKM.2</componentid>
 					<!-- VPN Module says key establishment, but that's not what CKM.2 is about -->
+					<!-- Need to revisit whether this is really needed. Obviously key transport and agreement could be needed 
+						in order to support IPsec IKE -->
 					<notes>To support key distribution for IPsec, the incorporating document must
 						include FCS_CKM.2 and specify the corresponding algorithms.</notes>
 			</componentneeded>
 			<componentneeded>
 				<componentid>FCS_CKM_EXT.5</componentid>
+					<!-- I don't think the PSK requirements leverage the PBKDF. Should they? -->
 					<notes>To support key derivation for IPsec, the incorporating document may need to include
 						FCS_CKM_EXT.5 and specify the corresponding key derivation algorithms.</notes>
 			</componentneeded>
 			<componentneeded>
-				<componentid>FCS_COP.1</componentid>
-				<!-- Needs FCS_COP.1/SKC for sure. Possibly FCS_COP.1/Hash or KeyedHash. SigGen, SigVer -->
+				<!-- <componentid>FCS_COP.1</componentid>  -->
+				<componentid>FCS_COP.1/SKC</componentid> 
+				<componentid>FCS_COP.1/Hash</componentid>
+				<componentid>FCS_COP.1/KeyedHash</componentid>
+				<componentid>FCS_COP.1/SigGen</componentid>
+				<componentid>FCS_COP.1/SigVer</componentid>
 				<notes>
 					To support the cryptography needed for IPsec communications, the incorporating document must include 
 					FCS_COP.1 (iterating as needed) to specify AES with corresponding key sizes and modes, digital
