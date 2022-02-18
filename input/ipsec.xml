@@ -910,13 +910,15 @@
 					A more agile digital signature scheme for IKEv2 authentication is defined in <xref to="bibRFC7427"/>.
 					This Package requires only that RSA- or ECDSA-based digital signatures be used.<h:p/> 
 					This Package does not permit use of Shared Key Message Integrity Code for peer authentication, 
-					though support is mandatory in the standard.<h:p/>
-					This Package requires that digital signature-based peer authentication use X.509v3 certificates.<h:p/>
+					although support is mandatory in the standard.<h:p/>
+					This Package requires that digital signature-based peer authentication use X.509v3 certificates
+					to verify the identity of the keys used in the signatures.<h:p/>
 					
 					<h:b>
 						The standard allows PSK either with or without EAP. The VPN client Module is silent about whether
-						EAP can be used for certificate-based authentication.  
-					</h:b><h:p/>
+						EAP can be used for certificate-based authentication. Thus it appears to not allow it.
+					</h:b>
+					<h:p/>
 					
 					Peer authentication using certificates can be accomplished using either mechanisms inherent in 
 					the IKE protocol, or the EAP framework. Authentication using pre-shared keys can be accomplished
