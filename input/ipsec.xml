@@ -180,7 +180,10 @@
 				<componentid>FCS_CKM_EXT.5</componentid>
 					<!-- I don't think the PSK requirements leverage the PBKDF. Should they? -->
 					<notes>To support key derivation for IPsec, the incorporating document may need to include
-						FCS_CKM_EXT.5 and specify the corresponding key derivation algorithms.</notes>
+						FCS_CKM_EXT.5 and specify the corresponding key derivation algorithms.<h:p/>
+						<h:b>IKE has its own key derivation method defined in the standard, and approved in 
+						NIST SP 800-135, Rev. 1. Sec 4.1. We might not need to bring in CKM 5 at all.  We still need the 
+						primitives, which are the hashes and keyed hashes.</h:b></notes>
 			</componentneeded>
 			<componentneeded id="cn-ipsec-cop-1">
 				<!-- Always required -->
