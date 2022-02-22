@@ -171,8 +171,8 @@
 			<componentneeded>
 				<componentid>FCS_CKM.2</componentid>
 					<!-- VPN Module says key establishment, but that's not what CKM.2 is about -->
-					<!-- Need to revisit whether this is really needed. Obviously key transport and agreement could be needed 
-						in order to support IPsec IKE -->
+					<!-- Need to revisit whether this is really needed. Obviously key transport and agreement could
+						be needed in order to support IPsec IKE -->
 					<notes>To support key distribution for IPsec, the incorporating document must
 						include FCS_CKM.2 and specify the corresponding algorithms.</notes>
 			</componentneeded>
@@ -182,7 +182,8 @@
 					<notes>To support key derivation for IPsec, the incorporating document may need to include
 						FCS_CKM_EXT.5 and specify the corresponding key derivation algorithms.</notes>
 			</componentneeded>
-			<componentneeded>
+			<componentneeded id="cn-ipsec-cop-1">
+				<!-- Always required -->
 				<componentid>FCS_COP.1</componentid>
 				<!-- <componentid>FCS_COP.1/SKC</componentid>  Required -->
 				<!-- <componentid>FCS_COP.1/Hash</componentid>  Required. -->
@@ -198,7 +199,8 @@
 					SHA are required for the mandatory pseudo-random function and for integrity protections.
 				</notes>
 			</componentneeded>
-			<componentneeded>
+			<componentneeded id="cn-ipsec-rbg">
+				<!-- Always needed -->
 				<componentid>FCS_RBG_EXT.1</componentid>
 				<notes>To support random bit generation needed for IPsec key generation, the incorporating document must
 					include a requirement that specifies the TOE's ability to invoke or provide 
@@ -217,14 +219,14 @@
 				<notes>If the TOE uses pre-shared keys to establish IPsec connections, then this SFR must be claimed
 					to specify requirements for the composition of pre-shared keys.</notes>
 			</componentneeded>
-			<componentneeded>
+			<componentneeded id="cn-ipsec-x509-1">
 				<!-- Always required -->
 				<componentid>FIA_X509_EXT.1</componentid>
 				<notes>To support establishment of IPSec communications using a public key algorithm that includes X.509, 
 					the incorporating document must include FIA_X509_EXT.1. This documents requires that X.509v3 certificates
 					be used in IKE peer authentication.</notes>
 			</componentneeded>
-			<componentneeded>
+			<componentneeded id="cn-ipsec-x509-2">
 				<!-- Always required -->
 				<componentid>FIA_X509_EXT.2</componentid>
 				<!-- Not sure that this one needs to be here. Does IPsec actually depend on it? -->
@@ -791,6 +793,7 @@
 					</selectables>].
 				</title>
 				<note role="application">
+					<h:b>These options align with RFC 6379 (2011), but not with RFC 8247 (2017). Should they? </h:b><h:p/>
 					The selection is used to specify additional DH groups supported. This applies to
 					IKEv1 and IKEv2 exchanges. It should be noted that if any additional DH groups
 					are specified, they must comply with the requirements (in terms of the
@@ -807,11 +810,11 @@
 					FCS_IPSEC_EXT.1.9, then, the assignment would read “[224, 384]” and for
 					FCS_IPSEC_EXT.1.10 it would read “[112, 192]” (although in this case the
 					requirement should probably be refined so that it makes sense mathematically).<h:p/>
-					<xref to="bibRFC8247"/> requires support for DH Group 14 and recommends support for Group 19
+					<xref to="bibRFC6379"/> (2011) recommends using a "256-bit random ECP group" (Group 19) or a 
+					"384-bit random ECP group" (Group 20).
+					<xref to="bibRFC8247"/> (2017) requires support for DH Group 14 and recommends support for Group 19
 					in IKEv2. It discourages support for Groups 5, 2, 23, and 24. And forbids support for
 					Groups 1 and 22.<h:p/>
-					<xref to="bibRFC6379"/> recommends using a "256-bit random ECP group" (Group 19) or a 
-					"384-bit random ECP group" (Group 20).
 				</note>
 				<aactivity level="element">
 					<TSS>
@@ -882,13 +885,12 @@
 					with X.509v3 certificates that conform to <xref to="bibRFC4945"/> as specified in
 					<no-link>FIA_X509_EXT.1</no-link> and 
 					<selectables onlyone="yes">
-						<selectable id="sel-ipsec-peer-psk">Pre-shared keys as specified in <no-link>FIA_PSK_EXT.1</no-link></selectable>
+						<selectable id="sel-ipsec-peer-psk-eap">Pre-shared keys as specified in <no-link>FIA_PSK_EXT.1</no-link>
+							transmitted via EAP as specified in FCS_IPSEC_EXT.2.</selectable>
+						<selectable id="sel-ipsec-peer-psk">Pre-shared keys as specified in <no-link>FIA_PSK_EXT.1</no-link>
+							transmitted via means other than EAP.</selectable>
 						<selectable>no other method</selectable>
-					</selectables> transmitted via
-					<selectables onlyone="yes">
-						<selectable id="sel-ipsec-peer-eap">EAP as specified in FCS_IPSEC_EXT.2</selectable>
-						<selectable>means other than EAP</selectable>
-					</selectables>.
+					</selectables>
 				</title>
 				<!-- This is what is going in to vpnclient 2.4:
 				The TSF shall ensure that all IKE protocols perform peer authentication using [selection: RSA, ECDSA] 
@@ -1158,7 +1160,7 @@
 		<!-- FCS_IPSEC_EXT.2 IPsec Peer Authentication Over EAP -->
 		<f-component id="sfr-fcs-ipsec-ext-2" cc-id="fcs_ipsec_ext.2" 
 			name="IPsec Peer Authentication Over EAP" status="sel-based">
-			<depends on="sel-ipsec-peer-eap"/>
+			<depends on="sel-ipsec-peer-psk-eap"/>
 			<f-element id="fcs-ipsec-ext-2e1">
 				<title>
 					The TSF shall perform IPsec peer authentication over EAP using
@@ -1170,7 +1172,9 @@
 				</title>
 				<note role="application">
 					EAP-TLS and EAP-TTLS with mutual authentication are the only two EAP methods allowed 
-					by this Package for IPsec peer authentication.
+					by this Package for IPsec peer authentication.<h:p/>
+					This Package allows EAP to be used for peer authentication using pre-shared keys only. Authentication using
+					public-key cryptography and certificates must use IKEv2 mechanisms.
 				</note>		
 			</f-element>
 			<f-element id="fcs-ipsec-ext-2e2">
