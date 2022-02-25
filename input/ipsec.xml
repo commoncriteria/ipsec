@@ -160,7 +160,7 @@
 	    	is approved fpor use in <xref to="bibNIST800135r1"/>, so use of this Package should not require claiming 
 	    	of FCS_CKM_EXT.2.<h:p/>
 		An ST must identify the applicable version of the PP, cPP, or PP-Module and this
-		Functional Package in its conformance claims.</h:p>
+		Functional Package in its conformance claims.<h:p/>
 		
 		<componentsneeded>
 			<componentneeded>
@@ -1393,6 +1393,14 @@
 			<description>
 				<h:a href="https://tools.ietf.org/html/rfc7427">Algorithm Implementation Requirements and Usage 
 					Guidance for the Internet Key Exchange Protocol Version 2 (IKEv2)</h:a>
+			</description>
+		</entry>   
+		<entry id="bibRFC8221">
+			<tag>RFC 8221</tag>
+			<description>
+				<h:a href="https://tools.ietf.org/html/rfc8221">Cryptographic Algorithm Implementation Requirements and 
+					Usage Guidance for Encapsulating Security Payload (ESP) and Authentication Header (AH)
+				</h:a>
 			</description>
 		</entry>   
 		<entry id="bibRFC8247">
