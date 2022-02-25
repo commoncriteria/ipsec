@@ -5,5 +5,5 @@
 	
 |/sec:toes[1]|
 		The Ta|/componentsneeded[1]|
-			|/componentneeded[6]|
+			|/componentneeded[5]|
 				|/depends[1]||/on-sel[1]||
