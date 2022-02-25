@@ -520,8 +520,10 @@
 					</selectables>].
 				</title>
 				<note role="application">
-					If this functionality is configurable, the TSF may be configured by a VPN gateway
-					or by a TOE administrator.
+					<xref to="bibRFC8221"/> requires that ESP support AES-CBC, AES-GCM, and NULL encryption. It recommends that 
+					AES-CCM be supported, but it is not required by the Package. If ESP traffic is encrypted using AES-CBC, then
+					a separate authentication algorithm is required. <xref to="bibRFC8221"/> requires HMAC-SHA-256 and HMAC-SHA-1,
+					and recommends HMAC-SHA-512.
 				</note>
 				<aactivity level="element">
 					<TSS>
