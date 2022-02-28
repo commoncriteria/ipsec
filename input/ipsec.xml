@@ -425,11 +425,11 @@
 				<note role="application">
 					If the TOE is used to connect to a VPN gateway for the purposes of establishing a
 					secure connection to a private network, the ST author is expected to select
-					tunnel mode. If the TOE uses IPsec to establish an end-to-end connection to
-					another IPsec endpoint, the ST author is expected to select transport mode. If
+					"<h:i>tunnel mode.</h:i>" If the TOE uses IPsec to establish an end-to-end connection to
+					another IPsec endpoint, the ST author is expected to select "<h:i>transport mode.</h:i>" If
 					the TOE uses IPsec to establish a connection to a specific endpoint device for the
 					purpose of secure remote administration, the ST author is expected to select
-					transport mode.
+					"<h:i>transport mode.</h:i>"
 				</note>
 				<aactivity level="element">
 					<TSS>
@@ -501,8 +501,9 @@
 			<!-- FCS_IPSEC_EXT.1.4 Crypto for ESP -->
 			<f-element id="fcs-ipsec-ext-1e4">
 				<title>The TSF shall implement the IPsec protocol ESP as defined by <xref to="bibRFC4303"/> using the cryptographic 
-					algorithms [<h:i>AES-GCM-128 as specified in <xref to="bibRFC4106"/>,
-									AES-GCM-256 as specified in <xref to="bibRFC4106"/>,</h:i>
+					algorithms [<h:ul>
+					<h:li><h:i>AES-GCM-128 as specified in <xref to="bibRFC4106"/>,</h:i></h:li>
+					<h:li><h:i>AES-GCM-256 as specified in <xref to="bibRFC4106"/>,</h:i></h:li></h:ul>
 					<selectables>
 						<selectable id="sel-ipsec-esp-cbc">AES-CBC with key size 
 							<selectables>
