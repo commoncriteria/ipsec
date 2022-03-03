@@ -156,9 +156,9 @@
 		to satisfy dependencies of this Package. It is the responsibility of the PP, cPP, or PP-Module author who 
 		incorporates this FP to ensure that dependence on these components is satisfied, either by the TOE or by 
 		assumptions about its Operational Environment.<h:p/>
-	    	Note that the IPsec standard defines its own key derivation function in <xref to="bibRFC7296"/>. This function
-	    	is approved fpor use in <xref to="bibNIST800135r1"/>, so use of this Package should not require claiming 
-	    	of FCS_CKM_EXT.2.<h:p/>
+	    	Note that the IKE defines its own key derivation function in <xref to="bibRFC7296"/>. This function was 
+	    	approved by NIST in <xref to="bibNIST800135r1"/>. As a result, this Package does not require that  
+	    	FCS_CKM_EXT.5 or FCS_CKM.5 be claimed by the base-PP.<h:p/>
 		An ST must identify the applicable version of the PP, cPP, or PP-Module and this
 		Functional Package in its conformance claims.<h:p/>
 		
@@ -792,7 +792,6 @@
 					</selectables>].
 				</title>
 				<note role="application">
-					<h:b>These options align with RFC 6379 (2011), but not with RFC 8247 (2017). Should they? </h:b><h:p/>
 					The selection is used to specify additional DH groups supported. This applies to
 					IKEv1 and IKEv2 exchanges. It should be noted that if any additional DH groups
 					are specified, they must comply with the requirements (in terms of the
@@ -809,7 +808,7 @@
 					FCS_IPSEC_EXT.1.9, then, the assignment would read “[224, 384]” and for
 					FCS_IPSEC_EXT.1.10 it would read “[112, 192]” (although in this case the
 					requirement should probably be refined so that it makes sense mathematically).<h:p/>
-					<xref to="bibRFC6379"/> (2011) recommends using a "256-bit random ECP group" (Group 19) or a 
+					Note that <xref to="bibRFC6379"/> (2011) recommends using a "256-bit random ECP group" (Group 19) or a 
 					"384-bit random ECP group" (Group 20).
 					<xref to="bibRFC8247"/> (2017) requires support for DH Group 14 and recommends support for Group 19
 					in IKEv2. It discourages support for Groups 5, 2, 23, and 24. And forbids support for
@@ -876,14 +875,14 @@
           
 			<!-- FCS_IPSEC_EXT.1.11 IKE Peer Authentication -->
 			<f-element id="fcs-ipsec-ext-1e11">
-				<title>The TSF shall ensure that all IKE protocols perform peer authentication using  
+				<title>The TSF shall ensure that all IKE protocols perform peer authentication using <h:p/> 
 					<selectables>
 						<selectable>RSA</selectable>
 						<selectable>ECDSA</selectable>
 					</selectables> 
 					with X.509v3 certificates that conform to <xref to="bibRFC4945"/> as specified in
-					<no-link>FIA_X509_EXT.1</no-link> and 
-					<selectables onlyone="yes">
+					<no-link>FIA_X509_EXT.1</no-link><h:p/> and 
+					<selectables onlyone="yes" linebreak="yes">
 						<selectable id="sel-ipsec-peer-psk-eap">Pre-shared keys as specified in <no-link>FIA_PSK_EXT.1</no-link>
 							transmitted via EAP as specified in FCS_IPSEC_EXT.2.</selectable>
 						<selectable id="sel-ipsec-peer-psk">Pre-shared keys as specified in <no-link>FIA_PSK_EXT.1</no-link>
@@ -891,20 +890,13 @@
 						<selectable>no other method</selectable>
 					</selectables>
 				</title>
-				<!-- This is what is going in to vpnclient 2.4:
-				The TSF shall ensure that all IKE protocols perform peer authentication using [selection: RSA, ECDSA] 
-				that use X.509v3 certificates that conform to RFC 4945 and 
-				[selection: Pre-shared keys, Pre-shared Keys transmitted via EAP-TLS, 
-				Pre-shared Keys transmitted via EAP-TTLS with mutual authentication, no other method].
-				-->
-				
 				<note role="application">
 					At least one public-key-based method for Peer Authentication using certificates is required in order to
 					conform to this Package. One or more of the public key schemes is chosen by
 					the ST author to reflect what is implemented (RSA or EDCSA). The ST author also ensures that
 					appropriate FCS requirements reflecting the algorithms used (and key
 					generation capabilities, if provided) are claimed to support those methods.<h:p/>
-					IKEv2 requires that RSA authentication be done using an RSA private key with RSASSA-PKCS1-v1_5 
+					IKEv2 requires that RSA authentication be done using an RSA private key with the RSASSA-PKCS1-v1_5 
 					signature scheme, see <xref to="bibRFC7296"/> sec. 3.8.
 					<xref to="bibRFC8247"/> limits IKEv2 ECDSA authentication to "ECDSA with SHA-256 on the P-256 curve,"
 					"ECDSA with SHA-384 on the P-384 curve," and "ECDSA with SHA-512 on the P-521 curve."
@@ -914,23 +906,14 @@
 					although support is mandatory in the standard.<h:p/>
 					This Package requires that digital signature-based peer authentication use X.509v3 certificates
 					to verify the identity of the keys used in the signatures.<h:p/>
-					
-					<h:b>
-						The standard allows PSK either with or without EAP. The VPN client Module is silent about whether
-						EAP can be used for certificate-based authentication. Thus it appears to not allow it.
-					</h:b>
-					<h:p/>
-					
-					Peer authentication using certificates can be accomplished using either mechanisms inherent in 
-					the IKE protocol, or the EAP framework. Authentication using pre-shared keys can be accomplished
-					using transmission through EAP or through an out-of-band sharing mechanism.<h:p/> 
+					Peer authentication using certificates must be accomplished using mechanisms inherent in 
+					the IKE protocol. Authentication using pre-shared keys can be accomplished
+					using methods specified in the IKE protocol, transmission through EAP, or through an out-of-band sharing mechanism.<h:p/> 
 					If "<h:i>Pre-shared keys as specified in FIA_PSK_EXT.1</h:i>" is selected, then the 
 					external requirement <no-link>FIA_PSK_EXT.1</no-link> must be claimed. FIA_PSK_EXT.1 includes options
 					for MFA solutions.<h:p/>
 					If "<h:i>EAP as specified in FCS_IPSEC_EXT.2</h:i>" is selected, then FCS_IPSEC_EXT.2 must be claimed. 
-					This selection should be made if EAP is used for transmission of
-					authentication factors whether certificate-based or PSK-based. "<h:i>Means other than EAP</h:i>" refers 
-					either to native IKE protocol mechanisms or to out-of-band mechanisms.<h:p/>
+					"<h:i>Means other than EAP</h:i>" refers either to native IKE protocol mechanisms or to out-of-band mechanisms.<h:p/>
 				</note>
 				<aactivity level="element">
 					<TSS>
@@ -1031,14 +1014,14 @@
 					certificate matches the configured resource identifier, where the 
 					presented and reference identifiers are of the following fields and types: <h:p/>
 					[
-					<selectables>
+					<selectables linebreak="yes">
 						<selectable>IP address</selectable>
 						<selectable>Fully Qualified Domain Name (FQDN)</selectable>
 						<selectable>user FQDN</selectable>
 						<selectable>Distinguished Name (DN)</selectable>
 					</selectables> 
 					and 
-					<selectables>
+					<selectables linebreak="yes">
 						<selectable><assignable>other supported reference identifier types</assignable></selectable>
 						<selectable exclusive="yes">no other reference identifier type</selectable>
 					</selectables>] 
