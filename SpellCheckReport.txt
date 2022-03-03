@@ -2,14 +2,11 @@ output/ipsec-release-linkable.html: AGD
 output/ipsec-release-linkable.html: EDCSA
 output/ipsec-release-linkable.html: FIA
 output/ipsec-release-linkable.html: RSASSA
-output/ipsec-release-linkable.html: fpor
 output/ipsec-release.html: AGD
 output/ipsec-release.html: EDCSA
 output/ipsec-release.html: FIA
 output/ipsec-release.html: RSASSA
-output/ipsec-release.html: fpor
 output/ipsec.html: AGD
 output/ipsec.html: EDCSA
 output/ipsec.html: FIA
 output/ipsec.html: RSASSA
-output/ipsec.html: fpor
