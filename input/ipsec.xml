@@ -212,6 +212,7 @@
 			<componentneeded id="cn-ipsec-psk">
 				<componentid>FIA_PSK_EXT.1</componentid>
                 <depends on-sel="sel-ipsec-peer-psk"/>
+                <depends on-sel="sel-ipsec-peer-psk-eap"/>
 				<notes>If the TOE uses pre-shared keys to establish IPsec connections, then this SFR must be claimed
 					to specify requirements for the composition of pre-shared keys.</notes>
 			</componentneeded>
