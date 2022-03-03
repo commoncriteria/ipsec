@@ -1,4 +1,4 @@
-A1
+AGD
 A2
 B1
 B2
@@ -8,8 +8,10 @@ CSR
 DNs
 DOI
 EAP
+EDCSA
 ECP
 ESN
+FIA
 FPF
 FQDN
 GW
@@ -23,6 +25,7 @@ PKIX
 POS
 PSK
 Preshared
+RSASSAA1
 SAs
 SPD
 SPDs
