@@ -641,9 +641,19 @@
 			<f-element id="fcs-ipsec-ext-1e6">
 				<title>The TSF shall ensure the encrypted payload in the IKE protocol uses the 
 					cryptographic algorithms <h:ul>
-						<h:li>AES-CBC-128 as specified in <xref to="bibRFC6379"/></h:li>
-						<h:li>AES-CBC-256 as specified in <xref to="bibRFC6379"/></h:li>
-					</h:ul>	and 
+						<h:li>AES-CBC as specified in <xref to="bibRFC6379"/> with key size
+							<selectables>
+								<selectable>128 bits</selectable>
+								<selectable>256 bits</selectable>
+							</selectables> and message authentication provided by 
+							<selectables>
+								<selectable id="sel-ipsec-esp-hmac-sha1">HMAC-SHA-1</selectable>
+								<selectable id="sel-ipsec-esp-hmac-sha256">HMAC-SHA-256</selectable>
+								<selectable id="sel-ipsec-esp-hmac-sha384">HMAC-SHA-384</selectable>
+								<selectable id="sel-ipsec-esp-hmac-sha512">HMAC-SHA-512</selectable>
+							</selectables> as specified in <xref to="bibRFC3602"/></selectable>
+						</h:li></h:ul>
+						and
 					<selectables linebreak="yes">
 						<selectable id="sel-ipsec-ike-gcm-128">AES-GCM-128 as specified in <xref to="bibRFC5282"/></selectable>
 						<selectable id="sel-ipsec-ike-gcm-256">AES-GCM-256 as specified in <xref to="bibRFC5282"/></selectable>
@@ -1148,7 +1158,7 @@
 					</Tests>
 				</aactivity>
 				<rule id="rule-ipsec13-ike1-version-matches">
-					<description>If "<h:i>IKEv1 Phase 1</h:i>" or "<h:i>IKEv1 Phase 2</h:i>" is selected in FCS_IPSEC_EXT.13
+					<description>If "<h:i>IKEv1 Phase 1</h:i>" or "<h:i>IKEv1 Phase 2</h:i>" is selected in FCS_IPSEC_EXT.1.13
 						then "<h:i>IKEv1...</h:i>" must be selected in FCS_IPSEC_EXT.1.5.</description>
 						<if><or><ref-id>sel-ipsec-13-ikev1p1</ref-id><ref-id>sel-ipsec-13-ikev1p2</ref-id></or></if>
 						<then><ref-id>sel-ipsec-ikev1</ref-id></then></rule>
