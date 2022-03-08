@@ -621,14 +621,20 @@
 				</aactivity>
 				<rule id="rule-ipsec-ikev1-version-matches">
 					<description>If "<h:i>IKEv1...</h:i>" is selected in FCS_IPSEC_EXT.1.5 
-						  then "<h:i>IKEv1</h:i>" must be selected in FCS_IPSEC_EXT.1.7.</description>
+						  then "<h:i>IKEv1...</h:i>" must be selected in FCS_IPSEC_EXT.1.7 and
+						  both "<h:i>IKEv1 Phase 1</h:i>" and "<h:i>IKEv1 Phase 2</h:i>" must be selected in FCS_IPSEC_EXT.13.</description>
                         <if><ref-id>sel-ipsec-ikev1</ref-id></if>
-						<then><or><ref-id>sel-ipsec-ikev1-sa-config</ref-id><ref-id>sel-ipsec-ikev1-sa-fixed</ref-id></or></then></rule>
+						<then><and><ref-id>sel-ipsec-ikev1-sa-lifetimes</ref-id>
+							<and><ref-id>sel-ipsec-13-ikev1p1</ref-id><ref-id>sel-ipsec-13-ikev1p2</ref-id></and></and>
+						</then></rule>
 				<rule id="rule-ipsec-ikev2-version-matches">
 					<description>If "<h:i>IKEv2...</h:i>" is selected in FCS_IPSEC_EXT.1.5 
-						  then "<h:i>IKEv2</h:i>" must be selected in FCS_IPSEC_EXT.1.7.</description>
+						  then "<h:i>IKEv2...</h:i>" must be selected in FCS_IPSEC_EXT.1.7 and 
+						  both "<h:i>IKEv2 IKE_SA</h:i>" and "<h:i>IKEv2 CHILD_SA</h:i>" must be selected in FCS_IPSEC_EXT.13.</description>
                         <if><ref-id>sel-ipsec-ikev2</ref-id></if>
-						<then><ref-id>sel-ipsec-ikev2-sa-config</ref-id></then></rule>
+						<then><and><ref-id>sel-ipsec-ikev2-sa-lifetimes</ref-id>
+							<and><ref-id>sel-ipsec-13-ikev2ikesa</ref-id><ref-id>sel-ipsec-13-ikev2childsa</ref-id></and></and>
+						</then></rule>
 			</f-element>
 			
 			<!-- FCS_IPSEC_EXT.1.6 IKE payload encryption -->
@@ -679,18 +685,35 @@
 			<f-element id="fcs-ipsec-ext-1e7"> 
 				<title>The TSF shall ensure that 
 					<selectables linebreak="yes">
-						<selectable id="sel-ipsec-ikev2-sa-config">IKEv2 SA lifetimes can be configured by 
+						<selectable id="sel-ipsec-ikev2-sa-lifetimes">IKEv2 SA lifetimes can be configured <!-- by 
 							<selectables>
 								<selectable>an Administrator</selectable>
 								<selectable>a VPN gateway</selectable>
-							</selectables> 
+							</selectables> -->
 							based on 
 							<selectables>
 								<selectable>number of packets/number of bytes</selectable>
 								<selectable>length of time</selectable>
 							</selectables>
 						</selectable>
-						<selectable id="sel-ipsec-ikev1-sa-config">IKEv1 SA lifetimes can be configured by 
+						<selectable id="sel-ipsec-ikev1-sa-lifetimes">IKEv1 SA lifetimes
+							<selectables linebreak="yes">
+								<selectable>can be configured based on 
+									<selectables>
+										<selectable>number of packets/number of bytes</selectable>
+										<selectable>length of time</selectable>
+									</selectables>
+								</selectable>
+								<selectable>are fixed based on 
+									<selectables>
+										<selectable>number of packets/number of bytes</selectable>
+										<selectable>length of time</selectable>
+									</selectables>
+								</selectable>
+							</selectables>
+						</selectable>
+								
+<!--						<selectable id="sel-ipsec-ikev1-sa-config">IKEv1 SA lifetimes can be configured by 
 							<selectables>
 								<selectable>an Administrator</selectable>
 								<selectable>a VPN gateway</selectable>
@@ -706,7 +729,7 @@
 								<selectable>number of packets/number of bytes</selectable>
 								<selectable>length of time</selectable>
 							</selectables>
-						</selectable>
+						</selectable>  -->
 					</selectables>.
 				</title>
 				<note role="application">
@@ -773,14 +796,14 @@
 					</Tests>
 				</aactivity>
 				<rule id="rule-ipsec7-ikev1-version-matches">
-					<description>If either "<h:i>IKEv1 SA...</h:i>" selection is made in FCS_IPSEC_EXT.1.7 
+					<description>If "<h:i>IKEv1...</h:i>" is selected in FCS_IPSEC_EXT.1.7 
 						  then "<h:i>IKEv1...</h:i>" must be selected in FCS_IPSEC_EXT.1.5.</description>
-                        <if><or><ref-id>sel-ipsec-ikev1-sa-config</ref-id><ref-id>sel-ipsec-ikev1-sa-fixed</ref-id></or></if>
+                        <if><ref-id>sel-ipsec-ikev1-sa-lifetimes</ref-id></if>
 						<then><ref-id>sel-ipsec-ikev1</ref-id></then></rule>
 				<rule id="rule-ipsec7-ikev2-version-matches">
-					<description>If "<h:i>IKEv2 SA...</h:i>" is selected in FCS_IPSEC_EXT.1.7 
+					<description>If "<h:i>IKEv2...</h:i>" is selected in FCS_IPSEC_EXT.1.7 
 						  then "<h:i>IKEv2...</h:i>" must be selected in FCS_IPSEC_EXT.1.5.</description>
-                        <if><ref-id>sel-ipsec-ikev2-sa-config</ref-id></if>
+                        <if><ref-id>sel-ipsec-ikev2-sa-lifetimes</ref-id></if>
 						<then><ref-id>sel-ipsec-ikev2</ref-id></then></rule>
 			</f-element>
 			
@@ -1074,14 +1097,14 @@
 				<title>The TSF shall be able to ensure by default that the strength of the symmetric algorithm 
 					(in terms of the number of bits in the key) negotiated to protect the 
 					<selectables>
-						<selectable id="sel-ipsec-ext-13-ikev1p1">IKEv1 Phase 1</selectable>
-						<selectable id="sel-ipsec-ext-13-ikev2ikesa">IKEv2 IKE_SA</selectable>
+						<selectable id="sel-ipsec-13-ikev1p1">IKEv1 Phase 1</selectable>
+						<selectable id="sel-ipsec-13-ikev2ikesa">IKEv2 IKE_SA</selectable>
 					</selectables> 
 					connection is greater than or equal to the strength of the symmetric algorithm
 					(in terms of the number of bits in the key) negotiated to protect the 
 					<selectables>
-						<selectable id="sel-ipsec-ext-13-ikev1p2">IKEv1 Phase 2</selectable>
-						<selectable id="sel-ipsec-ext-13-ikev2childsa">IKEv2 CHILD_SA</selectable>
+						<selectable id="sel-ipsec-13-ikev1p2">IKEv1 Phase 2</selectable>
+						<selectable id="sel-ipsec-13-ikev2childsa">IKEv2 CHILD_SA</selectable>
 					</selectables> connection.
 				</title>
 				<note role="application">
@@ -1125,15 +1148,15 @@
 					</Tests>
 				</aactivity>
 				<rule id="rule-ipsec13-ike1-version-matches">
-					<description>If "<h:i>IKEv1...</h:i>" is selected in FCS_IPSEC_EXT.1.5 
-						  then both "<h:i>IKEv1 Phase 1</h:i>" and "<h:i>IKEv1 Phase 2</h:i>" must be selected in FCS_IPSEC_EXT.13.</description>
-                        <if><ref-id>sel-ipsec-ikev1</ref-id></if>
-						<then><and><ref-id>sel-ipsec-13-ikev1p1</ref-id><ref-id>sel-ipsec-13-ikev1p2</ref-id></and></then></rule>
+					<description>If "<h:i>IKEv1 Phase 1</h:i>" or "<h:i>IKEv1 Phase 2</h:i>" is selected in FCS_IPSEC_EXT.13
+						then "<h:i>IKEv1...</h:i>" must be selected in FCS_IPSEC_EXT.1.5.</description>
+						<if><or><ref-id>sel-ipsec-13-ikev1p1</ref-id><ref-id>sel-ipsec-13-ikev1p2</ref-id></or></if>
+						<then><ref-id>sel-ipsec-ikev1</ref-id></then></rule>
 				<rule id="rule-ipsec13-ike2-version-matches">
-					<description>If "<h:i>IKEv2...</h:i>" is selected in FCS_IPSEC_EXT.1.5 
-						  then "<h:i>IKEv2 IKE_SA</h:i>" and "<h:i>IKEv2 CHILD_SA</h:i>" must be selected in FCS_IPSEC_EXT.13.</description>
-                        <if><ref-id>sel-ipsec-ikev2</ref-id></if>
-						<then><and><ref-id>sel-ipsec-13-ikev2ikesa</ref-id><ref-id>sel-ipsec-13-ikev2childsa</ref-id></and></then></rule>				
+					<description>If "<h:i>IKEv2 IKE_SA</h:i>" or "<h:i>IKEv2 CHILD_SA</h:i>" is selected in FCS_IPSEC_EXT.1.13 
+						  then "<h:i>IKEv2...</h:i>" must be selected in FCS_IPSEC_EXT.5.</description>
+                        <if><or><ref-id>sel-ipsec-13-ikev2ikesa</ref-id><ref-id>sel-ipsec-13-ikev2childsa</ref-id></or></if>
+						<then><ref-id>sel-ipsec-ikev2</ref-id></then></rule>			
 			</f-element>
 			
 			<audit-event>
