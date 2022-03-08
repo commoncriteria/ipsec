@@ -1,0 +1,2 @@
+/home/runner/work/ipsec/ipsec/input/ipsec.xml:628:13: error: element "and" not allowed here; expected the element end-tag or element "doc", "guidance", "not", "or", "ref-id" or "restrict"
+/home/runner/work/ipsec/ipsec/input/ipsec.xml:636:13: error: element "and" not allowed here; expected the element end-tag or element "doc", "guidance", "not", "or", "ref-id" or "restrict"
