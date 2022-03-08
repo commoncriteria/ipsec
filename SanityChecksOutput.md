@@ -1,13 +1,4 @@
-* Error: Detected dangling id-reference to sel-ipsec-peer-eap from attribute
-        on-sel/Package[1]|
-
-  |/sec:Introduction[1]|
-	
-|/sec:toes[1]|
-		The Ta|/componentsneeded[1]|
-			|/componentneeded[5]|
-				|/depends[1]||/on-sel[1]||
-* Error: Detected dangling ref-id to 'fcs-ipsec-ikev1'.
+* Error: Detected dangling ref-id to 'sel-ipsec-13-ikev1p1'.
 	  /Package[1]|
 
   |/sec:Security_Functional_Requirements[1]|
@@ -18,8 +9,20 @@
 
 			|/f-element[13]|
 				|/rule[1]|
-					|/if[1]||/ref-id[1]|fcs-ipsec|
-* Error: Detected dangling ref-id to 'fcs-ipsec-ext-ikev2'.
+					|/then[1]||/and[1]||/ref-id[1]|sel-ipsec|
+* Error: Detected dangling ref-id to 'sel-ipsec-13-ikev1p2'.
+	  /Package[1]|
+
+  |/sec:Security_Functional_Requirements[1]|
+
+	|/sec:cryptsup[1]|
+	
+	    |/f-component[1]|
+
+			|/f-element[13]|
+				|/rule[1]|
+					|/then[1]||/and[1]||/ref-id[2]|sel-ipsec|
+* Error: Detected dangling ref-id to 'sel-ipsec-13-ikev2ikesa'.
 	  /Package[1]|
 
   |/sec:Security_Functional_Requirements[1]|
@@ -30,7 +33,19 @@
 
 			|/f-element[13]|
 				|/rule[2]|
-					|/if[1]||/ref-id[1]|fcs-ipsec|
+					|/then[1]||/and[1]||/ref-id[1]|sel-ipsec|
+* Error: Detected dangling ref-id to 'sel-ipsec-13-ikev2childsa'.
+	  /Package[1]|
+
+  |/sec:Security_Functional_Requirements[1]|
+
+	|/sec:cryptsup[1]|
+	
+	    |/f-component[1]|
+
+			|/f-element[13]|
+				|/rule[2]|
+					|/then[1]||/and[1]||/ref-id[2]|sel-ipsec|
 * Warning: Detected an empty _p_ element./Package[1]|
 
   |/sec:Introduction[1]|
@@ -630,7 +645,7 @@
 				|/aactivity[1]|
 					|/Guidance[1]|
 						Th|/h:p[1]||
- Failed to find fcs-ipsec-ikev1 in /Package[1]|
+ Failed to find sel-ipsec-13-ikev1p1 in /Package[1]|
 
   |/sec:Security_Functional_Requirements[1]|
 
@@ -640,8 +655,19 @@
 
 			|/f-element[13]|
 				|/rule[1]|
-					|/if[1]||/ref-id[1]|fcs-ipsec| (use case or rule)
- Failed to find fcs-ipsec-ext-ikev2 in /Package[1]|
+					|/then[1]||/and[1]||/ref-id[1]|sel-ipsec| (use case or rule)
+ Failed to find sel-ipsec-13-ikev1p2 in /Package[1]|
+
+  |/sec:Security_Functional_Requirements[1]|
+
+	|/sec:cryptsup[1]|
+	
+	    |/f-component[1]|
+
+			|/f-element[13]|
+				|/rule[1]|
+					|/then[1]||/and[1]||/ref-id[2]|sel-ipsec| (use case or rule)
+ Failed to find sel-ipsec-13-ikev2ikesa in /Package[1]|
 
   |/sec:Security_Functional_Requirements[1]|
 
@@ -651,4 +677,15 @@
 
 			|/f-element[13]|
 				|/rule[2]|
-					|/if[1]||/ref-id[1]|fcs-ipsec| (use case or rule)
+					|/then[1]||/and[1]||/ref-id[1]|sel-ipsec| (use case or rule)
+ Failed to find sel-ipsec-13-ikev2childsa in /Package[1]|
+
+  |/sec:Security_Functional_Requirements[1]|
+
+	|/sec:cryptsup[1]|
+	
+	    |/f-component[1]|
+
+			|/f-element[13]|
+				|/rule[2]|
+					|/then[1]||/and[1]||/ref-id[2]|sel-ipsec| (use case or rule)
