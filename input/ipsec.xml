@@ -566,14 +566,14 @@
 								<selectable><xref to="bibRFC4868"/> for hash functions</selectable>
 								<selectable exclusive="yes">no other RFCs for hash functions</selectable>
 							</selectables>, and 
-							<selectables onlyone="yes">
+							<selectables>
 								<selectable>support for XAUTH</selectable>
-								<selectable>no support for XAUTH</selectable>
+								<selectable exclusive="yes">no support for XAUTH</selectable>
 							</selectables></selectable>
 						<selectable id="sel-ipsec-ikev2">IKEv2 as defined in <xref to="bibRFC7296"/> 
-							<selectables onlyone="yes">
+							<selectables>
 								<selectable>with mandatory support for NAT traversal as specified in section 2.23</selectable>
-								<selectable>with no support for NAT traversal</selectable>
+								<selectable exclusive="yes">with no support for NAT traversal</selectable>
 							</selectables>, and <xref to="bibRFC8784"/>, <xref to="bibRFC8247"/>, and
 							<selectables>
 								<selectable><xref to="bibRFC4868"/> for hash functions</selectable>
@@ -634,8 +634,11 @@
 			<!-- FCS_IPSEC_EXT.1.6 IKE payload encryption -->
 			<f-element id="fcs-ipsec-ext-1e6">
 				<title>The TSF shall ensure the encrypted payload in the IKE protocol uses the 
-					cryptographic algorithms [<h:i>AES-CBC-128, AES-CBC-256 as specified in <xref to="bibRFC6379"/> and </h:i>
-					<selectables>
+					cryptographic algorithms <h:ul>
+						<h:li>AES-CBC-128 as specified in <xref to="bibRFC6379"/></h:li>
+						<h:li>AES-CBC-256 as specified in <xref to="bibRFC6379"/></h:li>
+					</h:ul>	and 
+					<selectables linebreak="yes">
 						<selectable id="sel-ipsec-ike-gcm-128">AES-GCM-128 as specified in <xref to="bibRFC5282"/></selectable>
 						<selectable id="sel-ipsec-ike-gcm-256">AES-GCM-256 as specified in <xref to="bibRFC5282"/></selectable>
 						<selectable exclusive="yes">no other algorithm</selectable>
@@ -783,14 +786,17 @@
 			
 			<!-- FCS_IPSEC_EXT.1.8 DH Groups for IKE -->
 			<f-element id="fcs-ipsec-ext-1e8">
-				<title>The TSF shall ensure that all IKE protocols implement DH Groups [
-					<h:i>19 (256-bit Random ECP), 20 (384-bit Random ECP), and </h:i>
-					<selectables>
+				<title>The TSF shall ensure that all IKE protocols implement DH Groups 
+					<h:ul>
+						<h:li>19 (256-bit Random ECP)</h:li>
+						<h:li>20 (384-bit Random ECP)</h:li>
+					</h:ul>and 
+					<selectables linebreak="yes">
 						<selectable>24 (2048-bit MODP with 256-bit POS)</selectable>
 						<selectable>15 (3072-bit MODP)</selectable>
 						<selectable>14 (2048-bit MODP)</selectable>
 						<selectable exclusive="yes">no other DH groups</selectable>
-					</selectables>].
+					</selectables>.
 				</title>
 				<note role="application">
 					The selection is used to specify additional DH groups supported. This applies to
@@ -1014,7 +1020,6 @@
 				<title>The TSF shall establish a SA only if the presented identifier in the received 
 					certificate matches the configured resource identifier, where the 
 					presented and reference identifiers are of the following fields and types: <h:p/>
-					[
 					<selectables linebreak="yes">
 						<selectable>IP address</selectable>
 						<selectable>Fully Qualified Domain Name (FQDN)</selectable>
@@ -1025,7 +1030,7 @@
 					<selectables linebreak="yes">
 						<selectable><assignable>other supported reference identifier types</assignable></selectable>
 						<selectable exclusive="yes">no other reference identifier type</selectable>
-					</selectables>] 
+					</selectables>
 					contained in a certificate does not match the expected values for the
 					entity attempting to establish a connection.
 				</title>
@@ -1069,14 +1074,14 @@
 				<title>The TSF shall be able to ensure by default that the strength of the symmetric algorithm 
 					(in terms of the number of bits in the key) negotiated to protect the 
 					<selectables>
-						<selectable>IKEv1 Phase 1</selectable>
-						<selectable>IKEv2 IKE_SA</selectable>
+						<selectable id="fcs-ipsec-ext-13-ikev1p1">IKEv1 Phase 1</selectable>
+						<selectable id="fcs-ipsec-ext-13-ikev2ikesa">IKEv2 IKE_SA</selectable>
 					</selectables> 
 					connection is greater than or equal to the strength of the symmetric algorithm
 					(in terms of the number of bits in the key) negotiated to protect the 
 					<selectables>
-						<selectable>IKEv1 Phase 2</selectable>
-						<selectable>IKEv2 CHILD_SA</selectable>
+						<selectable id="fcs-ipsec-ext-13-ikev1p2">IKEv1 Phase 2</selectable>
+						<selectable id="fcs-ipsec-ext-13-ikev2childsa">IKEv2 CHILD_SA</selectable>
 					</selectables> connection.
 				</title>
 				<note role="application">
@@ -1119,6 +1124,16 @@
 						</testlist>
 					</Tests>
 				</aactivity>
+				<rule id="rule-ipsec13-ike1-version-matches">
+					<description>If "<h:i>IKEv1...</h:i>" is selected in FCS_IPSEC_EXT.1.5 
+						  then both "<h:i>IKEv1 Phase 1</h:i>" and "<h:i>IKEv1 Phase 2</h:i>" must be selected in FCS_IPSEC_EXT.13.</description>
+                        <if><ref-id>fcs-ipsec-ikev1</ref-id></if>
+						<then><and><ref-id>fcs-ipsec-ext-13-ikev1p1</ref-id><ref-id>fcs-ipsec-ext-13-ikev1p2</ref-id></and></then></rule>
+				<rule id="rule-ipsec13-ike2-version-matches">
+					<description>If "<h:i>IKEv2...</h:i>" is selected in FCS_IPSEC_EXT.1.5 
+						  then "<h:i>IKEv2 IKE_SA</h:i>" and "<h:i>IKEv2 CHILD_SA</h:i>" must be selected in FCS_IPSEC_EXT.13.</description>
+                        <if><ref-id>fcs-ipsec-ext-ikev2</ref-id></if>
+						<then><and><ref-id>fcs-ipsec-ext-13-ikev2ikesa</ref-id><ref-id>fcs-ipsec-ext-13-ikev2childsa</ref-id></and></then></rule>				
 			</f-element>
 			
 			<audit-event>
