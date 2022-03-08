@@ -625,7 +625,7 @@
 						  both "<h:i>IKEv1 Phase 1</h:i>" and "<h:i>IKEv1 Phase 2</h:i>" must be selected in FCS_IPSEC_EXT.13.</description>
                         <if><ref-id>sel-ipsec-ikev1</ref-id></if>
 						<then><and><ref-id>sel-ipsec-ikev1-sa-lifetimes</ref-id>
-							<and><ref-id>sel-ipsec-13-ikev1p1</ref-id><ref-id>sel-ipsec-13-ikev1p2</ref-id></and></and>
+							<ref-id>sel-ipsec-13-ikev1p1</ref-id><ref-id>sel-ipsec-13-ikev1p2</ref-id></and>
 						</then></rule>
 				<rule id="rule-ipsec-ikev2-version-matches">
 					<description>If "<h:i>IKEv2...</h:i>" is selected in FCS_IPSEC_EXT.1.5 
@@ -633,7 +633,7 @@
 						  both "<h:i>IKEv2 IKE_SA</h:i>" and "<h:i>IKEv2 CHILD_SA</h:i>" must be selected in FCS_IPSEC_EXT.13.</description>
                         <if><ref-id>sel-ipsec-ikev2</ref-id></if>
 						<then><and><ref-id>sel-ipsec-ikev2-sa-lifetimes</ref-id>
-							<and><ref-id>sel-ipsec-13-ikev2ikesa</ref-id><ref-id>sel-ipsec-13-ikev2childsa</ref-id></and></and>
+							<ref-id>sel-ipsec-13-ikev2ikesa</ref-id><ref-id>sel-ipsec-13-ikev2childsa</ref-id></and>
 						</then></rule>
 			</f-element>
 			
