@@ -651,7 +651,7 @@
 								<selectable id="sel-ipsec-esp-hmac-sha256">HMAC-SHA-256</selectable>
 								<selectable id="sel-ipsec-esp-hmac-sha384">HMAC-SHA-384</selectable>
 								<selectable id="sel-ipsec-esp-hmac-sha512">HMAC-SHA-512</selectable>
-							</selectables> as specified in <xref to="bibRFC3602"/></selectable>
+							</selectables> as specified in <xref to="bibRFC3602"/>
 						</h:li></h:ul>
 						and
 					<selectables linebreak="yes">
