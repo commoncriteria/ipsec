@@ -23,7 +23,7 @@
       <PPTitle>Draft Functional Package for IPsec</PPTitle>
       <PPVersion>1.0</PPVersion>
       <PPAuthor>National Information Assurance Partnership</PPAuthor>
-      <PPPubDate>2022-03-04</PPPubDate>
+      <PPPubDate>2022-03-08</PPPubDate>
       <Keywords>IPsec; Internet Protocol</Keywords>
     </ReferenceTable>
   </PPReference>
@@ -31,7 +31,7 @@
   <RevisionHistory>
     <entry>
       <version>1.0</version>
-      <date>2022-02-04</date>
+      <date>2022-03-08</date>
       <subject>Latest draft.</subject>
     </entry>
   </RevisionHistory>
@@ -205,7 +205,7 @@
 			<componentneeded id="cn-ipsec-tls">
 				<!-- Selection based inclusion of the TLS Package -->
 				<componentid>FCS_TLS_EXT.1</componentid>
-				<depends on-sel="sel-ipsec-peer-eap"/>
+				<depends on-sel="sel-ipsec-peer-psk-eap"/>
 				<notes>To support peer authentication over EAP, this Package requires support for the EAP-TLS or EAP-TTLS
 					protocols. For this reason, the ST may need to incorporate the <xref to="bibNIAPFPTLS"/>.</notes>
 			</componentneeded>
@@ -1074,14 +1074,14 @@
 				<title>The TSF shall be able to ensure by default that the strength of the symmetric algorithm 
 					(in terms of the number of bits in the key) negotiated to protect the 
 					<selectables>
-						<selectable id="fcs-ipsec-ext-13-ikev1p1">IKEv1 Phase 1</selectable>
-						<selectable id="fcs-ipsec-ext-13-ikev2ikesa">IKEv2 IKE_SA</selectable>
+						<selectable id="sel-ipsec-ext-13-ikev1p1">IKEv1 Phase 1</selectable>
+						<selectable id="sel-ipsec-ext-13-ikev2ikesa">IKEv2 IKE_SA</selectable>
 					</selectables> 
 					connection is greater than or equal to the strength of the symmetric algorithm
 					(in terms of the number of bits in the key) negotiated to protect the 
 					<selectables>
-						<selectable id="fcs-ipsec-ext-13-ikev1p2">IKEv1 Phase 2</selectable>
-						<selectable id="fcs-ipsec-ext-13-ikev2childsa">IKEv2 CHILD_SA</selectable>
+						<selectable id="sel-ipsec-ext-13-ikev1p2">IKEv1 Phase 2</selectable>
+						<selectable id="sel-ipsec-ext-13-ikev2childsa">IKEv2 CHILD_SA</selectable>
 					</selectables> connection.
 				</title>
 				<note role="application">
@@ -1127,13 +1127,13 @@
 				<rule id="rule-ipsec13-ike1-version-matches">
 					<description>If "<h:i>IKEv1...</h:i>" is selected in FCS_IPSEC_EXT.1.5 
 						  then both "<h:i>IKEv1 Phase 1</h:i>" and "<h:i>IKEv1 Phase 2</h:i>" must be selected in FCS_IPSEC_EXT.13.</description>
-                        <if><ref-id>fcs-ipsec-ikev1</ref-id></if>
-						<then><and><ref-id>fcs-ipsec-ext-13-ikev1p1</ref-id><ref-id>fcs-ipsec-ext-13-ikev1p2</ref-id></and></then></rule>
+                        <if><ref-id>sel-ipsec-ikev1</ref-id></if>
+						<then><and><ref-id>sel-ipsec-13-ikev1p1</ref-id><ref-id>sel-ipsec-13-ikev1p2</ref-id></and></then></rule>
 				<rule id="rule-ipsec13-ike2-version-matches">
 					<description>If "<h:i>IKEv2...</h:i>" is selected in FCS_IPSEC_EXT.1.5 
 						  then "<h:i>IKEv2 IKE_SA</h:i>" and "<h:i>IKEv2 CHILD_SA</h:i>" must be selected in FCS_IPSEC_EXT.13.</description>
-                        <if><ref-id>fcs-ipsec-ext-ikev2</ref-id></if>
-						<then><and><ref-id>fcs-ipsec-ext-13-ikev2ikesa</ref-id><ref-id>fcs-ipsec-ext-13-ikev2childsa</ref-id></and></then></rule>				
+                        <if><ref-id>sel-ipsec-ikev2</ref-id></if>
+						<then><and><ref-id>sel-ipsec-13-ikev2ikesa</ref-id><ref-id>sel-ipsec-13-ikev2childsa</ref-id></and></then></rule>				
 			</f-element>
 			
 			<audit-event>
