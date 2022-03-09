@@ -1231,12 +1231,12 @@
 						The evaluator shall verify that the TSS describes the use of EAP options for each of the selected peer 
 						authentication mechanisms, that TLS with mutual authentication is used, that the random values are from
 						an appropriate source, and that the TSS describes that the EAP MSK is derived from the TLS
-						master key and is used as the IKEv2 shared key.<h:br/><h:br/>
+						master key and is used as the IKEv2 shared key.<h:br/>
 					</TSS>
 					<Guidance>
 						The evaluator shall verify that the guidance documents describe any configurable features of the EAP or
 						TLS functionality, including instructions for configuration of the authenticators and registration 
-						processes for clients.<h:br/><h:br/>
+						processes for clients.<h:br/>
 					</Guidance>
 					<Tests>
 						For each supported EAP method claimed in FCS_IPSEC_EXT.2.1 the evaluator shall perform the following tests:
@@ -1266,6 +1266,7 @@
 					</Tests>
 				</aactivity>
 			</f-element>    
+			<audit-event/>
 		</f-component>
 		
     </sec:cryptsup>  <!-- FCS -->
