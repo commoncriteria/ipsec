@@ -1099,8 +1099,8 @@
 					Common Name.					
 				</note>
 				<aactivity level="element">
-					EAs for this element are tested through EAs for FCS_IPSEC_EXT.1.11.
-					<no-tests/><h:br/>
+					EAs for this element are tested through EAs for FCS_IPSEC_EXT.1.11.<h:br/>
+					<no-tests/>
 				</aactivity>
 			</f-element>
 			
