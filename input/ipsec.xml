@@ -327,22 +327,22 @@
 						If the TOE boundary includes a general-purpose operating system or mobile device, the evaluator
 						shall examine the TSS to ensure that it describes whether the IPsec functionality is 
 						architecturally integrated with the TOE itself or whether it is a separate executable that 
-						is bundled with the TOE.<h:br/><h:br/>
+						is bundled with the TOE.<h:br/>
 					</TSS>
 					<Guidance>
 						The evaluator shall ensure that the operational guidance contains any appropriate information for ensuring
-						that the IPsec implementation can be properly configured.<h:br/><h:br/>
+						that the IPsec implementation can be properly configured.<h:br/>
 					</Guidance>
 					<Tests>
 						As a prerequisite for performing the Test EAs for the individual FCS_IPSEC_EXT.1 elements below, the
-						evaluator must do the following:<h:br/><h:br/>
+						evaluator must do the following:<h:br/>
 						The evaluator must create a test environment consisting of at least the components illustrated
 						below. It is expected that the traffic generator will be used to construct network packets and will provide the
 						evaluator with the ability manipulate fields in the ICMP, IPv4, IPv6, UDP, and TCP packet headers. The
-						evaluator shall provide justification for any differences in the test environment.<h:br/><h:br/>
+						evaluator shall provide justification for any differences in the test environment.<h:br/>
 						<figure entity="images/network.png" title="Test Environment" id="fig-testenv"/>
 						Note that the evaluator shall perform all tests using the TOE and a representative sample of
-						platforms listed in the ST (for TOEs that claim to support multiple platforms).<h:br/><h:br/>
+						platforms listed in the ST (for TOEs that claim to support multiple platforms).<h:br/>
 					</Tests>
 				</aactivity>
 				<aactivity level="element"> <!-- The TSF shall implement IPsec as specified in RFC 4301 -->
@@ -910,7 +910,7 @@
 						The evaluator shall check to ensure that, for all nonces generated for use in IKE,  
 						the TSS describes the process for generating nonces. The evaluator shall verify that the TSS
 						indicates that the random number generated meets the requirements of this FP,
-						and that the length of the nonce meets the stipulations in the requirement.<h:br/>
+						and that the length of the nonce meets the stipulations in the requirement.<h:br/><h:br/>
 					<no-tests/>
 				</aactivity>
 			</f-element>
@@ -1100,7 +1100,7 @@
 				</note>
 				<aactivity level="element">
 					EAs for this element are tested through EAs for FCS_IPSEC_EXT.1.11.
-					<no-tests/>
+					<no-tests/><h:br/>
 				</aactivity>
 			</f-element>
 			
