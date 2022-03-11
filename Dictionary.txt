@@ -1,4 +1,5 @@
 AGD
+A1
 A2
 B1
 B2
@@ -25,6 +26,7 @@ PKIX
 POS
 PSK
 Preshared
+RSASSA
 RSASSAA1
 SAs
 SPD
