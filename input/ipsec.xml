@@ -23,7 +23,7 @@
       <PPTitle>Draft Functional Package for IPsec</PPTitle>
       <PPVersion>1.0</PPVersion>
       <PPAuthor>National Information Assurance Partnership</PPAuthor>
-      <PPPubDate>2022-03-08</PPPubDate>
+      <PPPubDate>2022-03-11</PPPubDate>
       <Keywords>IPsec; Internet Protocol</Keywords>
     </ReferenceTable>
   </PPReference>
@@ -31,7 +31,7 @@
   <RevisionHistory>
     <entry>
       <version>1.0</version>
-      <date>2022-03-08</date>
+      <date>2022-03-11</date>
       <subject>Latest draft.</subject>
     </entry>
   </RevisionHistory>
@@ -209,14 +209,14 @@
 				<componentid>FCS_TLS_EXT.1</componentid>
 				<depends on-sel="sel-ipsec-peer-psk-eap"/>
 				<notes>To support peer authentication over EAP, this Package requires support for the EAP-TLS or EAP-TTLS
-					protocols. For this reason, the ST may need to incorporate the <xref to="bibNIAPFPTLS"/>.</notes>
+					protocols. For this reason, the ST may need to incorporate the <xref to="bibNIAPFPTLS"/>.<h:br/></notes>
 			</componentneeded>
 			<componentneeded id="cn-ipsec-psk">
 				<componentid>FIA_PSK_EXT.1</componentid>
                 <depends on-sel="sel-ipsec-peer-psk"/>
                 <depends on-sel="sel-ipsec-peer-psk-eap"/>
 				<notes>If the TOE uses pre-shared keys to establish IPsec connections, then this SFR must be claimed
-					to specify requirements for the composition of pre-shared keys.</notes>
+					to specify requirements for the composition of pre-shared keys.<h:br/></notes>
 			</componentneeded>
 			<componentneeded id="cn-ipsec-x509-1">
 				<!-- Always required -->
@@ -235,9 +235,12 @@
 			</componentneeded>
 			<componentneeded>
 			<componentid>FPT_STM.1</componentid>
+				<depends on-sel="sel-ipsec-ikev1-rekey-fixed-time"/>
+				<depends on-sel="sel-ipsec-ikev1-rekey-config-time"/>
+				<depends on-sel="sel-ipsec-ikev2-rekey-time"/>				
 				<notes>To support establishment of IPSec communications using a public key algorithm that includes X.509, 
 					the incorporating document must include FPT_STM.1 or some other requirement that ensures reliable system time.  
-					Note however that support for time-based rekey thresholds is selectable and not mandatory.</notes>
+					Note however that support for time-based rekey thresholds is selectable and not mandatory.<h:br/></notes>
 			</componentneeded>
 		</componentsneeded>
 	</sec:toes>
@@ -705,23 +708,21 @@
 							based on 
 							<selectables>
 								<selectable>number of packets/number of bytes</selectable>
-								<selectable>length of time</selectable>
+								<selectable id="sel-ipsec-ikev2-rekey-time">length of time</selectable>
 							</selectables>
 						</selectable>
 						<selectable id="sel-ipsec-ikev1-sa-lifetimes">IKEv1 SA lifetimes
 							<selectables linebreak="yes">
-								<selectable>can be configured based on 
+								<selectable>can be configurable based on 
 									<selectables>
 										<selectable>number of packets/number of bytes</selectable>
-										<selectable>length of time</selectable>
-									</selectables>
-								</selectable>
+										<selectable id="sel-ipsec-ikev1-rekey-config-time">length of time</selectable>
+									</selectables></selectable>
 								<selectable>are fixed based on 
 									<selectables>
 										<selectable>number of packets/number of bytes</selectable>
-										<selectable>length of time</selectable>
-									</selectables>
-								</selectable>
+										<selectable id="sel-ipsec-ikev1-rekey-fixed-time">length of time</selectable>
+									</selectables></selectable>
 							</selectables>
 						</selectable>
 								
