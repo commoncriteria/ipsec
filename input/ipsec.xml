@@ -649,10 +649,10 @@
 								<selectable>256 bits</selectable>
 							</selectables> and message authentication provided by 
 							<selectables>
-								<selectable id="sel-ipsec-esp-hmac-sha1">HMAC-SHA-1</selectable>
-								<selectable id="sel-ipsec-esp-hmac-sha256">HMAC-SHA-256</selectable>
-								<selectable id="sel-ipsec-esp-hmac-sha384">HMAC-SHA-384</selectable>
-								<selectable id="sel-ipsec-esp-hmac-sha512">HMAC-SHA-512</selectable>
+								<selectable id="sel-ipsec-ike-hmac-sha1">HMAC-SHA-1</selectable>
+								<selectable id="sel-ipsec-ike-hmac-sha256">HMAC-SHA-256</selectable>
+								<selectable id="sel-ipsec-ike-hmac-sha384">HMAC-SHA-384</selectable>
+								<selectable id="sel-ipsec-ike-hmac-sha512">HMAC-SHA-512</selectable>
 							</selectables> as specified in <xref to="bibRFC3602"/>
 						</h:li></h:ul>
 						and
