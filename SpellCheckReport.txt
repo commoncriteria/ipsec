@@ -1,6 +1,0 @@
-output/ipsec-release-linkable.html: A1
-output/ipsec-release-linkable.html: RSASSA
-output/ipsec-release.html: A1
-output/ipsec-release.html: RSASSA
-output/ipsec.html: A1
-output/ipsec.html: RSASSA
