@@ -65,7 +65,7 @@
 	communications across the network.  IKE is the protocol used to set up and manage IPsec connections.
 	<h:br/><h:br/>
 	This <h:i>Functional Package for IPsec</h:i> provides a collection of requirements and evaluation activities for
-	IPSec implementations. The intent of this package is to provide PP, cPP, and PP-Module authors with a readily
+	IPsec implementations. The intent of this package is to provide PP, cPP, and PP-Module authors with a readily
 	consumable collection of SFRs and EAs to be integrated into their documents. This Package can be used to 
 	to evaluate the IPsec functionality of TOEs that are not themselves VPN clients. For example,
 	it could be used to evaluate the trusted channel functionality of an operating system that chooses to 
@@ -112,7 +112,7 @@
 			A suite of open standards for ensuring private communications over public networks.
 		</term>
 		<term abbr="ISAKMP" full="Internet Security Association and Key Management Protocol">
-			A protocol defined by RFC 2408 for establishing Security association (SA) and cryptographic keys in an
+			A protocol defined by <xref to="bibRFC2408"/> for establishing Security Associations (SA) and cryptographic keys in an
 			Internet environment.	  
 		</term>
 		<term abbr="PSK" full="Pre-Shared Key">
@@ -125,7 +125,7 @@
 		<term abbr="SPD" full="Security Policy Database">
 			A set of rules that determines whether a packet is subject to IPsec processing.  
 			Each entry in the SPD represents a policy that defines how the set of traffic covered under
-			the policy will be processed.
+			the policy is to be processed.
 		</term>
 		<term abbr="UDP" full="User Datagram Protocol">
 			A communications protocol that is primarily used to establish low-latency and loss-tolerating
@@ -154,15 +154,15 @@
 		The contents of this FP must be appropriately incorporated into a PP, cPP, or PP-Module. When this Package 
 		is so incorporated, the ST must include selection-based requirements in accordance with the selections or 
 		assignments indicated in the incorporating document.<h:br/><h:br/>
-		The PP, cPP, or PP-Module that instantiates this Package must typically include the following components in order
+		An ST must identify the applicable version of the PP, cPP, or PP-Module and this
+		Functional Package in its conformance claims.<h:br/><h:br/>
+		The PP, cPP, or PP-Module that incorporates this Package must typically include the following components in order
 		to satisfy dependencies of this Package. It is the responsibility of the PP, cPP, or PP-Module author who 
 		incorporates this FP to ensure that dependence on these components is satisfied, either by the TOE or by 
 		assumptions about its Operational Environment.<h:br/><h:br/>
-	    	Note that the IKE defines its own key derivation function in <xref to="bibRFC7296"/>. This function was 
-	    	approved by NIST in <xref to="bibNIST800135r1"/>. As a result, this Package does not require that  
-	    	FCS_CKM_EXT.5 or FCS_CKM.5 be claimed by the base-PP.<h:br/><h:br/>
-		An ST must identify the applicable version of the PP, cPP, or PP-Module and this
-		Functional Package in its conformance claims.<h:br/><h:br/>
+	    	Note that IKE defines its own key derivation function in <xref to="bibRFC7296"/> (approved 
+	    	by NIST in <xref to="bibNIST800135r1"/>). As a result, this Package does not require that  
+	    	the incorporating document claim a key derivation SFR (typically FCS_CKM_EXT.5 or FCS_CKM.5).
 		
 		<componentsneeded>
 			<componentneeded>
@@ -170,15 +170,17 @@
 				<!-- <componentid>FCS_CKM.1/AKG</componentid>  -->
 				<!-- <componentid>FCS_CKM.1/SKG</componentid>  -->
 				<notes>To support key generation for IPsec, the incorporating document must
-					include FCS_CKM.1 and specify the corresponding algorithms. </notes>
+					include the approriate iterations of FCS_CKM.1 and specify the
+					corresponding algorithms. 
+				</notes>
 			</componentneeded>
 			<componentneeded>
 				<componentid>FCS_CKM.2</componentid>
-					<!-- VPN Module says key establishment, but that's not what CKM.2 is about -->
-					<!-- Need to revisit whether this is really needed. Obviously key transport and agreement could
-						be needed in order to support IPsec IKE -->
+					<!-- Required -->
 					<notes>To support key distribution for IPsec, the incorporating document must
-						include FCS_CKM.2 and specify the corresponding algorithms.</notes>
+						include FCS_CKM.2 and specify the corresponding algorithms. The standard requires
+						that IKE implement a Diffie-Hellman key exchange. 
+						</notes>
 			</componentneeded>
 			<componentneeded id="cn-ipsec-cop-1">
 				<!-- Always required -->
@@ -221,7 +223,7 @@
 			<componentneeded id="cn-ipsec-x509-1">
 				<!-- Always required -->
 				<componentid>FIA_X509_EXT.1</componentid>
-				<notes>To support establishment of IPSec communications using a public key algorithm that includes X.509, 
+				<notes>To support establishment of IPsec communications using a public key algorithm that includes X.509, 
 					the incorporating document must include FIA_X509_EXT.1. This documents requires that X.509v3 certificates
 					be used in IKE peer authentication.</notes>
 			</componentneeded>
@@ -238,7 +240,7 @@
 				<depends on-sel="sel-ipsec-ikev1-rekey-fixed-time"/>
 				<depends on-sel="sel-ipsec-ikev1-rekey-config-time"/>
 				<depends on-sel="sel-ipsec-ikev2-rekey-time"/>				
-				<notes>To support establishment of IPSec communications using a public key algorithm that includes X.509, 
+				<notes>To support establishment of IPsec communications using a public key algorithm that includes X.509, 
 					the incorporating document must include FPT_STM.1 or some other requirement that ensures reliable system time.  
 					Note however that support for time-based rekey thresholds is selectable and not mandatory.<h:br/></notes>
 			</componentneeded>
