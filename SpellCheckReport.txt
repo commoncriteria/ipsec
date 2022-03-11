@@ -1,0 +1,3 @@
+output/ipsec-release-linkable.html: approriate
+output/ipsec-release.html: approriate
+output/ipsec.html: approriate
