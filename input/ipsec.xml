@@ -667,8 +667,7 @@
 				</title>
 				<note role="application">
 					<xref to="bibRFC8247"/> requires that IKEv2 support AES-CBC-128/256 and recommends support for AES-GCM-128/256 for
-					protecting IKE traffic.<h:br/><h:br/>
-					<h:b>Why is no integrity algorithm required here for the IKE SA? There probably should be.</h:b>
+					protecting IKE traffic.
 				</note>
 				<aactivity level="element">
 					<TSS>
@@ -713,7 +712,7 @@
 						</selectable>
 						<selectable id="sel-ipsec-ikev1-sa-lifetimes">IKEv1 SA lifetimes
 							<selectables linebreak="yes">
-								<selectable>can be configurable based on 
+								<selectable>are configurable based on 
 									<selectables>
 										<selectable>number of packets/number of bytes</selectable>
 										<selectable id="sel-ipsec-ikev1-rekey-config-time">length of time</selectable>
@@ -918,18 +917,18 @@
           
 			<!-- FCS_IPSEC_EXT.1.11 IKE Peer Authentication -->
 			<f-element id="fcs-ipsec-ext-1e11">
-				<title>The TSF shall ensure that all IKE protocols perform peer authentication using <h:br/><h:br/> 
-					<selectables>
+				<title>The TSF shall ensure that all IKE protocols perform peer authentication using <h:ul> 
+					<h:li><selectables>
 						<selectable>RSA</selectable>
 						<selectable>ECDSA</selectable>
 					</selectables> 
 					with X.509v3 certificates that conform to <xref to="bibRFC4945"/> as specified in
-					<no-link>FIA_X509_EXT.1</no-link><h:br/><h:br/> and 
+						<no-link>FIA_X509_EXT.1</no-link>, and </h:li></h:ul> 
 					<selectables onlyone="yes" linebreak="yes">
 						<selectable id="sel-ipsec-peer-psk-eap">Pre-shared keys as specified in <no-link>FIA_PSK_EXT.1</no-link>
-							transmitted via EAP as specified in FCS_IPSEC_EXT.2.</selectable>
+							transmitted via EAP as specified in FCS_IPSEC_EXT.2</selectable>
 						<selectable id="sel-ipsec-peer-psk">Pre-shared keys as specified in <no-link>FIA_PSK_EXT.1</no-link>
-							transmitted via means other than EAP.</selectable>
+							transmitted via means other than EAP</selectable>
 						<selectable>no other method</selectable>
 					</selectables>
 				</title>
