@@ -953,11 +953,12 @@
 					Peer authentication using certificates must be accomplished using mechanisms inherent in 
 					the IKE protocol. Authentication using pre-shared keys can be accomplished
 					using methods specified in the IKE protocol, transmission through EAP, or through an out-of-band sharing mechanism.<h:br/><h:br/> 
-					If "<h:i>Pre-shared keys as specified in FIA_PSK_EXT.1</h:i>" is selected, then the 
-					external requirement <no-link>FIA_PSK_EXT.1</no-link> must be claimed. FIA_PSK_EXT.1 includes options
+					If either "<h:i>Pre-shared keys as specified in FIA_PSK_EXT.1...</h:i>" selection is made, then 
+					the external requirement <no-link>FIA_PSK_EXT.1</no-link> must be claimed. FIA_PSK_EXT.1 includes options
 					for MFA solutions.<h:br/><h:br/>
-					If "<h:i>EAP as specified in FCS_IPSEC_EXT.2</h:i>" is selected, then FCS_IPSEC_EXT.2 must be claimed. 
-					"<h:i>Means other than EAP</h:i>" refers either to native IKE protocol mechanisms or to out-of-band mechanisms.<h:br/><h:br/>
+					If "<h:i>Pre-shared keys as specified in FIA_PSK_EXT.1 transmitted via EAP as specified in FCS_IPSEC_EXT.2,</h:i>" is selected, 
+					then FCS_IPSEC_EXT.2 must be claimed in addition to <no-link>FIA_PSK_EXT.1</no-link>. 
+					"<h:i>means other than EAP</h:i>" refers either to native IKE protocol mechanisms or to out-of-band mechanisms.<h:br/><h:br/>
 				</note>
 				<aactivity level="element">
 					<TSS>
