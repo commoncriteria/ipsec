@@ -170,7 +170,7 @@
 				<!-- <componentid>FCS_CKM.1/AKG</componentid>  -->
 				<!-- <componentid>FCS_CKM.1/SKG</componentid>  -->
 				<notes>To support key generation for IPsec, the incorporating document must
-					include the approriate iterations of FCS_CKM.1 and specify the
+					include the appropriate iterations of FCS_CKM.1 and specify the
 					corresponding algorithms. 
 				</notes>
 			</componentneeded>
@@ -856,7 +856,7 @@
 					"384-bit random ECP group" (Group 20).
 					<xref to="bibRFC8247"/> (2017) requires support for DH Group 14 and recommends support for Group 19
 					in IKEv2. It discourages support for Groups 5, 2, 23, and 24. And forbids support for
-					Groups 1 and 22.<h:br/><h:br/>
+					Groups 1 and 22.
 				</note>
 				<aactivity level="element">
 					<TSS>
@@ -886,7 +886,7 @@
 					<TSS>
 						The evaluator shall check to ensure that, for each DH group supported, the TSS describes the
 						process for generating "x." The evaluator shall verify that the TSS
-						indicates that the random number generated meets the requirements of this FP,
+						indicates that the random number generated meets the requirements of this Package,
 						and that the length of "x" meets the stipulations in the requirement.<h:br/>
 					</TSS>
 					<Guidance>There are no AGD EAs for this requirement.<h:br/></Guidance>
@@ -909,11 +909,14 @@
 					key size. 
 				</note>				
 				<aactivity level="element">
+					<TSS>
 						The evaluator shall check to ensure that, for all nonces generated for use in IKE,  
 						the TSS describes the process for generating nonces. The evaluator shall verify that the TSS
-						indicates that the random number generated meets the requirements of this FP,
-						and that the length of the nonce meets the stipulations in the requirement.<h:br/><h:br/>
-					<no-tests/>
+						indicates that the random number generated meets the requirements of this Package,
+						and that the length of the nonce meets the stipulations in the requirement.<h:br/>
+					</TSS>
+					<Guidance>There are no AGD EAs for this requirement.<h:br/></Guidance>
+					<Tests>There are no test EAs for this requirement.</Tests>
 				</aactivity>
 			</f-element>
           
@@ -931,7 +934,7 @@
 							transmitted via EAP as specified in FCS_IPSEC_EXT.2</selectable>
 						<selectable id="sel-ipsec-peer-psk">Pre-shared keys as specified in <no-link>FIA_PSK_EXT.1</no-link>
 							transmitted via means other than EAP</selectable>
-						<selectable>no other method</selectable>
+						<selectable exclusive="yes">no other method</selectable>
 					</selectables>
 				</title>
 				<note role="application">
@@ -1047,7 +1050,7 @@
 						</testlist>
 						The evaluator shall perform the following tests if Pre-Shared key-based peer authentication is implemented:
 						<testlist>
-							<test>Not sure what to do here.</test>
+							<test><h:b>Not sure what to do here.QQQQQQQQQQQQQQQQQQQQQQQQQQQ</h:b></test>
 						</testlist>
 					</Tests>
 				</aactivity>
