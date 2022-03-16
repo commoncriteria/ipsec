@@ -1048,9 +1048,21 @@
 								TOE fails to authenticate the IKE peer.
 							</test>
 						</testlist>
-						The evaluator shall perform the following tests if Pre-Shared key-based peer authentication is implemented:
+						If EAP is used for peer authentication, then this is tested in FCS_IPSEC_EXT.2.<h:br/><h:br/>
+						If the TOE implements peer authentication using pre-shared secrets, then generation of pre-shared secrets is tested
+						in FIA_PSK_EXT.1, and peer authentication using pre-shared secrets is tested as follows:
 						<testlist>
-							<test><h:b>Not sure what to do here.QQQQQQQQQQQQQQQQQQQQQQQQQQQ</h:b></test>
+							<test>The evaluator shall have the peer generate an AUTH value using the pre-shared secret and send it to the TOE.
+								The TOE shall generate an AUTH value using the pre-shared secret and send it to the peer. The evaluator shall
+								ensure that an IPsec connection is established. 
+							</test>
+							<test>The evaluator shall repeat the preceding test, but with the peer signing the AUTH value with a value
+								other than the pre-shared secret.  The evaluator shall ensure that an IPsec connection is not established. 
+							</test>
+							<test>The evaluator shall repeat the preceding test again, but with the peer signing an incorrectly
+								calculated AUTH value with the pre-shared secret.  The evaluator shall ensure that an IPsec
+								connection is not established. 
+							</test>
 						</testlist>
 					</Tests>
 				</aactivity>
