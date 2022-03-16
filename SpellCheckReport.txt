@@ -1,3 +1,3 @@
-output/ipsec-release-linkable.html: QQQQQQQQQQQQQQQQQQQQQQQQQQQ
-output/ipsec-release.html: QQQQQQQQQQQQQQQQQQQQQQQQQQQ
-output/ipsec.html: QQQQQQQQQQQQQQQQQQQQQQQQQQQ
+output/ipsec-release-linkable.html: AUTH
+output/ipsec-release.html: AUTH
+output/ipsec.html: AUTH
