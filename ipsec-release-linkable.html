@@ -732,10 +732,9 @@ The following sections list Common Criteria and technology terms used in this do
 	    	by NIST in <a href="#bibNIST800135r1">[NIST SP 800-135 Rev. 1]</a>)<a id="period_63" href="#period_63">. </a>As a result, this Package does not require that  
 	    	the incorporating document claim a key derivation <abbr class="dyn-abbr"><a href="#abbr_SFR">SFR</a></abbr> (typically FCS_CKM_EXT.5 or FCS_CKM.5)<a id="period_64" href="#period_64">. </a>		
 		<table><tr class="header"><th>Component</th><th>Explanation</th></tr><tr><td class="componentneeded" id="FCS_CKM.1"><a href="#FCS_CKM.1">FCS_CKM.1</a></td><td>To support key generation for <abbr class="dyn-abbr"><a href="#abbr_IPsec">IPsec</a></abbr>, the incorporating document must
-					include the appropriate iterations of <a href="#FCS_CKM.1">FCS_CKM.1</a> and specify the
-					corresponding algorithms<a id="period_65" href="#period_65">. </a>
+					claim <a href="#FCS_CKM.1">FCS_CKM.1</a> for asymmetric keys and with support for ECC<a id="period_65" href="#period_65">. </a>
 				<br></td></tr><tr><td class="componentneeded" id="FCS_CKM.2"><a href="#FCS_CKM.2">FCS_CKM.2</a></td><td>To support key distribution for <abbr class="dyn-abbr"><a href="#abbr_IPsec">IPsec</a></abbr>, the incorporating document must
-						include <a href="#FCS_CKM.2">FCS_CKM.2</a> and specify the corresponding algorithms<a id="period_66" href="#period_66">. </a>The standard requires
+						claim <a href="#FCS_CKM.2">FCS_CKM.2</a> and support EC-based key distribution<a id="period_66" href="#period_66">. </a>The standard requires
 						that <abbr class="dyn-abbr"><a href="#abbr_IKE">IKE</a></abbr> implement a Diffie-Hellman key exchange<a id="period_67" href="#period_67">. </a>
 						<br></td></tr><tr><td class="componentneeded" id="FCS_COP.1"><a href="#FCS_COP.1">FCS_COP.1</a></td><td>
 					To support the cryptography needed for <abbr class="dyn-abbr"><a href="#abbr_IPsec">IPsec</a></abbr> communications, the incorporating document must include 
