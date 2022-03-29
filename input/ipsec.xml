@@ -170,15 +170,14 @@
 				<!-- <componentid>FCS_CKM.1/AKG</componentid>  -->
 				<!-- <componentid>FCS_CKM.1/SKG</componentid>  -->
 				<notes>To support key generation for IPsec, the incorporating document must
-					include the appropriate iterations of FCS_CKM.1 and specify the
-					corresponding algorithms. 
+					claim FCS_CKM.1 for asymmetric keys and with support for ECC. 
 				</notes>
 			</componentneeded>
 			<componentneeded>
 				<componentid>FCS_CKM.2</componentid>
 					<!-- Required -->
 					<notes>To support key distribution for IPsec, the incorporating document must
-						include FCS_CKM.2 and specify the corresponding algorithms. The standard requires
+						claim FCS_CKM.2 and support EC-based key distribution. The standard requires
 						that IKE implement a Diffie-Hellman key exchange. 
 						</notes>
 			</componentneeded>
