@@ -195,7 +195,9 @@
 					signature generation and verification function (at least one of RSA or ECDSA), a cryptographic hash
 					function, and a keyed-hash message authentication function. In particular, this Package requires that the
 					TOE support AES-GCM-128 and AES-GCM-256 for ESP, and AES-CBC-128 and AES-CBC-256 for IKE. HMAC and 
-					SHA are required for the mandatory pseudo-random function and for integrity protections.
+					SHA are required for the mandatory pseudo-random function and for integrity protections. Depending on  
+					selections in this Package, the incorporating document may need to support SHA-1, SHA-256, SHA-384, or
+					SHA-512, along with the corresponding HMAC functions.
 				</notes>
 			</componentneeded>
 			<componentneeded id="cn-ipsec-rbg">
@@ -223,8 +225,8 @@
 				<!-- Always required -->
 				<componentid>FIA_X509_EXT.1</componentid>
 				<notes>To support establishment of IPsec communications using a public key algorithm that includes X.509, 
-					the incorporating document must include FIA_X509_EXT.1. This documents requires that X.509v3 certificates
-					be used in IKE peer authentication.</notes>
+					the incorporating document must include FIA_X509_EXT.1. This Package requires that X.509v3 certificates
+					be supported for IKE peer authentication.</notes>
 			</componentneeded>
 			<componentneeded id="cn-ipsec-x509-2">
 				<!-- Always required -->
@@ -874,7 +876,7 @@
 			<!-- FCS_IPSEC_EXT.1.9 Generating secret value for DH groups -->
 			<f-element id="fcs-ipsec-ext-1e9">
 				<title>The TSF shall generate the secret value x used in the
-					IKE Diffie-Hellman key exchange (“x” in g^x mod p) using the random bit
+					IKE Diffie-Hellman key exchange (“x” in g^x mod p or "x" in xG for ECDH) using the random bit
 					generator specified in FCS_RBG_EXT.1, and having a length of at least
 					<assignable>(one or more) number of bits that is at least twice the “bits of
 					security” value associated with the negotiated Diffie-Hellman group as listed in
@@ -955,9 +957,14 @@
 					Peer authentication using certificates must be accomplished using mechanisms inherent in 
 					the IKE protocol. Authentication using pre-shared keys can be accomplished
 					using methods specified in the IKE protocol, transmission through EAP, or through an out-of-band sharing mechanism.<h:br/><h:br/> 
+		
+					See <xref to="bibRFC8603"/> for additional guidance on certificates and certificate revocaton for
+					National Security Systems.<h:br/><h:br/>
+					
 					If either "<h:i>Pre-shared keys as specified in FIA_PSK_EXT.1...</h:i>" selection is made, then 
 					the external requirement <no-link>FIA_PSK_EXT.1</no-link> must be claimed. <no-link>FIA_PSK_EXT.1</no-link>
 					includes options for MFA solutions.<h:br/><h:br/>
+					
 					If "<h:i>Pre-shared keys as specified in FIA_PSK_EXT.1 transmitted via EAP as specified in FCS_IPSEC_EXT.2,</h:i>" is selected, 
 					then FCS_IPSEC_EXT.2 must be claimed in addition to <no-link>FIA_PSK_EXT.1</no-link>. In the other selection, 
 					"<h:i>means other than EAP</h:i>" refers either to native IKE protocol mechanisms or to out-of-band mechanisms.
@@ -1461,6 +1468,13 @@
 			<description>
 				<h:a href="https://tools.ietf.org/html/rfc8247">Algorithm Implementation Requirements and Usage Guidance
 					for the Internet Key Exchange Protocol Version 2 (IKEv2)</h:a>
+			</description>
+		</entry>   
+		<entry id="bibRFC8603">
+			<tag>RFC 8603</tag>
+			<description>
+				<h:a href="https://tools.ietf.org/html/rfc8603">Commercial National Security Algorithm (CNSA) Suite Certificate and
+               				Certificate Revocation List (CRL) Profile</h:a>
 			</description>
 		</entry>   
 		<entry id="bibRFC8784">
