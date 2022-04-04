@@ -958,7 +958,7 @@
 					the IKE protocol. Authentication using pre-shared keys can be accomplished
 					using methods specified in the IKE protocol, transmission through EAP, or through an out-of-band sharing mechanism.<h:br/><h:br/> 
 		
-					See <xref to="bibRFC8603"/> for additional guidance on certificates and certificate revocaton for
+					See <xref to="bibRFC8603"/> for additional guidance on certificates and certificate revocation for
 					National Security Systems.<h:br/><h:br/>
 					
 					If either "<h:i>Pre-shared keys as specified in FIA_PSK_EXT.1...</h:i>" selection is made, then 
