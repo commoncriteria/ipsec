@@ -1,6 +1,0 @@
-output/ipsec-release-linkable.html: CNSA
-output/ipsec-release-linkable.html: xG
-output/ipsec-release.html: CNSA
-output/ipsec-release.html: xG
-output/ipsec.html: CNSA
-output/ipsec.html: xG
