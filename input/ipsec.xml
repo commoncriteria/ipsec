@@ -830,9 +830,12 @@
 						<h:li>20 (384-bit Random ECP)</h:li>
 					</h:ul>and 
 					<selectables linebreak="yes">
-						<selectable>24 (2048-bit MODP with 256-bit POS)</selectable>
-						<selectable>15 (3072-bit MODP)</selectable>
 						<selectable>14 (2048-bit MODP)</selectable>
+						<selectable>15 (3072-bit MODP)</selectable>
+						<selectable>16 (4096-bit MODP)</selectable>
+						<selectable>17 (6144-bit MODP)</selectable>
+						<selectable>18 (8192-bit MODP)</selectable>
+						<selectable>24 (2048-bit MODP with 256-bit POS)</selectable>
 						<selectable exclusive="yes">no other DH groups</selectable>
 					</selectables>.
 				</title>
@@ -929,7 +932,11 @@
 						<selectable>ECDSA</selectable>
 					</selectables> 
 					with X.509v3 certificates that conform to <xref to="bibRFC4945"/> as specified in
-						<no-link>FIA_X509_EXT.1</no-link>, and </h:li></h:ul> 
+						<no-link>FIA_X509_EXT.1</no-link> and transmitted via 
+						<selectables linebreak="yes">
+							<selectable>EAP as specified in FCS_IPSEC_EXT.2</selectable>
+							<selectable>native IKE mechanisms</selectable>
+						</selectables>, and </h:li></h:ul> 
 					<selectables onlyone="yes" linebreak="yes">
 						<selectable id="sel-ipsec-peer-psk-eap">Pre-shared keys as specified in <no-link>FIA_PSK_EXT.1</no-link>
 							transmitted via EAP as specified in FCS_IPSEC_EXT.2</selectable>
@@ -944,30 +951,33 @@
 					the ST author to reflect what is implemented (RSA or EDCSA). The ST author also ensures that
 					appropriate FCS requirements reflecting the algorithms used (and key
 					generation capabilities, if provided) are claimed to support those methods.<h:br/><h:br/>
+					
+					When pre-shared keys are supported for IKEv2, the ST Author selects 
+					"<h:i>Pre-shared keys as specified in <no-link>FIA_PSK_EXT.1</no-link> transmitted via EAP 
+					as specified in FCS_IPSEC_EXT.2</h:i>." This indicates client verification using certificates
+					in a mutually authenticated TLS handshake and verification of PSKs protected under the 
+					TLS channel. <h:br/><h:br/>
+					
+					When Pre-shared Keys are supported for IKEv1, the ST Author selects 
+					"<h:i>Pre-shared keys as specified in <no-link>FIA_PSK_EXT.1</no-link> transmitted via transmitted 
+					via means other than EAP</h:i>."  This indicates that PSKs use native IPsec mechanisms 
+					or some other out-of-band mechanism. <h:br/><h:br/>
+					
 					IKEv2 requires that RSA authentication be done using an RSA private key with the RSASSA-PKCS1-v1_5 
 					signature scheme, see <xref to="bibRFC7296"/> sec. 3.8.
 					<xref to="bibRFC8247"/> limits IKEv2 ECDSA authentication to "ECDSA with SHA-256 on the P-256 curve,"
 					"ECDSA with SHA-384 on the P-384 curve," and "ECDSA with SHA-512 on the P-521 curve."
 					A more agile digital signature scheme for IKEv2 authentication is defined in <xref to="bibRFC7427"/>.
 					This Package requires only that RSA- or ECDSA-based digital signatures be used.<h:br/><h:br/>
+					
 					This Package does not permit use of Shared Key Message Integrity Code for peer authentication, 
 					although support is mandatory in the standard.<h:br/><h:br/>
+					
 					This Package requires that digital signature-based peer authentication use X.509v3 certificates
 					to verify the identity of the keys used in the signatures.<h:br/><h:br/>
-					Peer authentication using certificates must be accomplished using mechanisms inherent in 
-					the IKE protocol. Authentication using pre-shared keys can be accomplished
-					using methods specified in the IKE protocol, transmission through EAP, or through an out-of-band sharing mechanism.<h:br/><h:br/> 
-		
+					
 					See <xref to="bibRFC8603"/> for additional guidance on certificates and certificate revocation for
-					National Security Systems.<h:br/><h:br/>
-					
-					If either "<h:i>Pre-shared keys as specified in FIA_PSK_EXT.1...</h:i>" selection is made, then 
-					the external requirement <no-link>FIA_PSK_EXT.1</no-link> must be claimed. <no-link>FIA_PSK_EXT.1</no-link>
-					includes options for MFA solutions.<h:br/><h:br/>
-					
-					If "<h:i>Pre-shared keys as specified in FIA_PSK_EXT.1 transmitted via EAP as specified in FCS_IPSEC_EXT.2,</h:i>" is selected, 
-					then FCS_IPSEC_EXT.2 must be claimed in addition to <no-link>FIA_PSK_EXT.1</no-link>. In the other selection, 
-					"<h:i>means other than EAP</h:i>" refers either to native IKE protocol mechanisms or to out-of-band mechanisms.
+					National Security Systems.<h:br/>
 				</note>
 				<aactivity level="element">
 					<TSS>
